@@ -1,1 +1,13 @@
+br
 p= link_to 'Ask question', new_question_path
+br
+- if @questions.empty?
+  b Questions list is empty
+- else
+  - @questions.each do |question|
+    b= question.title
+    br
+    = question.body
+    br
+    = link_to 'Show question', question
+    hr
