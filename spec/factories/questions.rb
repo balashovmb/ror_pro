@@ -8,10 +8,15 @@ FactoryGirl.define do
     "Question title#{n}"
   end  
 
-  factory :question do
+  factory :question_list, class: "Question" do
     title 
-    body
+    body 
   end
+
+  factory :question do
+    title "Question title"
+    body "Question body"
+  end  
 
   factory :invalid_question, class: "Question" do
     title nil

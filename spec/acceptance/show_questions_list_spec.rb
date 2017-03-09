@@ -5,7 +5,7 @@ feature 'Questions list', %q{
 } do 
   scenario 'User can view list of questions' do
     
-    create_list(:question,2)     
+    create_list(:question_list,2)     
 
     visit questions_path
     expect(page).to have_content 'Question title1'
