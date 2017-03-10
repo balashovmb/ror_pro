@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
+  let(:user) { question.user }
+  let(:another_user) { create(:user) }
 
   describe 'GET #new' do
     sign_in_user
@@ -43,7 +45,7 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #show' do
-     before { get :show, params:{ id: question}} 
+    before { get :show, params:{ id: question}} 
       
     it 'assigns the requested question to @question' do
       expect(assigns[:question]).to eq question
@@ -66,6 +68,36 @@ RSpec.describe QuestionsController, type: :controller do
     it 'renders index view' do
       expect(response).to render_template :index
     end
-  end  
+  end
 
+  describe 'DELETE #destroy' do
+    context 'user is author of the question ' do    
+      before { sign_in(user) }
+      
+      before { question }
+      it 'delete question' do
+        expect { delete :destroy, params:{ id: question} }.to change(Question, :count ).by(-1)
+      end
+
+      it 'redirect_to index view' do
+        delete :destroy, params: { id: question }
+        expect(response).to redirect_to questions_path 
+      end
+    end 
+    
+    context 'user is not author of the question' do    
+      before { sign_in(another_user) }
+      
+      before { question }
+      it 'do not delete question' do
+        expect { delete :destroy, params:{ id: question} }.to_not change(Question, :count)
+      end
+
+      it 'redirect_to index view' do
+        delete :destroy, params: { id: question }
+        expect(response).to redirect_to question_path 
+      end
+    end  
+
+  end    
 end

@@ -1,12 +1,14 @@
 = @question.title
 br
 = @question.body
+- if @question.user == current_user
+ p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
+
 hr
 - if @question.answers
   - @question.answers.each do |answer|
     = answer.body
     br
-
 
 - if user_signed_in?
   = form_for [@question, @question.answers.new] do |f|
