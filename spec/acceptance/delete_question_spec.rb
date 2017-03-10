@@ -13,7 +13,8 @@ feature 'Delete question', %q{
     click_on 'Delete question'
 
 
-    expect(page).to have_content "Your question deleted."  
+    expect(page).to have_content "Your question deleted."
+    expect(page).not_to have_content(question.body)      
   end 
 
 end

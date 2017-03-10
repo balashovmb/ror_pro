@@ -1,4 +1,4 @@
-= @question.title
+b= @question.title
 br
 = @question.body
 - if @question.user == current_user
@@ -19,3 +19,5 @@ hr
     = f.submit 'Create answer'
 - else
   i You must sign in first for create answer
+  br
+= link_to 'All questions', questions_path

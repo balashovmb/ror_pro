@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question) }
-  let(:answer) { question.answers.create(attributes_for(:answer)) }
-
+  let(:user) { question.user }
+  let(:answer) { question.answers.create(body: "1234567890", user: user) }
+ 
   describe 'POST #create' do
     sign_in_user
-    
+
     context 'with valid attributes' do
       let(:create_answer) { post :create, params: { question_id: question.id, answer: attributes_for(:answer) } }
       it 'saves the new answer in the database' do
@@ -29,5 +30,24 @@ RSpec.describe AnswersController, type: :controller do
         expect(response).to render_template "questions/show" 
       end
     end
+  end
+
+
+  describe 'DELETE #destroy' do
+    context 'user is author of the answer' do    
+      before { sign_in(user) }
+      before { question }
+      before { answer }
+
+      it 'delete answer' do
+        expect { delete :destroy, params:{ question_id: answer.question.id, id: answer } }.to change(Answer, :count ).by(-1)
+      end
+
+      it 'redirect_to index view' do
+        delete :destroy, params: { question_id: answer.question.id, id: answer }
+        expect(response).to redirect_to question_path(question) 
+      end
+    end 
+    
   end
 end
