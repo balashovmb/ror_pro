@@ -1,5 +1,12 @@
 = @question.title
+br
 = @question.body
+hr
+- if @question.answers
+  - @question.answers.each do |answer|
+    = answer.body
+    br
+
 
 - if user_signed_in?
   = form_for [@question, @question.answers.new] do |f|
@@ -9,6 +16,4 @@
     <br>
     = f.submit 'Create answer'
 - else
-i You must sign in first for create answer
-
-p= link_to "Answer", new_question_answer_path(@question)
+  i You must sign in first for create answer
