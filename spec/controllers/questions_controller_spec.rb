@@ -45,8 +45,8 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { get :show, params:{ id: question}} 
-      
+    before { get :show, params: { id: question } }
+
     it 'assigns the requested question to @question' do
       expect(assigns[:question]).to eq question
     end
@@ -57,13 +57,13 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question,2) }
+    let(:questions) { create_list(:question, 2) }
 
     before { get :index }
 
     it 'populates an array of all questions' do
       expect(assigns(:questions)).to match_array(questions)
-    end      
+    end
 
     it 'renders index view' do
       expect(response).to render_template :index
@@ -71,33 +71,32 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    context 'user is author of the question ' do    
+    context 'user is author of the question ' do
       before { sign_in(user) }
-      
+
       before { question }
       it 'delete question' do
-        expect { delete :destroy, params:{ id: question} }.to change(Question, :count ).by(-1)
+        expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
       end
 
       it 'redirect_to index view' do
         delete :destroy, params: { id: question }
-        expect(response).to redirect_to questions_path 
+        expect(response).to redirect_to questions_path
       end
-    end 
-    
-    context 'user is not author of the question' do    
+    end
+
+    context 'user is not author of the question' do
       before { sign_in(another_user) }
-      
+
       before { question }
       it 'do not delete question' do
-        expect { delete :destroy, params:{ id: question} }.to_not change(Question, :count)
+        expect { delete :destroy, params: { id: question } }.to_not change(Question, :count)
       end
 
       it 'redirect_to index view' do
         delete :destroy, params: { id: question }
-        expect(response).to redirect_to question_path 
+        expect(response).to redirect_to question_path
       end
-    end  
-
-  end    
+    end
+  end
 end

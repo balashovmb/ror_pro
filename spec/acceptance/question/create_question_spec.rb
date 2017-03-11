@@ -5,7 +5,7 @@ feature 'Create question', %q{
   As an authenticated user
   I want to be able to ask questions
 } do
-  given(:user) { create(:user)}  
+  given(:user) { create(:user) }
 
   scenario 'Authenticated user creates question' do
     sign_in(user)
@@ -16,7 +16,7 @@ feature 'Create question', %q{
     fill_in 'Body', with: 'text text text'
     click_on 'Create'
 
-    expect(page).to have_content "Your question successfully created."  
+    expect(page).to have_content 'Your question successfully created.'
   end
 
   scenario 'Non-authenticated user tries to create question' do
@@ -25,5 +25,4 @@ feature 'Create question', %q{
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
-
 end

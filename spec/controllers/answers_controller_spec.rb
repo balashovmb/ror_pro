@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
   let(:question) { create(:question) }
   let(:user) { question.user }
-  let(:answer) { question.answers.create(body: "1234567890", user: user) }
- 
+  let(:answer) { create(:answer, user: user, question: question) }
+
   describe 'POST #create' do
     sign_in_user
 
@@ -27,27 +27,24 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'renders questions' do
         create_invalid_answer
-        expect(response).to render_template "questions/show" 
+        expect(response).to render_template 'questions/show'
       end
     end
   end
 
-
   describe 'DELETE #destroy' do
-    context 'user is author of the answer' do    
+    context 'user is author of the answer' do
       before { sign_in(user) }
-      before { question }
       before { answer }
 
       it 'delete answer' do
-        expect { delete :destroy, params:{ question_id: answer.question.id, id: answer } }.to change(Answer, :count ).by(-1)
+        expect { delete :destroy, params: { question_id: answer.question.id, id: answer } }.to change(Answer, :count).by(-1)
       end
 
       it 'redirect_to index view' do
         delete :destroy, params: { question_id: answer.question.id, id: answer }
-        expect(response).to redirect_to question_path(question) 
+        expect(response).to redirect_to question_path(answer.question)
       end
-    end 
-    
+    end
   end
 end

@@ -1,15 +1,18 @@
 b= @question.title
 br
 = @question.body
-- if @question.user == current_user
+- if current_user.try(:author?, @question)
  p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
-
 hr
-- if @question.answers
+
+- if @question.answers.present?
   - @question.answers.each do |answer|
     = answer.body
+    - if current_user.try(:author?, answer)
+      p= link_to 'Delete answer', question_answer_path({question_id: @question.id, id: answer.id}) , method: :delete, data: { confirm: 'Are you shure?' }
     br
-
+    br
+ 
 - if user_signed_in?
   = form_for [@question, @question.answers.new] do |f|
     = f.label :body
@@ -20,4 +23,5 @@ hr
 - else
   i You must sign in first for create answer
   br
+
 = link_to 'All questions', questions_path

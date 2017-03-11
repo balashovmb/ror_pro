@@ -5,17 +5,24 @@ feature 'Create answer', %q{
   As an authenticated user
   I want to be able to give answers
 } do
-  given(:user) { create(:user)}  
-  
+  given(:user) { create(:user) }
+
   scenario 'Authenticated user creates answer' do
     sign_in(user)
 
     question = create(:question)
-   
+
     visit question_path(question)
     fill_in 'Body', with: 'text text12'
     click_on 'Create answer'
 
-    expect(page).to have_content "Your answer successfully created."       
+    expect(page).to have_content 'Your answer successfully created.'
+  end
+
+  scenario 'Non-authenticated user can not see Create answer button' do
+    question = create(:question)
+
+    visit question_path(question)
+    expect(page).not_to have_content('Create answer')
   end
 end
