@@ -17,7 +17,9 @@ feature 'Create answer', %q{
     click_on 'Create answer'
 
     expect(page).to have_content 'Your answer successfully created.'
-    expect(page).to have_content 'text text12'    
+    within '.answers' do 
+      expect(page).to have_content 'text text12' 
+    end
   end
 
   scenario 'Non-authenticated user can not see Create answer button' do

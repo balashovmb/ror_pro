@@ -5,13 +5,14 @@ br
  p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
 hr
 
-- if @question.answers.present?
-  - @question.answers.each do |answer|
-    = answer.body
-    - if current_user.try(:author?, answer)
-      p= link_to 'Delete answer', question_answer_path({question_id: @question.id, id: answer.id}) , method: :delete, data: { confirm: 'Are you shure?' }
-    br
-    br
+.answers
+  - if @question.answers.present?
+    - @question.answers.each do |answer|
+      = answer.body
+      - if current_user.try(:author?, answer)
+        p= link_to 'Delete answer', question_answer_path({question_id: @question.id, id: answer.id}) , method: :delete, data: { confirm: 'Are you shure?' }
+      br
+      br
  
 - if user_signed_in?
   = form_for [@question, @question.answers.new] do |f|
