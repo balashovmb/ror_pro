@@ -1,7 +1,7 @@
   - if @question.answers.present?
     - @question.answers.each do |answer|
       = answer.body
-      - if current_user.try(:author?, answer)
+      - if current_user && current_user.author?(answer)
         p= link_to 'Delete answer', question_answer_path({question_id: @question.id, id: answer.id}) , method: :delete, data: { confirm: 'Are you shure?' }
       br
       br
