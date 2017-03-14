@@ -12,7 +12,7 @@ feature 'Create answer', %q{
     sign_in(user)
 
     visit question_path(question)
-    fill_in 'Your answer', with: 'text text12'
+    fill_in 'Answer', with: 'text text12'
     click_on 'Create answer'
 
     within '.answers' do
