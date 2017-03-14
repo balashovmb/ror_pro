@@ -13,7 +13,7 @@ RSpec.describe AnswersController, type: :controller do
       it 'saves the new answer in the database' do
         expect { create_answer }.to change(Answer, :count).by(1)
       end
-      
+
       it 'renders create template' do
         create_answer
         expect(response).to render_template :create

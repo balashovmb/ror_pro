@@ -1,0 +1,36 @@
+require: rubocop-rspec
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - Gemfile
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
+
+# > Limit lines to 80 characters.
+# How did we get here?
+# Github's code views fit 101 character without horizontal scrolling
+Metrics/LineLength:
+  Max: 120
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+RSpec/ImplicitExpect:
+  EnforcedStyle: should
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false  
+

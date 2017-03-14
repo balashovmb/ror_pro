@@ -15,13 +15,12 @@ feature 'Create answer', %q{
     fill_in 'Body', with: 'text text12'
     click_on 'Create answer'
 
-    within '.answers' do 
-      expect(page).to have_content 'text text12' 
+    within '.answers' do
+      expect(page).to have_content 'text text12'
     end
   end
 
   scenario 'Non-authenticated user can not see Create answer button' do
-
     visit question_path(question)
     expect(page).not_to have_content('Create answer')
   end

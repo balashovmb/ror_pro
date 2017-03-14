@@ -74,7 +74,6 @@ RSpec.describe QuestionsController, type: :controller do
     context 'user is author of the question ' do
       before { sign_in(user) }
 
-      before { question }
       it 'delete question' do
         expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
       end

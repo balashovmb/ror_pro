@@ -4,7 +4,7 @@ RSpec.describe User do
   it { should validate_presence_of :email }
   it { should validate_presence_of :password }
   it { should have_many(:questions).dependent(:destroy) }
-  it { should have_many(:answers).dependent(:destroy) } 
+  it { should have_many(:answers).dependent(:destroy) }
 
   let(:user) { create(:user) }
   let(:question) { create(:question, user: user) }
@@ -17,5 +17,4 @@ RSpec.describe User do
   it 'returns false if user is the author of that question' do
     expect(user.author?(question2)).to eq false
   end
-
 end
