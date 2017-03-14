@@ -29,12 +29,14 @@ feature 'Answer editing', %{
 
     scenario 'author try to edit his question' do
       click_on 'Edit'
-      fill_in 'Answer', with: 'edited answer'
+      within '.answers' do
+        fill_in 'Answer', with: 'edited answer'
+      end
       click_on 'Save'
 
       expect(page).to_not have_content answer.body
       expect(page).to have_content 'edited answer'
-      expect(page).to_not have_selector 'textaria'
+      expect(page).to_not have_selector 'textarea'
     end
 
   end
