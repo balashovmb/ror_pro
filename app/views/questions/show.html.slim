@@ -10,8 +10,8 @@ hr
  
 - if user_signed_in?
   = form_for [@question, @question.answers.new], remote: true do |f|
-    = f.label :body
-    <br>
+    = f.label :body, 'Your answer'
+    .answer-errors
     = f.text_area :body
     <br>
     = f.submit 'Create answer'

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'acceptance/acceptance_helper'
 
 feature 'Create answer', %q{
   In order to help somebody who asked the question
@@ -12,7 +12,7 @@ feature 'Create answer', %q{
     sign_in(user)
 
     visit question_path(question)
-    fill_in 'Body', with: 'text text12'
+    fill_in 'Your answer', with: 'text text12'
     click_on 'Create answer'
 
     within '.answers' do
@@ -23,5 +23,14 @@ feature 'Create answer', %q{
   scenario 'Non-authenticated user can not see Create answer button' do
     visit question_path(question)
     expect(page).not_to have_content('Create answer')
+  end
+
+  scenario 'User try to create invalid answer', js: true do
+    sign_in(user)
+    visit question_path(question)
+
+    click_on 'Create answer'
+
+    expect(page).to have_content "Body is too short"
   end
 end
