@@ -27,7 +27,7 @@ feature 'Answer editing', %{
       end
     end
 
-    scenario 'author try to edit his question' do
+    scenario 'author try to edit his question', js: true  do
       click_on 'Edit'
       within '.answers' do
         fill_in 'Answer', with: 'edited answer'

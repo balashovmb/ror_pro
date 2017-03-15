@@ -6,7 +6,10 @@ br
 hr
 
 .answers
-  = render 'answers'
+  - if @question.answers.empty?
+    b No answers
+  - else
+    = render @question.answers
  
 - if user_signed_in?
   = form_for [@question, @question.answers.new], remote: true do |f|
