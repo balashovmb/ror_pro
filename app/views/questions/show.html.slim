@@ -11,15 +11,16 @@ hr
   - else
     = render @question.answers
  
-- if user_signed_in?
-  = form_for [@question, @question.answers.new], remote: true do |f|
-    = f.label :body, 'Answer'
-    .answer-errors
-    = f.text_area :body
-    <br>
-    = f.submit 'Create answer'
-- else
-  i You must sign in first for create answer
-  br
+.new_answer
+  - if user_signed_in?
+    = form_for [@question, @question.answers.new], remote: true do |f|
+      = f.label :body, 'Answer'
+      .answer-errors
+      = f.text_area :body, id: "new-answer-body"
+      <br>
+      = f.submit 'Create answer'
+  - else
+    i You must sign in first for create answer
+    br
 
 = link_to 'All questions', questions_path
