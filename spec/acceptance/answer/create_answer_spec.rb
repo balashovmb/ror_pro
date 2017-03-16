@@ -12,7 +12,7 @@ feature 'Create answer', %q{
     sign_in(user)
 
     visit question_path(question)  
-    fill_in 'new-answer-body', with: 'text text12'
+    fill_in 'Answer', with: 'text text12'
     click_on 'Create answer'
     within '.answers' do
       expect(page).to have_content 'text text12'
@@ -21,7 +21,7 @@ feature 'Create answer', %q{
 
   scenario 'Non-authenticated user can not see Create answer button' do
     visit question_path(question)
-    expect(page).not_to have_content('Create answer')
+    expect(page).not_to have_button('Create answer')
   end
 
   scenario 'User try to create invalid answer', js: true do

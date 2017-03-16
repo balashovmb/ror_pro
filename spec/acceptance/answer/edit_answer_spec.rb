@@ -7,6 +7,7 @@ feature 'Answer editing', %{
 } do
   
   given(:answer) { create(:answer) }
+  given(:user) { create(:user) }
 
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(answer.question)
@@ -37,12 +38,13 @@ feature 'Answer editing', %{
         expect(page).to have_content 'edited answer'
         expect(page).to_not have_selector 'textarea' 
       end
-
     end
-
   end
 
-  
+  scenario " try to edit other user's question" do
+    sign_in(user)
+    visit question_path(answer.question)    
 
-  scenario " try to edit other user's question"
+    expect(page).to_not have_link 'Edit' 
+  end    
 end

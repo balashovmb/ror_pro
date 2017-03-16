@@ -16,7 +16,7 @@ hr
     = form_for [@question, @question.answers.new], remote: true do |f|
       = f.label :body, 'Answer'
       .answer-errors
-      = f.text_area :body, id: "new-answer-body"
+      = f.text_area :body
       <br>
       = f.submit 'Create answer'
   - else
