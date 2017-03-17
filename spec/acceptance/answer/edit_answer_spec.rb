@@ -9,7 +9,7 @@ feature 'Answer editing', %{
   given(:answer) { create(:answer) }
   given(:user) { create(:user) }
 
-  scenario 'Unauthenticated user try to edit question' do
+  scenario 'Unauthenticated user try to edit answer' do
     visit question_path(answer.question)
 
     expect(page).to_not have_link 'Edit'    
@@ -28,7 +28,7 @@ feature 'Answer editing', %{
       end
     end
 
-    scenario 'author try to edit his question', js: true  do
+    scenario 'author try to edit his answer', js: true  do
       click_on 'Edit'
       within '.answers' do
         fill_in 'Answer', with: 'edited answer'
@@ -41,7 +41,7 @@ feature 'Answer editing', %{
     end
   end
 
-  scenario " try to edit other user's question" do
+  scenario "try to edit other user's answer" do
     sign_in(user)
     visit question_path(answer.question)    
 

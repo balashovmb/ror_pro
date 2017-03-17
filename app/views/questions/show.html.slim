@@ -1,10 +1,21 @@
-b= @question.title
-br
-= @question.body
-- if current_user.try(:author?, @question)
- p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
+.question
+  .question_title  
+    b= @question.title
+  br
+  .question_body
+    = @question.body
+  - if user_signed_in? && current_user.author?(@question)
+    p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
+    p= link_to 'Edit question', '#', class: 'edit-question-link', data: { question_id: @question.id} 
+    p 
+    = form_for @question, remote: true do |f|  
+      = f.label :title
+      .edit-question-errors    
+      = f.text_field :title
+      = f.label :body
+      = f.text_area :body
+      = f.submit 'Save'
 hr
-
 .answers
   - if @question.answers.empty?
     b No answers

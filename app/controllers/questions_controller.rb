@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_question, only: [:show, :destroy]
+  before_action :set_question, only: [:show, :destroy, :update]
 
   def new
     @question = Question.new
@@ -26,9 +26,18 @@ class QuestionsController < ApplicationController
       @question.destroy
       redirect_to questions_path, notice: 'Your question deleted.'
     else
-      redirect_to @question, alert: 'No rights to delete'
+      redirect_to @question, alert: 'No rights to delete.'
     end
   end
+
+  def update
+    if current_user.author?(@question)    
+      @question.update(question_params)
+      flash[:notice] = 'Your question updated.'
+    else
+      flash[:alert] = 'No rights to edit question.'
+    end      
+  end 
 
   private
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question) }
-  let(:user) { question.user }
+  let!(:user) { question.user }
   let(:answer) { create(:answer, user: user, question: question) }
 
   describe 'POST #create' do
@@ -50,7 +50,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do  
-    sign_in_user
+    before { sign_in(user) }
 
     it 'assigns the requested answer to @answer' do
       patch :update, params:{ id: answer, question_id: question, answer: attributes_for(:answer)}, format: :js
