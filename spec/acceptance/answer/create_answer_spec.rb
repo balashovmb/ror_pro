@@ -11,7 +11,7 @@ feature 'Create answer', %q{
   scenario 'Authenticated user creates answer', js: true do
     sign_in(user)
 
-    visit question_path(question)  
+    visit question_path(question)
     fill_in 'new-answer-body', with: 'text text12'
     click_on 'Create answer'
     within '.answers' do

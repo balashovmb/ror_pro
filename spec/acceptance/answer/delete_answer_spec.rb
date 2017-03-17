@@ -13,7 +13,7 @@ feature 'Delete answer', %q{
       sign_in(answer.user)
 
       visit question_path(answer.question)
-      click_on 'Delete answer' 
+      click_on 'Delete answer'
 
       expect(page).not_to have_content(answer.body)
     end

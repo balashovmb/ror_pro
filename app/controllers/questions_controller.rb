@@ -31,13 +31,13 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if current_user.author?(@question)    
+    if current_user.author?(@question)
       @question.update(question_params)
       flash[:notice] = 'Your question updated.'
     else
       flash[:alert] = 'No rights to edit question.'
-    end      
-  end 
+    end
+  end
 
   private
 

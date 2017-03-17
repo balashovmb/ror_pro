@@ -19,12 +19,12 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if current_user.author?(@answer)    
+    if current_user.author?(@answer)
       @answer.update(answer_params)
       flash[:notice] = 'Your answer updated.'
     else
       flash[:alert] = 'No rights to edit answer.'
-    end      
+    end
   end
 
   private
