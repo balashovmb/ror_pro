@@ -40,12 +40,12 @@ RSpec.describe AnswersController, type: :controller do
       before { answer }
 
       it 'delete answer' do
-        expect { delete :destroy, params: { question_id: answer.question.id, id: answer } }.to change(Answer, :count).by(-1)
+        expect { delete :destroy, params: { question_id: answer.question.id, id: answer }, format: :js }.to change(Answer, :count).by(-1)
       end
 
       it 'redirect_to index view' do
-        delete :destroy, params: { question_id: answer.question.id, id: answer }
-        expect(response).to redirect_to question_path(answer.question)
+        delete :destroy, params: { question_id: answer.question.id, id: answer, format: :js }
+        expect(response).to render_template 'answers/destroy' 
       end
     end
   end
@@ -57,11 +57,6 @@ RSpec.describe AnswersController, type: :controller do
       it 'assigns the requested answer to @answer' do
         patch :update, params:{ id: answer, question_id: question, answer: attributes_for(:answer)}, format: :js
         expect(assigns(:answer)).to eq answer
-      end
-
-      it 'assigns the question' do
-        patch :update, params:{ id: answer, question_id: question, answer: attributes_for(:answer)}, format: :js
-        expect(assigns(:question)).to eq question
       end
 
       it 'changes answer attributes' do

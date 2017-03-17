@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
-  before_action :set_question,       only: [:create, :destroy, :update]
+  before_action :set_question,       only: [:create]
   before_action :set_answer,         only: [:destroy, :update]
 
   def create
@@ -16,7 +16,6 @@ class AnswersController < ApplicationController
     else
       flash[:alert] = 'No rights to delete'
     end
-    redirect_to @question
   end
 
   def update
