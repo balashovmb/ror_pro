@@ -10,11 +10,13 @@ RSpec.describe User do
   let(:question) { create(:question, user: user) }
   let(:question2) { create(:question) }
 
-  it 'returns true if user is the author of that question' do
-    expect(user.author?(question)).to eq true
-  end
+  context 'Author? method' do
+    it 'returns true if user is the author of that question' do
+      expect(user.author?(question)).to eq true
+    end
 
-  it 'returns false if user is the author of that question' do
-    expect(user.author?(question2)).to eq false
+    it 'returns false if user is the author of that question' do
+      expect(user.author?(question2)).to eq false
+    end
   end
 end
