@@ -1,5 +1,5 @@
 .answer id = "answer-#{answer.id}"
-   p id="edited-answer-#{answer.id}"
+  p id="edited-answer-#{answer.id}"
     = answer.body
     - if current_user && current_user.author?(answer)
       p= link_to 'Delete answer', answer, method: :delete, remote: true, data: { answer_id: answer.id, confirm: 'Are you shure?' }
@@ -10,5 +10,8 @@
         .edit-answer-errors
         = f.text_area :body
         = f.submit 'Save'
+    - if current_user && current_user.author?(answer.question)
+      p= link_to 'Set best', answer, method: :patch
+
 
 br
