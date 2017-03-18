@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :set_question,       only: [:create]
-  before_action :set_answer,         only: [:destroy, :update]
+  before_action :set_answer,         only: [:destroy, :update, :set_best]
 
   def create
     @answer = @question.answers.new(answer_params)
@@ -25,6 +25,15 @@ class AnswersController < ApplicationController
     else
       flash[:alert] = 'No rights to edit answer.'
     end
+  end
+
+  def set_best
+    if current_user.author?(@answer)
+      @answer.set_best
+      flash[:notice] = 'Answer mark as best.'
+    else
+      flash[:alert] = 'No rights to set best answer.'
+    end  
   end
 
   private

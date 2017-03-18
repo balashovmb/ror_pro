@@ -51,7 +51,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'user is author of the answer ' do
+    context 'user is author of the answer' do
       before { sign_in(user) }
 
       it 'assigns the requested answer to @answer' do
@@ -81,4 +81,40 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #set_best' do
+    context 'user is an author of the question' do
+      before { sign_in(user) }
+
+      it 'assigns the requested answer to @answer' do
+        patch :set_best, params: { id: answer }, format: :js
+        expect(assigns(:answer)).to eq answer
+      end
+
+      it 'changes answer attribute best to true' do
+        patch :set_best, params: { id: answer }, format: :js
+        expect(assigns(:answer).best).to eq true
+      end
+
+      it 'renders set_best template' do
+        patch :set_best, params: { id: answer }, format: :js
+        expect(response).to render_template :set_best
+      end                
+
+    end
+
+    context 'user is not an author of the question' do
+      before { sign_in(another_user) }
+     
+      it 'changes answer attribute best to true' do
+        patch :set_best, params: { id: answer }, format: :js
+        expect(assigns(:answer).best).to eq false            
+      end
+
+      it 'renders set_best template' do
+        patch :set_best, params: { id: answer }, format: :js
+        expect(response).to render_template :set_best
+      end
+    end
+  end        
 end

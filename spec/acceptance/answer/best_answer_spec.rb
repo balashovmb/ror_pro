@@ -14,7 +14,6 @@ feature 'Best answer', %q{
       sign_in(question.user)
       visit question_path(question)
 
-      save_and_open_page
       click_on 'Set best'
 
       within '.best' do
