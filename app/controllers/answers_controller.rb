@@ -30,10 +30,7 @@ class AnswersController < ApplicationController
   def set_best
     if current_user.author?(@answer)
       @answer.set_best
-      flash[:notice] = 'Answer mark as best.'
-    else
-      flash[:alert] = 'No rights to set best answer.'
-    end  
+    end 
   end
 
   private

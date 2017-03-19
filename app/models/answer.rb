@@ -5,7 +5,9 @@ class Answer < ApplicationRecord
   validates :body, length: { minimum: 10 }
 
   def set_best
-    self.best = true
-    self.save
+    transaction do
+      Answer.where(question_id: self.question.id, best: true).update_all(best: false)    
+      update(best:true)
+    end
   end
 end
