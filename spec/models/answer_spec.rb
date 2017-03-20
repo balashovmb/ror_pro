@@ -7,7 +7,7 @@ RSpec.describe Answer, type: :model do
 
   let(:question) { create(:question) }
   let(:answer1) { create(:answer, question: question) }
-  let(:answer2) { create(:answer, question: question, best: false )}
+  let(:answer2) { create(:answer, question: question, best: false ) }
 
 
   context 'set_best method' do

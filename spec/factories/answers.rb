@@ -14,13 +14,13 @@ FactoryGirl.define do
     body nil
     user
     question
-    best false    
+    best false
   end
 
   factory :answer_list, class: "Answer" do
     body :answer_body
     user
     question
-    best false    
+    best false
   end
 end

@@ -99,16 +99,16 @@ RSpec.describe AnswersController, type: :controller do
       it 'renders set_best template' do
         patch :set_best, params: { id: answer }, format: :js
         expect(response).to render_template :set_best
-      end                
+      end
 
     end
 
     context 'user is not an author of the question' do
       before { sign_in(another_user) }
-     
+
       it "don't changes answer attribute best to true" do
         patch :set_best, params: { id: answer }, format: :js
-        expect(assigns(:answer).best).to eq false            
+        expect(assigns(:answer).best).to eq false
       end
 
       it 'renders set_best template' do
@@ -116,5 +116,5 @@ RSpec.describe AnswersController, type: :controller do
         expect(response).to render_template :set_best
       end
     end
-  end        
+  end
 end
