@@ -43,7 +43,7 @@ feature 'Question editing', %{
     end
   end
 
-  scenario "try to edit other user's question" do
+  scenario "can't see Edit question link on another user's question" do
     sign_in(user)
     visit question_path(question)
 

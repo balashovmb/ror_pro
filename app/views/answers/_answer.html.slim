@@ -3,7 +3,10 @@
     = answer.body    
     - if answer.best
       p
-        b BEST ANSWER!     
+        b BEST ANSWER!
+    - else
+      - if current_user && current_user.author?(answer.question)
+        p= link_to 'Set best', set_best_answer_path(answer), method: :patch, remote: true         
     - if current_user && current_user.author?(answer)
       p= link_to 'Delete answer', answer, method: :delete, remote: true, data: { answer_id: answer.id, confirm: 'Are you shure?' }
       p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id} 
@@ -13,7 +16,5 @@
         .edit-answer-errors
         = f.text_area :body
         = f.submit 'Save'
-    - if current_user && current_user.author?(answer.question)
-      p= link_to 'Set best', set_best_answer_path(answer), method: :patch, remote: true
-      
+
 br
