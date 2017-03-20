@@ -106,7 +106,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'user is not an author of the question' do
       before { sign_in(another_user) }
      
-      it 'changes answer attribute best to true' do
+      it "don't changes answer attribute best to true" do
         patch :set_best, params: { id: answer }, format: :js
         expect(assigns(:answer).best).to eq false            
       end

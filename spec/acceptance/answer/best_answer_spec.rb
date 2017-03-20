@@ -14,10 +14,12 @@ feature 'Best answer', %q{
       sign_in(question.user)
       visit question_path(question)
 
-      click_link 'Set best'
-  
+      within "#answer-#{answer.id}" do
+        click_link 'Set best'
+      end
+
       wait_for_ajax    
-     
+      visit question_path(question)
       save_and_open_page              
     
       expect(page).to have_content 'BEST ANSWER!' 
