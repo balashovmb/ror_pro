@@ -24,7 +24,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'with invalid attributes' do
       let(:create_invalid_answer) { post :create, params: { question_id: question.id, answer: attributes_for(:invalid_answer), format: :js } }
       it 'does not save the question' do
-        expect { create_invalid_answer }.to_not change(Answer, :count)
+        expect { create_invalid_answer }.not_to change(Answer, :count)
       end
 
       it 'renders create template' do
@@ -77,7 +77,7 @@ RSpec.describe AnswersController, type: :controller do
       it 'do not edit answer' do
         patch :update, params: { id: answer, question_id: question, answer: { body: 'new body12' } }, format: :js
         question.reload
-        expect(answer.body).to_not eq 'new body12'
+        expect(answer.body).not_to eq 'new body12'
       end
     end
   end

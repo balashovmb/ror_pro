@@ -29,7 +29,7 @@ feature 'Best answer', %q{
 
     scenario 'mark on previous best answer disappears', js: true do
       within "#answer-#{answer2.id}" do
-        expect(page).to_not have_content 'BEST ANSWER!'
+        expect(page).not_to have_content 'BEST ANSWER!'
       end
     end
 
@@ -41,6 +41,6 @@ feature 'Best answer', %q{
   scenario "non author of question can't see Set best link", js: true do
     sign_in(another_user)
     visit question_path(question)
-    expect(page).to_not have_link 'Set best'
+    expect(page).not_to have_link 'Set best'
   end
 end

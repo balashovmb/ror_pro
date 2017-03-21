@@ -12,7 +12,7 @@ feature 'Question editing', %{
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(question)
 
-    expect(page).to_not have_link 'Edit'
+    expect(page).not_to have_link 'Edit'
   end
 
   describe 'Authenticated user' do
@@ -33,12 +33,12 @@ feature 'Question editing', %{
         fill_in 'Body', with: 'edited body'
         click_on 'Save'
 
-        expect(page).to_not have_content question.title
-        expect(page).to_not have_content question.body
+        expect(page).not_to have_content question.title
+        expect(page).not_to have_content question.body
         expect(page).to have_content 'edited title'
         expect(page).to have_content 'edited body'
 
-        expect(page).to_not have_selector 'textarea'
+        expect(page).not_to have_selector 'textarea'
       end
     end
   end
@@ -47,6 +47,6 @@ feature 'Question editing', %{
     sign_in(user)
     visit question_path(question)
 
-    expect(page).to_not have_link 'Edit question'
+    expect(page).not_to have_link 'Edit question'
   end
 end

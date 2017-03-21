@@ -12,7 +12,7 @@ feature 'Answer editing', %{
   scenario 'Unauthenticated user try to edit answer' do
     visit question_path(answer.question)
 
-    expect(page).to_not have_link 'Edit'
+    expect(page).not_to have_link 'Edit'
   end
 
   describe 'Authenticated user' do
@@ -34,9 +34,9 @@ feature 'Answer editing', %{
         fill_in 'Answer', with: 'edited answer'
         click_on 'Save'
 
-        expect(page).to_not have_content answer.body
+        expect(page).not_to have_content answer.body
         expect(page).to have_content 'edited answer'
-        expect(page).to_not have_selector 'textarea'
+        expect(page).not_to have_selector 'textarea'
       end
     end
   end
@@ -45,6 +45,6 @@ feature 'Answer editing', %{
     sign_in(user)
     visit question_path(answer.question)
 
-    expect(page).to_not have_link 'Edit'
+    expect(page).not_to have_link 'Edit'
   end
 end

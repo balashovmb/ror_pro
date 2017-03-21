@@ -34,7 +34,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not save the question' do
-        expect { post :create, params: { question: attributes_for(:invalid_question) } }.to_not change(Question, :count)
+        expect { post :create, params: { question: attributes_for(:invalid_question) } }.not_to change(Question, :count)
       end
 
       it 're-renders new view' do
@@ -89,7 +89,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       before { question }
       it 'do not delete question' do
-        expect { delete :destroy, params: { id: question } }.to_not change(Question, :count)
+        expect { delete :destroy, params: { id: question } }.not_to change(Question, :count)
       end
 
       it 'redirect_to index view' do
@@ -127,8 +127,8 @@ RSpec.describe QuestionsController, type: :controller do
       it 'do not edit question' do
         patch :update, params: { id: question, question: { title: 'new title1', body: 'new body12' } }, format: :js
         question.reload
-        expect(question.title).to_not eq 'new title1'
-        expect(question.body).to_not eq 'new body12'
+        expect(question.title).not_to eq 'new title1'
+        expect(question.body).not_to eq 'new body12'
       end
     end
   end
