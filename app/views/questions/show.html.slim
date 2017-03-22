@@ -4,6 +4,11 @@
   br
   .question_body
     = @question.body
+  p Attachments:
+  ul
+    -@question.attachments.each do |a|
+      li= a.file.file.filename
+
   - if user_signed_in? && current_user.author?(@question)
     p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
     p= link_to 'Edit question', '#', class: 'edit-question-link', data: { question_id: @question.id} 
