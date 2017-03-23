@@ -30,7 +30,7 @@ class AnswersController < ApplicationController
   def set_best
     @answer.set_best if current_user.author?(@answer.question)
   end
-
+ 
   private
 
   def set_question
@@ -38,7 +38,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, attachments_attributes: [:file])
   end
 
   def set_answer
