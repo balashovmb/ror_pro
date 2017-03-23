@@ -58,6 +58,11 @@ RSpec.describe QuestionsController, type: :controller do
     it 'renders show view' do
       expect(response).to render_template :show
     end
+
+    it 'builds new attachment for question' do
+      expect(assigns(:answer).attachments.first).to be_a_new(Attachment)      
+    end
+
   end
 
   describe 'GET #index' do

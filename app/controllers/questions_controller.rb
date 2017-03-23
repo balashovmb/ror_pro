@@ -40,6 +40,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def show
+    @answer = @question.answers.new   
+    @answer.attachments.new
+  end
+
   private
 
   def question_params
