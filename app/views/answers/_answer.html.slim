@@ -1,24 +1,24 @@
 .answer id = "answer-#{answer.id}"
   p id="edited-answer-#{answer.id}"
-  - if answer.persisted?
-      = answer.body
-      ul
-        -answer.attachments.each do |a|
-          li= link_to a.file.identifier, a.file.url    
-      - if answer.best
-        p
-          b BEST ANSWER!
-      - else
-        - if current_user && current_user.author?(answer.question)
-          p= link_to 'Set best', set_best_answer_path(answer), method: :patch, remote: true         
-      - if current_user && current_user.author?(answer)
-        p= link_to 'Delete answer', answer, method: :delete, remote: true, data: { answer_id: answer.id, confirm: 'Are you shure?' }
-        p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id} 
-        p 
-        = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-          = f.label :body, "Answer"
-          .edit-answer-errors
-          = f.text_area :body
-          = f.submit 'Save'
+    - if answer.persisted?
+        = answer.body
+        ul
+          -answer.attachments.each do |a|
+            li= link_to a.file.identifier, a.file.url    
+        - if answer.best
+          p
+            b BEST ANSWER!
+        - else
+          - if current_user && current_user.author?(answer.question)
+            p= link_to 'Set best', set_best_answer_path(answer), method: :patch, remote: true         
+        - if current_user && current_user.author?(answer)
+          p= link_to 'Delete answer', answer, method: :delete, remote: true, data: { answer_id: answer.id, confirm: 'Are you shure?' }
+          p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id} 
+          p 
+          = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+            = f.label :body, "Answer"
+            .edit-answer-errors
+            = f.text_area :body
+            = f.submit 'Save'
 
 br
