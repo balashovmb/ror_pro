@@ -11,7 +11,7 @@ feature 'Best answer', %q{
   given!(:answer3) { create(:answer, question: question) }
   given(:another_user) { create(:user) }
 
-  context 'Author of the question click on Set best link', js: true do
+  context 'Author of the question click on Set best link' , js: true do
     before do
       sign_in(question.user)
       visit question_path(question)

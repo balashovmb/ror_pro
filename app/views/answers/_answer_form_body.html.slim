@@ -2,4 +2,4 @@
 .answer-errors
 = f.text_area :body, id: 'answer-body-field'
 p
-= render partial: 'common/attachments', locals: {f: f}
+  = link_to_add_association 'Add filea', f, :attachments, partial: 'common/attachment_fields'

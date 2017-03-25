@@ -16,5 +16,9 @@
           p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id} 
           p 
           = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-            = render partial: 'answers/answer_form_body', locals: {f: f}
+            = f.label :body, 'Answer'
+            .answer-errors
+            = f.text_area :body, id: 'answer-body-field'
+            p
+              = link_to_add_association 'Add filea', f, :attachments, partial: 'common/attachment_fields'
             = f.submit 'Save'
