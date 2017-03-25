@@ -1,0 +1,5 @@
+= f.label :body, 'Answer'
+.answer-errors
+= f.text_area :body, id: 'answer-body-field'
+p
+= render partial: 'common/attachments', locals: {f: f}

@@ -7,8 +7,6 @@
   = f.text_area :body
   p Attachments:
   p
-  = f.fields_for :attachments do |a|
-    = a.label :file
-    = a.file_field :file 
+    = render partial: 'common/attachments', locals: {f: f}
   p
   = f.submit 'Create'
