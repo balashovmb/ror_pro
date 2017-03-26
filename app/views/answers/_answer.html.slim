@@ -18,7 +18,9 @@
           = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
             = f.label :body, 'Answer'
             .answer-errors
-            = f.text_area :body, id: 'answer-body-field'
+            = f.text_area :body
             p
-              = link_to_add_association 'Add filea', f, :attachments, partial: 'common/attachment_fields'
+            .add-file
+              = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
             = f.submit 'Save'
+          

@@ -31,7 +31,7 @@ feature 'Answer editing', %{
     scenario 'author try to edit his answer', js: true do
       click_on 'Edit'
       within '.answers' do
-        fill_in 'answer-body-field', with: 'edited answer'
+        fill_in 'Answer', with: 'edited answer'
         click_on 'Save'
 
         expect(page).not_to have_content answer.body

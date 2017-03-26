@@ -12,7 +12,7 @@ feature 'Add files to answer', %q{
   background do
     sign_in(user)
     visit question_path(question)
-    fill_in 'answer-body-field', with: 'My answer1'    
+    fill_in 'new-answer-body', with: 'My answer1'    
   end
 
   scenario 'User adds file to answer', js: true do

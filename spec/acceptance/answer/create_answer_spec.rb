@@ -12,7 +12,7 @@ feature 'Create answer', %q{
     sign_in(user)
 
     visit question_path(question)
-    fill_in 'answer-body-field', with: 'text text12'
+    fill_in 'new-answer-body', with: 'text text12'
     click_on 'Create answer'
     within '.answers' do
       expect(page).to have_content 'text text12'

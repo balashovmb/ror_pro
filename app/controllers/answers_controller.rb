@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:create, :destroy, :update, :set_best]
   before_action :set_question,       only: [:create]
   before_action :set_answer,         only: [:destroy, :update, :set_best]
 
@@ -38,7 +38,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body, attachments_attributes: [:file])
+    params.require(:answer).permit(:body, attachments_attributes: [:file, :_destroy, :id])
   end
 
   def set_answer

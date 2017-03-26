@@ -29,8 +29,12 @@ hr
 .new_answer
   - if user_signed_in?
     = form_for [@question, @answer], remote: true do |f|
-      = render partial: 'answers/answer_form_body', locals: {f: f}
-      p= f.submit 'Create answer'
+        = f.label :body, 'Answer'
+        .answer-errors
+        = f.text_area :body, id: 'new-answer-body'
+        p
+          = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
+        p= f.submit 'Create answer'
   - else
     i You must sign in first for create answer
     br
