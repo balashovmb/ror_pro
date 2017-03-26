@@ -7,9 +7,9 @@ RSpec.describe AttachmentsController, type: :controller do
     let!(:file){ create(:attachment, attachable: question) }
     let(:another_user){ create(:user) }
 
-    context 'author of the answer delete attachment' do
+    context 'author of the question delete attachment' do
 
-      it 'delete attachment in database' do
+      it 'delete Attachment in database' do
         sign_in(user)
         expect { delete :destroy, params: { id: file }, format: :js }.to change(question.attachments, :count).by(-1)
       end
