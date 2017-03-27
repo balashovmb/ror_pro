@@ -5,7 +5,7 @@ class Answer < ApplicationRecord
 
   validates :body, length: { minimum: 10 }
 
-  accepts_nested_attributes_for :attachments
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank, allow_destroy: true
 
   default_scope { order('best DESC') }
 
