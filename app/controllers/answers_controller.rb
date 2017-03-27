@@ -30,7 +30,7 @@ class AnswersController < ApplicationController
   def set_best
     @answer.set_best if current_user.author?(@answer.question)
   end
- 
+
   private
 
   def set_question

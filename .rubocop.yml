@@ -34,3 +34,5 @@ Style/StringLiterals:
 Style/PercentLiteralDelimiters:
   Enabled: false  
 
+Style/UnneededPercentQ:
+  Enabled: false  

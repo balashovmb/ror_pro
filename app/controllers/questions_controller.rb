@@ -4,7 +4,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-#    @question.attachments.build
   end
 
   def create
@@ -41,8 +40,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = @question.answers.new   
-#    @answer.attachments.new
+    @answer = @question.answers.new
   end
 
   private

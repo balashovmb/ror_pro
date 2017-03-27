@@ -16,7 +16,6 @@ feature 'Question editing', %{
   end
 
   describe 'Authenticated user' do
-
     before do
       sign_in(question.user)
       visit question_path(question)

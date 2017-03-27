@@ -100,7 +100,6 @@ RSpec.describe AnswersController, type: :controller do
         patch :set_best, params: { id: answer }, format: :js
         expect(response).to render_template :set_best
       end
-
     end
 
     context 'user is not an author of the question' do

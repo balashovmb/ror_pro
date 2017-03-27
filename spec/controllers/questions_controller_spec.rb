@@ -54,7 +54,6 @@ RSpec.describe QuestionsController, type: :controller do
     it 'renders show view' do
       expect(response).to render_template :show
     end
-
   end
 
   describe 'GET #index' do

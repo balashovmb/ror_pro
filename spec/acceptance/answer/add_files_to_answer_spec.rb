@@ -12,11 +12,11 @@ feature 'Add files to answer', %q{
   background do
     sign_in(user)
     visit question_path(question)
-    fill_in 'new-answer-body', with: 'My answer1'    
+    fill_in 'new-answer-body', with: 'My answer1'
   end
 
   scenario 'User adds file to answer', js: true do
-    click_on 'Add file'     
+    click_on 'Add file'
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on 'Create'
 
@@ -25,19 +25,18 @@ feature 'Add files to answer', %q{
     end
   end
 
-  scenario 'User adds several files to answer', js: true  do
-    click_on 'Add file' 
-    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"  
-    click_on 'Add file'    
+  scenario 'User adds several files to answer', js: true do
+    click_on 'Add file'
+    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+    click_on 'Add file'
     within all('.nested-fields').last do
       attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
     end
 
     click_on 'Create'
-    within '.answers' do    
+    within '.answers' do
       expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
-      expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'  
+      expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'
     end
   end
-
 end
