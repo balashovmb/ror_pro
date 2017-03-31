@@ -1,24 +1,24 @@
 require 'rails_helper'
 
 RSpec.shared_examples 'voted' do
-  describe 'PATCH #rate_up' do
+  describe 'POST #vote_up' do
     sign_in_user
 
-    let(:model) { create(described_class.controller_name.classify.underscore.to_sym) }
+    let(:votable) { create(described_class.controller_name.classify.underscore.to_sym) }
 
     let(:params) do {
-        id: model.id, format: :json
+        id: votable.id
       }
     end
 
-    context "Rate at another post/answer" do
-      it "assigns the answer/post to @ratable" do
-        patch :vote_up, params: params
-        expect(assigns(:ratable)).to eq model
+    context "Vote for another user's question/answer" do
+      it "assigns the answer/post to @votable" do
+        post :vote_up, params: params
+        expect(assigns(:votable)).to eq votable
       end
 
-      it "rate up answer/post" do
-        expect { patch :vote_up, params: params }.to change{ model.votes.where(user: @user).sum(:votes) }.by(1)
+      it "vote up question/answer" do
+        expect { post :vote_up, method: :post, params: { id: votable }, format: :js }.to change(@user.votes, :count).by(1)
       end
     end
   end
