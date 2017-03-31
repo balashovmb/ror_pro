@@ -2,8 +2,16 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :questions do
-    resources :answers, shallow: true do
+  concern :votable do
+    member do
+      post 'vote_up'
+      post 'vote_down'
+      delete 'cancel_vote'
+    end
+  end
+
+  resources :questions, concerns: [:votable] do
+    resources :answers, concerns: [:votable], shallow: true do
       patch 'set_best', on: :member
     end
   end
