@@ -18,7 +18,7 @@ RSpec.shared_examples 'voted' do
       end
 
       it "vote up question/answer" do
-        expect { post :vote_up, method: :post, params: { id: votable }, format: :js }.to change(@user.votes, :count).by(1)
+        expect { post :vote_up, params: { id: votable }, format: :js }.to change(@user.votes, :count).by(1)
       end
     end
   end

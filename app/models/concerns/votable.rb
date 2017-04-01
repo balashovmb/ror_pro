@@ -23,5 +23,9 @@ module Votable
   def cancel_vote(user)
     votes.where(user: user).destroy_all
   end
-    
+
+  def exist_vote?(user)
+    Vote.where(user: user, votable: self).exists?
+  end
+   
 end

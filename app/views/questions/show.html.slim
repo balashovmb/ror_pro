@@ -1,5 +1,8 @@
 .question
   = render @question
+  .question-rating = "Rating: #{@question.rating}"  
+  - if user_signed_in? && !current_user.author?(@question)
+    = link_to '+', polymorphic_path([:vote_up, @question]), method: :post, remote: true, class: "vote-question-link", data: { type: :json }   
 hr
 .answers
   - if @question.answers.empty?
