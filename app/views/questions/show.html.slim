@@ -1,8 +1,11 @@
 .question
   = render @question
-  .question-rating = "Rating: #{@question.rating}"  
+  .question-rating = "Rating: #{@question.rating}" 
+  .question-errors = " "   
   - if user_signed_in? && !current_user.author?(@question)
-    = link_to '+', polymorphic_path([:vote_up, @question]), method: :post, remote: true, class: "vote-question-link", data: { type: :json }   
+    p= link_to 'Vote UP', polymorphic_path([:vote_up, @question]), method: :post, remote: true, class: "vote-question-link", data: { type: :json }
+    p= link_to 'Cancel', polymorphic_path([:cancel_vote, @question]), method: :delete, remote: true, class: "vote-question-link", data: { type: :json }    
+    p= link_to 'Vote DOWN', polymorphic_path([:vote_down, @question]), method: :post, remote: true, class: "vote-question-link", data: { type: :json }             
 hr
 .answers
   - if @question.answers.empty?

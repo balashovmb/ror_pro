@@ -1,0 +1,7 @@
+- votable_klass = votable.class.name.downcase
+.voting
+  div class="#{votable_klass}-errors"
+  div class="#{votable_klass}-rating"= "Rating: #{votable.rating}"   
+  - if user_signed_in? && !current_user.author?(votable)
+    = link_to '+', polymorphic_path([:vote_up, votable]), method: :post, remote: true, class: "vote-#{votable}-link", data: { type: :json }  
+1   

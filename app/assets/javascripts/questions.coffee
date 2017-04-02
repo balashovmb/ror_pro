@@ -14,11 +14,11 @@ $(document).on 'click', '.edit-question-link', edit_question
 vote_question = (e) ->
   $('.vote-question-link').bind 'ajax:success', (e, data, status, xhr) ->
     response = $.parseJSON(xhr.responseText)
-    if(response.status = 'success')
-      $('.question-errors').empty()
-      $('.question-rating').html('<p>Rating: ' + response.rating + '</p>')
-    else
-      $('.question-errors').append('<p>' + response.data + '</p>')
+    $('.question-rating').html('<p>Rating: ' + response.rating + '</p>')
+    $('.question-errors').html('')
+  .bind 'ajax:error', (e, xhr, status, error) ->
+    response = $.parseJSON(xhr.responseText)
+    $('.question-errors').html('<p>' + response.data + '</p>')   
 
 $(document).on 'click', '.vote-question-link', vote_question
 
