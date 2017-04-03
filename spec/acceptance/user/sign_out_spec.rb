@@ -1,4 +1,4 @@
-require 'acceptance/acceptance_helper'
+require 'rails_helper'
 
 feature 'User sign out', %q{
   When I finish using the webapp
