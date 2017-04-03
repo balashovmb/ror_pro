@@ -1,7 +1,6 @@
 require 'active_support/concern'
 
 module Attachable
-
   extend ActiveSupport::Concern
 
   included do

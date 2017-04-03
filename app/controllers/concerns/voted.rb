@@ -4,28 +4,28 @@ module Voted
   included do
     before_action :set_votable, only: [:vote_up, :vote_down, :cancel_vote]
     before_action :check_users_vote, only: [:vote_up, :vote_down]
-    before_action :check_votable_author, only: [:vote_up, :vote_down, :cancel_vote] 
+    before_action :check_votable_author, only: [:vote_up, :vote_down, :cancel_vote]
   end
 
   def vote_up
     @votable.vote_up(current_user)
-    json_vote_ok   
+    json_vote_ok
   end
 
   def vote_down
     @votable.vote_down(current_user)
-    json_vote_ok    
+    json_vote_ok
   end
 
   def cancel_vote
     @votable.cancel_vote(current_user)
-    json_vote_ok   
-  end    
+    json_vote_ok
+  end
 
-  private 
+  private
 
   def json_vote_ok
-    render json: { id: @votable.id, rating: @votable.rating }, status: :ok  
+    render json: { id: @votable.id, rating: @votable.rating }, status: :ok
   end
 
   def model_klass
@@ -38,7 +38,7 @@ module Voted
 
   def check_users_vote
     if @votable.exist_vote?(current_user)
-      render json: { id: @votable.id, data: 'You can vote only once'}, status: :unprocessable_entity
+      render json: { id: @votable.id, data: 'You can vote only once' }, status: :unprocessable_entity
     end
   end
 
@@ -47,5 +47,4 @@ module Voted
       render json: { id: @votable.id, data: "You can't vote for your #{model_klass}" }, status: :unprocessable_entity
     end
   end
-
 end

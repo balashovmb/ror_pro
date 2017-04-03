@@ -1,7 +1,6 @@
 require 'active_support/concern'
 
 module Votable
-
   extend ActiveSupport::Concern
 
   included do
@@ -27,5 +26,4 @@ module Votable
   def exist_vote?(user)
     Vote.where(user: user, votable: self).exists?
   end
-   
 end

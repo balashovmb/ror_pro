@@ -8,6 +8,9 @@ AllCops:
     - Gemfile
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
+    - 'spec/acceptance/acceptance_helper.rb'
+    - 'tmp/**/*'
+    - 'public/**/*'        
   DisplayCopNames: true
 
 Rails:

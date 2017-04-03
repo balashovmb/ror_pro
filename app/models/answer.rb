@@ -5,9 +5,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
 
-
   validates :body, length: { minimum: 10 }
-
 
   default_scope { order('best DESC') }
 

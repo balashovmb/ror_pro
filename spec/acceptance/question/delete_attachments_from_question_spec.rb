@@ -2,7 +2,7 @@ require 'acceptance/acceptance_helper'
 
 feature 'Delete files from questions', %q{
   In order to fix question
-  As an authenticated author 
+  As an authenticated author
   Can delete attached files
 } do
   given!(:user) { create(:user) }
