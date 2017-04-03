@@ -49,7 +49,6 @@ feature 'Vote for question', %q{
       within ".question" do
         click_link 'Vote DOWN'
         click_link 'Vote DOWN'
-
         expect(page).to have_content 'Rating: -1'      
       end
     end
@@ -63,7 +62,9 @@ feature 'Vote for question', %q{
       
       within ".question" do
         click_link 'Vote UP'
+        wait_for_ajax
         click_link 'Cancel'
+        wait_for_ajax
         expect(page).to have_content 'Rating: 0' 
       end   
     end
