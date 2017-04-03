@@ -34,6 +34,7 @@ feature 'Best answer', %q{
     end
 
     scenario 'best answer shows first in answer list', js: true do
+      wait_for_ajax
       expect(first('.answer')).to have_content 'BEST ANSWER!'
     end
   end

@@ -10,3 +10,16 @@ edit_answer = (e) ->
   $('form#edit-answer-' + answer_id).show();    
 
 $(document).on 'click', '.edit-answer-link', edit_answer
+
+vote_answer_success = (e, data, status, xhr) ->
+    answer = $.parseJSON(xhr.responseText)
+    $('#answer-'+ answer.id + ' .answer-rating').html('<p>Rating: ' + answer.rating + '</p>')
+    $('.answer-errors').html('')
+
+vote_answer_error = (e, xhr, status, error) ->
+    response = $.parseJSON(xhr.responseText)
+    $('#answer-'+ response.id + '.answer-errors').html(response.error)  
+
+
+$(document).on 'ajax:success', '.vote-answer-link', vote_answer_success
+$(document).on 'ajax:error', '.vote-answer-link', vote_answer_error
