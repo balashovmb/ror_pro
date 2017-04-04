@@ -25,7 +25,7 @@ module Voted
   private
 
   def json_vote_ok
-    render json: { id: @votable.id, rating: @votable.rating }, status: :ok
+    render json: { id: @votable.id, rating: @votable.rating, dom_id: "#{@votable.class.name.underscore}_#{@votable.id}" }, status: :ok
   end
 
   def model_klass
