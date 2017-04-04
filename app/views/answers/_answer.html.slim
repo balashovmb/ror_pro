@@ -28,11 +28,6 @@
             .add-file
               = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
             = f.submit 'Save'
-        .answer-rating = "Rating: #{answer.rating}" 
-        .answer-vote-errors = " "                
-        - if user_signed_in? && !current_user.author?(answer)
-          p= link_to 'Vote UP', polymorphic_path([:vote_up, answer]), method: :post, remote: true, class: "vote-answer-link", data: { type: :json }
-          p= link_to 'Cancel', polymorphic_path([:cancel_vote, answer]), method: :delete, remote: true, class: "vote-answer-link", data: { type: :json }    
-          p= link_to 'Vote DOWN', polymorphic_path([:vote_down, answer]), method: :post, remote: true, class: "vote-answer-link", data: { type: :json }
+        = render 'votes/votes', votable: answer  
 br                 
           
