@@ -40,6 +40,7 @@ gem 'devise'
 gem 'carrierwave'
 gem 'remotipart'
 gem 'cocoon'
+gem 'record_tag_helper'
 
 group :test do
   gem 'shoulda-matchers'

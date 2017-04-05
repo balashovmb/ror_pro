@@ -1,10 +1,13 @@
 - votable_klass = votable.class.name.downcase
 .voting
-  div class="#{votable_klass}-#{votable.id}-vote-errors"
-  div class="#rating_#{dom_id votable}"= "Rating: #{votable.rating}"   
+  div  
+    span 
+    =< content_tag_for :span, votable, :errors
+  div  
+    span = "Rating:"
+    =< content_tag_for :span, votable, :rating
+      = votable.rating   
   - if user_signed_in? && !current_user.author?(votable)
-    p= link_to 'Vote UP', polymorphic_path([:vote_up, votable]), method: :post, remote: true, class: "vote-#{dom_id votable}-link", data: { type: :json }
-    p= link_to 'Cancel', polymorphic_path([:cancel_vote, votable]), method: :delete, remote: true, class: "vote-#{dom_id votable}-link", data: { type: :json }   
-    p= link_to 'Vote DOWN', polymorphic_path([:vote_down, votable]), method: :post, remote: true, class: "vote-#{dom_id votable}-link", data: { type: :json }
-
-  
+    p= link_to 'Vote UP', polymorphic_path([:vote_up, votable]), method: :post, remote: true, data: { type: :json }
+    p= link_to 'Cancel', polymorphic_path([:cancel_vote, votable]), method: :delete, remote: true, data: { type: :json }   
+    p= link_to 'Vote DOWN', polymorphic_path([:vote_down, votable]), method: :post, remote: true,  data: { type: :json }

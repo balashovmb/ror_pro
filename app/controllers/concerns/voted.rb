@@ -25,7 +25,11 @@ module Voted
   private
 
   def json_vote_ok
-    render json: { id: @votable.id, rating: @votable.rating, dom_id: "#{@votable.class.name.underscore}_#{@votable.id}" }, status: :ok
+    render json: { rating: @votable.rating, dom_id: dom_id }, status: :ok
+  end
+
+  def dom_id
+    "#{@votable.class.name.underscore}_#{@votable.id}"
   end
 
   def model_klass
@@ -38,13 +42,13 @@ module Voted
 
   def check_users_vote
     if @votable.exist_vote?(current_user)
-      render json: { id: @votable.id, data: 'You can vote only once' }, status: :unprocessable_entity
+      render json: { data: 'You can vote only once', dom_id: dom_id }, status: :unprocessable_entity
     end
   end
 
   def check_votable_author
     if current_user.author?(@votable)
-      render json: { id: @votable.id, data: "You can't vote for your #{model_klass}" }, status: :unprocessable_entity
+      render json: { data: "You can't vote for your #{model_klass}", dom_id: dom_id }, status: :unprocessable_entity
     end
   end
 end
