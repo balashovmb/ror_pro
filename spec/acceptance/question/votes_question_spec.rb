@@ -26,8 +26,10 @@ feature 'Vote for question', %q{
     scenario "authenticated user can't vote twice", js: true do
       within ".question" do
         click_link 'Vote UP'
+        wait_for_ajax
         click_link 'Vote UP'
         expect(page).to have_content 'Rating: 1'
+        expect(page).to have_content "You can vote only once"   
       end
     end
   end
@@ -45,8 +47,10 @@ feature 'Vote for question', %q{
     scenario "authenticated user can't vote twice", js: true do
       within ".question" do
         click_link 'Vote DOWN'
+        wait_for_ajax
         click_link 'Vote DOWN'
         expect(page).to have_content 'Rating: -1'
+        expect(page).to have_content "You can vote only once"        
       end
     end
   end
