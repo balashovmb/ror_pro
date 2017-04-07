@@ -8,23 +8,29 @@ shared_examples_for "votable" do
   let(:user2) { create(:user) }
 
   describe 'vote methods tests' do
-    it 'votes up' do
+    it '#vote_up' do
       model.vote_up(user)
 
       expect(model.rating).to eq(1)
     end
 
-    it 'votes down' do
+    it '#vote_down' do
       model.vote_down(user)
 
       expect(model.rating).to eq(-1)
     end
 
-    it 'cancel vote' do
+    it '#cancel_vote' do
       model.vote_up(user)
       model.cancel_vote(user)
 
       expect(model.rating).to eq(0)
+    end
+
+    it '#exist_vote?' do
+      model.vote_up(user)
+
+      expect(model.exist_vote?(user)).to eq(true)
     end
 
     it 'sum of the votes of two users' do

@@ -5,22 +5,21 @@ feature 'Show answers', %q{
 } do
 
   given!(:question) { create(:question) }
-  given!(:answer) {create(:answer, question: question)}
-  given!(:answer2) {create(:answer, question: question)}
+  given!(:answers) {create_list :answer_list, 2, question: question }
 
   scenario 'authenticated user can see answers' do
     sign_in(question.user)
 
     visit question_path(question)
 
-    expect(page).to have_content answer.body
-    expect(page).to have_content answer2.body
+    expect(page).to have_content answers.first.body
+    expect(page).to have_content answers.last.body
   end
 
   scenario 'non-authenticated user can see answers ' do
     visit question_path(question)
 
-    expect(page).to have_content answer.body
-    expect(page).to have_content answer2.body
+    expect(page).to have_content answers.first.body
+    expect(page).to have_content answers.last.body
   end
 end

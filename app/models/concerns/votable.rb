@@ -24,6 +24,6 @@ module Votable
   end
 
   def exist_vote?(user)
-    Vote.where(user: user, votable: self).exists?
+    votes.where(user: user).exists?
   end
 end
