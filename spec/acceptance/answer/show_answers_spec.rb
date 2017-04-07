@@ -5,7 +5,7 @@ feature 'Show answers', %q{
 } do
 
   given!(:question) { create(:question) }
-  given!(:answers) {create_list :answer_list, 2, question: question }
+  given!(:answers) { create_list :answer_list, 2, question: question }
 
   scenario 'authenticated user can see answers' do
     sign_in(question.user)

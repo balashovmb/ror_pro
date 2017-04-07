@@ -87,11 +87,11 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     context 'user is not author of the question' do
-      before do 
-        sign_in(another_user) 
+      before do
+        sign_in(another_user)
         question
       end
-       
+
       it 'do not delete question' do
         expect { delete :destroy, params: { id: question } }.not_to change(Question, :count)
       end

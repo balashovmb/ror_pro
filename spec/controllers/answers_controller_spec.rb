@@ -38,10 +38,10 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'DELETE #destroy' do
     context 'user is author of the answer' do
-      
-      before do 
-        sign_in(user) 
-        answer 
+
+      before do
+        sign_in(user)
+        answer
       end
 
       it 'delete answer' do
