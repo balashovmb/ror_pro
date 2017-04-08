@@ -1,5 +1,5 @@
 .question
-  = render @question
+  = render 'questions/question_show', question: @question
   = render 'votes/votes', votable: @question             
 hr
 .answers
