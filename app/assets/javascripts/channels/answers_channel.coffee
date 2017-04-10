@@ -5,7 +5,7 @@ App.cable.subscriptions.create "AnswersChannel",
   ,
   received: (data) ->
     console.log 'Data received'    
-    $('.answers').append data
+    $('.answers').append(JST['templates/answer'](data))
 
   followCurrenQuestion: ->
     questionId = $('.question').data('id')

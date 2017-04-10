@@ -1,0 +1,2 @@
+.answer.collection-item.section id="answer_#{@id}"
+  p.answer-body =@body
