@@ -1,0 +1,7 @@
+p
+  | Rating:
+  span.rating=@rating
+-if gon.current_user_id && (@votable.user_id != gon.current_user_id)
+  a.vote_link href="/answers/#{@votable.id}/vote_up" data-remote="true" Vote_UP
+  a.vote_link href="/answers/#{@votable.id}/cancel_vote" data-remote="true", data-method="delete" Cancel  
+  a.vote_link href="/answers/#{@votable.id}/vote_down" data-remote="true" Vote_DOWN

@@ -42,7 +42,8 @@ class AnswersController < ApplicationController
     ActionCable.server.broadcast(
       "question_answers_#{@question.id}",
       answer: @answer,
-      question_author_id: @question.user_id
+      question_author_id: @question.user_id,
+      rating: @answer.rating
     )
 
   end   

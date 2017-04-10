@@ -1,4 +1,5 @@
 .answer id="answer_#{@answer.id}"
   p.answer-body =@answer.body
-  = gon.current_user_id
+
+==JST["templates/votes"](votable: @answer, rating: @rating)
 
