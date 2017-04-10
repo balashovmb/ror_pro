@@ -1,2 +1,4 @@
-.answer.collection-item.section id="answer_#{@id}"
-  p.answer-body =@body
+.answer id="answer_#{@answer.id}"
+  p.answer-body =@answer.body
+  = gon.current_user_id
+
