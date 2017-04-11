@@ -1,4 +1,4 @@
-.answer id="answer_#{@answer.id}"
+.answer id="answer-#{@answer.id}"
   p.answer-body =@answer.body
   ==JST["templates/votes"](votable: @answer, rating: @rating)
 
