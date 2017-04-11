@@ -1,11 +1,13 @@
-p.voting
+p.votings
   | Rating:
-  span.rating=@rating
-  -if gon.current_user_id && (@votable.user_id != gon.current_user_id)
-    p
-      a href="/answers/#{@votable.id}/vote_up" data-remote="true" data-method="post" data-type="json" Vote_UP
-    p
-      a href="/answers/#{@votable.id}/cancel_vote" data-remote="true" data-method="delete" data-type="json" Cancel  
-    p
-      a href="/answers/#{@votable.id}/vote_down" data-remote="true" data-type="json" Vote_DOWN
+  span id="rating_#{@votable_klass}_#{@votable.id}" =@rating
+  div
+    span id="errors_#{@votable_klass}_#{@votable.id}"  
+    -if gon.current_user_id && (@votable.user_id != gon.current_user_id)
+      p
+        a.voting href="/answers/#{@votable.id}/vote_up" data-remote="true" data-method="post" data-type="json" Vote_UP
+      p
+        a.voting href="/answers/#{@votable.id}/cancel_vote" data-remote="true" data-method="delete" data-type="json" Cancel  
+      p
+        a.voting href="/answers/#{@votable.id}/vote_down" data-remote="true" data-method="post" data-type="json" Vote_DOWN
 
