@@ -1,9 +1,11 @@
 .answer id="answer-#{@answer.id}"
   p.answer-body =@answer.body
-  ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')
   - if @answer.best
     p
       b BEST ANSWER!
   - else
     - if gon.current_user_id && (gon.current_user_id == @question_author_id)
-      a href="/answers/#{@answer.id}/set_best"  data-remote="true" data-method="patch" Set_best    
+      a href="/answers/#{@answer.id}/set_best"  data-remote="true" data-method="patch" Set_best
+  - if gon.current_user_id && (gon.current_user_id == @answer.user_id)
+    a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" Delete answer    
+  ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')        
