@@ -1,6 +1,10 @@
 .answer id="answer-#{@answer.id}"
   p.answer-body =@answer.body
-  - if @answer.best
+  - for a in @attachments
+    li
+      a href=a.with_meta.url =a.with_meta.filename
+
+  - if @answer.best 
     p
       b BEST ANSWER!
   - else
@@ -8,4 +12,5 @@
       a href="/answers/#{@answer.id}/set_best"  data-remote="true" data-method="patch" Set_best
   - if gon.current_user_id && (gon.current_user_id == @answer.user_id)
     a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" Delete answer    
-  ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')        
+  ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')
+  br        

@@ -42,7 +42,8 @@ class AnswersController < ApplicationController
     data = {
       answer: @answer,
       question_author_id: @question.user_id,
-      rating: @answer.rating
+      rating: @answer.rating,
+      attachments: @answer.attachments.as_json(methods: :with_meta)
     }
     ActionCable.server.broadcast( "question_answers_#{@question.id}", data )
 
