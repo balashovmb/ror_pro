@@ -4,8 +4,9 @@ App.cable.subscriptions.create "AnswersChannel",
     console.log 'Connected AnswersChannel'
   ,
   received: (data) ->
-    console.log 'Data received'    
-    $('.answers').append(JST['templates/answer'](data))
+    console.log data.answer.user_id
+    if gon.current_user_id != data.answer.user_id
+      $('.answers').append(JST['templates/answer'](data))
 
   followCurrenQuestion: ->
     questionId = $('.question').data('id')
