@@ -1,6 +1,6 @@
 p.votings
-  | Rating:
-  span id="rating_#{@votable_klass}_#{@votable.id}" =@rating
+  | Rating: 
+  span id="rating_#{@votable_klass}_#{@votable.id}" = @rating
   div
     span id="errors_#{@votable_klass}_#{@votable.id}"  
     -if gon.current_user_id && (@votable.user_id != gon.current_user_id)

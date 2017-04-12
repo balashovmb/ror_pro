@@ -6,8 +6,8 @@ feature 'Vote for answer', %q{
 } do
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
-  given!(:answer) { create(:answer, question: question) }
-  given!(:users_answer) { create(:answer, question: question, user: user) }
+  given(:answer) { create(:answer, question: question) }
+  given(:users_answer) { create(:answer, question: question, user: user) }
   given(:user2) { create(:user) }
 
   before do
@@ -69,7 +69,6 @@ feature 'Vote for answer', %q{
   end
 
   scenario "author of the question don't see links for vote", js: true do
-
     within "#answer-#{users_answer.id}" do
       expect(page).not_to have_content 'Vote UP'
       expect(page).not_to have_content 'Vote DOWN'
@@ -78,7 +77,7 @@ feature 'Vote for answer', %q{
   end
 
   fcontext "mulitple sessions" do
-    scenario "answer links appears and works on another user's page", js: true do
+    before do
       Capybara.using_session('user') do
         sign_in(user)
         visit question_path(question)
@@ -96,12 +95,34 @@ feature 'Vote for answer', %q{
           expect(page).to have_content 'text text12'
         end
       end
+    end
 
+    scenario "answer Vote UP link works in another users session", js: true do
       Capybara.using_session('user2') do
         within '.answers' do
-          expect(page).to have_content 'Vote UP'
-          expect(page).to have_content 'Vote DOWN'
-          expect(page).to have_content 'Cancel'
+
+          click_link 'Vote UP'
+          expect(page).to have_content 'Rating: 1'
+        end
+      end
+    end
+
+    scenario "answer Vote DOWN link works in another users session", js: true do
+      Capybara.using_session('user2') do
+        within '.answers' do
+
+          click_link 'Vote DOWN'
+          expect(page).to have_content 'Rating: -1'
+        end
+      end
+    end
+
+    scenario "answer Cancel vote link works in another users session", js: true do
+      Capybara.using_session('user2') do
+        within '.answers' do
+          click_link 'Vote DOWN'
+          click_link 'Cancel'
+          expect(page).to have_content 'Rating: 0'                    
         end
       end
     end
