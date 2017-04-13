@@ -1,6 +1,14 @@
 .question data-id="#{@question.id}"
   = render 'questions/question_show', question: @question
-  = render 'votes/votes', votable: @question             
+  = render 'votes/votes', votable: @question
+  .question_comments
+  .question_new_comment
+    if user_signed_in?
+      = form_for [@question, @comment], remote: true do |f|
+        = f.label :body, 'comment'
+        .comment-errors
+        = f.text_area :body
+        p= f.submit 'Create comment'                 
 hr
 .answers
   - if @question.answers.empty?

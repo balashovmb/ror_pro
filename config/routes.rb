@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -14,8 +15,15 @@ Rails.application.routes.draw do
     resources :answers, concerns: [:votable], shallow: true do
       patch 'set_best', on: :member
     end
+    resources :comments, only: :create, defaults: { commentable: 'question' }    
   end
 
+  resources :answers, only: [] do
+    resources :comments, only: :create, defaults: { commentable: 'answer' }
+  end
+
+  resources :comments, only: :destroy
+  
   resources :attachments, only: :destroy  
 
   root 'questions#index'
