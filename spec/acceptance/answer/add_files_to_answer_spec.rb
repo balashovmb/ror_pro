@@ -8,6 +8,8 @@ feature 'Add files to answer', %q{
 
   given(:user) { create(:user) }
   given(:question) { create(:question) }
+  given(:user2) { create(:user) }
+
 
   background do
     sign_in(user)
@@ -37,6 +39,38 @@ feature 'Add files to answer', %q{
     within '.answers' do
       expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
       expect(page).to have_link 'rails_helper.rb', href: '/uploads/attachment/file/2/rails_helper.rb'
+    end
+  end
+
+ fcontext "mulitple sessions" do
+    before do
+      Capybara.using_session('user') do
+        sign_in(user)
+        visit question_path(question)
+      end
+ 
+      Capybara.using_session('user2') do
+        sign_in(user2)
+        visit question_path(question)
+      end
+
+      Capybara.using_session('user') do
+        fill_in 'new-answer-body', with: 'text text12'
+        click_on 'Add file'
+        attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+        click_on 'Create'        
+        within '.answers' do
+          expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+        end
+      end
+    end
+
+    scenario "answer attachments appears in another users session", js: true do
+      Capybara.using_session('user2') do
+        within '.answers' do
+          expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+        end
+      end
     end
   end
 end

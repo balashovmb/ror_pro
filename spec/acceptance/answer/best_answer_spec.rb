@@ -68,7 +68,6 @@ feature 'Best answer', %q{
 
     scenario "answer Set best link works in another users session", js: true do
       Capybara.using_session('user2') do
-        save_and_open_page
         within '#answer-4' do
           click_link 'Set best'
           expect(page).to have_content 'BEST ANSWER!'
