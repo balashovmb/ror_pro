@@ -91,7 +91,7 @@ feature 'Vote for answer', %q{
       Capybara.using_session('user') do
         fill_in 'new-answer-body', with: 'text text12'
         click_on 'Create answer'
-        within '.answers' do
+        within '#answer-3' do
           expect(page).to have_content 'text text12'
         end
       end
@@ -100,7 +100,6 @@ feature 'Vote for answer', %q{
     scenario "answer Vote UP link works in another users session", js: true do
       Capybara.using_session('user2') do
         within '#answer-3' do
-
           click_link 'Vote UP'
           expect(page).to have_content 'Rating: 1'
         end
@@ -110,7 +109,6 @@ feature 'Vote for answer', %q{
     scenario "answer Vote DOWN link works in another users session", js: true do
       Capybara.using_session('user2') do
         within '#answer-3' do
-
           click_link 'Vote DOWN'
           expect(page).to have_content 'Rating: -1'
         end
@@ -118,9 +116,10 @@ feature 'Vote for answer', %q{
     end
 
     scenario "answer Cancel vote link works in another users session", js: true do
-      Capybara.using_session('user2') do
+      Capybara.using_session('user2') do     
         within '#answer-3' do
           click_link 'Vote DOWN'
+          wait_for_ajax
           click_link 'Cancel'
           expect(page).to have_content 'Rating: 0'                    
         end

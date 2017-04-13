@@ -44,4 +44,36 @@ feature 'Best answer', %q{
     visit question_path(question)
     expect(page).not_to have_link 'Set best'
   end
+
+  fcontext "mulitple sessions" do
+    before do
+      Capybara.using_session('user') do
+        sign_in(another_user)
+        visit question_path(question)
+      end
+ 
+      Capybara.using_session('user2') do
+        sign_in(question.user)
+        visit question_path(question)
+      end
+
+      Capybara.using_session('user') do
+        fill_in 'new-answer-body', with: 'text text12'
+        click_on 'Create answer'
+        within '#answer-4' do
+          expect(page).to have_content 'text text12'
+        end
+      end
+    end
+
+    scenario "answer Set best link works in another users session", js: true do
+      Capybara.using_session('user2') do
+        save_and_open_page
+        within '#answer-4' do
+          click_link 'Set best'
+          expect(page).to have_content 'BEST ANSWER!'
+        end
+      end
+    end 
+  end   
 end
