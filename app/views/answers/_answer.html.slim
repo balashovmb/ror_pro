@@ -28,6 +28,10 @@
           .add-file
             = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
           = f.submit 'Save'
-      = render 'votes/votes', votable: answer  
+      = render 'votes/votes', votable: answer
+    .answer_comments
+      =render answer.comments
+    - if current_user  
+      = render partial: "comments/form", locals: { commentable: answer }        
   br                 
             
