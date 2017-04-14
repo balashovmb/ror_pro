@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_commentabe,      only: :create
+  before_action :set_commentable,      only: :create
   before_action :set_comment,         only: :destroy  
   
   def create
-    @comment = commentable.comments.new(comment_params)
+    @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
-    @answer.save       
+    @comment.save       
   end
 
   def destroy
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :commentable)
-  end
+  end 
 
   def commentable_name
     params[:commentable]
