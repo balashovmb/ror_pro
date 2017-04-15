@@ -39,7 +39,7 @@ feature 'Create answer', %q{
         sign_in(user)
         visit question_path(question)
       end
- 
+
       Capybara.using_session('guest') do
         visit question_path(question)
       end
@@ -56,5 +56,5 @@ feature 'Create answer', %q{
         expect(page).to have_content 'text text12'
       end
     end
-  end 
+  end
 end

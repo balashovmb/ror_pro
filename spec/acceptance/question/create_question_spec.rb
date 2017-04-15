@@ -34,7 +34,7 @@ feature 'Create question', %q{
         sign_in(user)
         visit questions_path
       end
- 
+
       Capybara.using_session('guest') do
         visit questions_path
       end
@@ -52,5 +52,5 @@ feature 'Create question', %q{
         expect(page).to have_content 'Test question'
       end
     end
-  end 
+  end
 end

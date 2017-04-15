@@ -1,23 +1,20 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_commentable,      only: [:new, :create]
-  before_action :set_comment,         only: :destroy 
+  before_action :set_commentable, only: [:new, :create]
+  before_action :set_comment, only: :destroy
 
   def new
     @comment = @commentable.comments.new
-  end  
-  
+  end
+
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
     publish_comment if @comment.save
-
   end
 
   def destroy
-    if current_user.author?(@comment)
-      @comment.destroy
-    end
+    @comment.destroy if current_user.author?(@comment)
   end
 
   private
@@ -25,7 +22,7 @@ class CommentsController < ApplicationController
   def question_id
     if @comment.commentable_type == 'Question'
       @commentable.id
-    elsif @comment.commentable_type  == 'Answer'
+    elsif @comment.commentable_type == 'Answer'
       @commentable.question.id
     end
   end
@@ -40,7 +37,7 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :commentable)
-  end 
+  end
 
   def commentable_name
     params[:commentable]
@@ -51,11 +48,10 @@ class CommentsController < ApplicationController
   end
 
   def publish_comment
-
     data = {
       type: :comment,
       comment: @comment
     }
     ActionCable.server.broadcast("question_comments_#{question_id}", data)
-  end  
+  end
 end

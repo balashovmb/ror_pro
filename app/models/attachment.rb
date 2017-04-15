@@ -5,5 +5,5 @@ class Attachment < ApplicationRecord
 
   def with_meta
     Hash["filename", file.identifier, "url", file.url]
-  end  
+  end
 end

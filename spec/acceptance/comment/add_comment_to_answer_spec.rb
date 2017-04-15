@@ -5,8 +5,8 @@ feature 'Create comment to answer', %q{
  authentified user can add comment to this answer
 } do
 
-  let(:user) {create(:user)}
-  let(:answer) {create(:answer)}
+  let(:user) { create(:user) }
+  let(:answer) { create(:answer) }
 
   context 'single session' do
     before do
@@ -19,16 +19,16 @@ feature 'Create comment to answer', %q{
         click_link 'Add comment'
         fill_in 'comment', with: 'new comment'
         click_on 'Create comment'
-        expect(page).to have_content 'new comment'      
+        expect(page).to have_content 'new comment'
       end
     end
-    scenario 'User tries to create too short comment',js: true do
+    scenario 'User tries to create too short comment', js: true do
       within "#answer-#{answer.id}" do
         click_link 'Add comment'
         fill_in 'comment', with: 'lol'
         click_on 'Create comment'
         expect(page).not_to have_content 'lol'
-        expect(page).to have_content 'Body is too short'     
+        expect(page).to have_content 'Body is too short'
       end
     end
   end
@@ -39,7 +39,7 @@ feature 'Create comment to answer', %q{
         sign_in(user)
         visit question_path(answer.question)
       end
- 
+
       Capybara.using_session('guest') do
         visit question_path(answer.question)
       end
@@ -49,15 +49,15 @@ feature 'Create comment to answer', %q{
           click_link 'Add comment'
           fill_in 'comment', with: 'new comment'
           click_on 'Create comment'
-          expect(page).to have_content 'new comment'      
+          expect(page).to have_content 'new comment'
         end
       end
 
       Capybara.using_session('guest') do
         within "#answer-#{answer.id}" do
-          expect(page).to have_content 'new comment'      
-        end          
+          expect(page).to have_content 'new comment'
+        end
       end
     end
-  end     
+  end
 end

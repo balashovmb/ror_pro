@@ -51,7 +51,7 @@ feature 'Best answer', %q{
         sign_in(another_user)
         visit question_path(question)
       end
- 
+
       Capybara.using_session('user2') do
         sign_in(question.user)
         visit question_path(question)
@@ -73,6 +73,6 @@ feature 'Best answer', %q{
           expect(page).to have_content 'BEST ANSWER!'
         end
       end
-    end 
-  end   
+    end
+  end
 end

@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
         locals: { question: @question }
       )
     )
-  end  
+  end
 
   def question_params
     params.require(:question).permit(:title, :body, attachments_attributes: [:file, :_destroy, :id])

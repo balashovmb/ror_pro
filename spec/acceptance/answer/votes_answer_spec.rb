@@ -16,7 +16,6 @@ feature 'Vote for answer', %q{
   end
 
   context 'Vote up' do
-
     scenario "authenticated user can vote ", js: true do
       within "#answer-#{answer.id}" do
         click_link 'Vote UP'
@@ -36,7 +35,6 @@ feature 'Vote for answer', %q{
   end
 
   context 'Vote down' do
-
     scenario "authenticated user can vote down", js: true do
       within "#answer-#{answer.id}" do
         click_link 'Vote DOWN'
@@ -57,7 +55,6 @@ feature 'Vote for answer', %q{
 
   context 'Cancel vote' do
     scenario "user can cancel his vote", js: true do
-
       within "#answer-#{answer.id}" do
         click_link 'Vote UP'
         wait_for_ajax
@@ -82,7 +79,7 @@ feature 'Vote for answer', %q{
         sign_in(user)
         visit question_path(question)
       end
- 
+
       Capybara.using_session('user2') do
         sign_in(user2)
         visit question_path(question)
@@ -116,14 +113,14 @@ feature 'Vote for answer', %q{
     end
 
     scenario "answer Cancel vote link works in another users session", js: true do
-      Capybara.using_session('user2') do     
+      Capybara.using_session('user2') do
         within '#answer-3' do
           click_link 'Vote DOWN'
           wait_for_ajax
           click_link 'Cancel'
-          expect(page).to have_content 'Rating: 0'                    
+          expect(page).to have_content 'Rating: 0'
         end
       end
     end
-  end 
+  end
 end
