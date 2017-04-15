@@ -1,14 +1,17 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_commentable,      only: :create
-  before_action :set_comment,         only: :destroy
+  before_action :set_commentable,      only: [:new, :create]
+  before_action :set_comment,         only: :destroy 
 
-  after_action :publish_comment, only: [:create]     
+  def new
+    @comment = @commentable.comments.new
+  end  
   
   def create
     @comment = @commentable.comments.new(comment_params)
     @comment.user = current_user
-    @comment.save       
+    publish_comment if @comment.save
+
   end
 
   def destroy

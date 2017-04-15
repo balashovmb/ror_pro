@@ -1,21 +1,21 @@
 require 'acceptance/acceptance_helper'
 
-feature 'Create comment to question', %q{
- To make the question more understandable
- authentified user can add comment to the question
+feature 'Create comment to answer', %q{
+ To make the answer more understandable
+ authentified user can add comment to this answer
 } do
 
   let(:user) {create(:user)}
-  let(:question) {create(:question)}
+  let(:answer) {create(:answer)}
 
   context 'single session' do
     before do
       sign_in(user)
-      visit question_path(question)
+      visit question_path(answer.question)
     end
 
-    scenario 'User adds comment to the question', js: true do
-      within '.question' do
+    scenario 'User adds comment to the answer', js: true do
+      within "#answer-#{answer.id}" do
         click_link 'Add comment'
         fill_in 'comment', with: 'new comment'
         click_on 'Create comment'
@@ -23,7 +23,7 @@ feature 'Create comment to question', %q{
       end
     end
     scenario 'User tries to create too short comment',js: true do
-      within '.question' do
+      within "#answer-#{answer.id}" do
         click_link 'Add comment'
         fill_in 'comment', with: 'lol'
         click_on 'Create comment'
@@ -37,15 +37,15 @@ feature 'Create comment to question', %q{
     scenario "comment appears on another user's page", js: true do
       Capybara.using_session('user') do
         sign_in(user)
-        visit question_path(question)
+        visit question_path(answer.question)
       end
  
       Capybara.using_session('guest') do
-        visit question_path(question)
+        visit question_path(answer.question)
       end
 
       Capybara.using_session('user') do
-        within '.question' do
+        within "#answer-#{answer.id}" do
           click_link 'Add comment'
           fill_in 'comment', with: 'new comment'
           click_on 'Create comment'
@@ -54,7 +54,7 @@ feature 'Create comment to question', %q{
       end
 
       Capybara.using_session('guest') do
-        within '.question' do
+        within "#answer-#{answer.id}" do
           expect(page).to have_content 'new comment'      
         end          
       end

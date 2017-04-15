@@ -31,8 +31,8 @@
       = render 'votes/votes', votable: answer
     div id="Answer-#{answer.id}-comments" class="answer-comments"
       =render answer.comments
-    .question-new-comment  
-      - if current_user  
-        = render partial: "comments/form", locals: { commentable: answer }        
+    .answer-new-comment  
+      - if user_signed_in?  
+        =< link_to 'Add comment', new_answer_comment_path(answer), remote: true    
   br                 
             

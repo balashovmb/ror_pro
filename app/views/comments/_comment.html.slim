@@ -3,4 +3,5 @@
     small 
       p
         i= comment.body  
-      p= link_to 'Delete comment', comment, method: :delete, remote: true, data: { confirm: 'Are you shure?'} 
+      - if user_signed_in? && current_user.author?(comment)  
+        p= link_to 'Delete comment', comment, method: :delete, remote: true, data: { confirm: 'Are you shure?'} 

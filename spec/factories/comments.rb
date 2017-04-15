@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :comment do
-    body "MyText"
+    body "MyComment"
     user
     association :commentable, factory: :question
   end

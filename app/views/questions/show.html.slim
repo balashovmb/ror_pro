@@ -4,7 +4,7 @@
   .div id="Question-#{@question.id}-comments" class = 'question-comments'
     = render @question.comments
   .question-new-comment
-    = render partial: "comments/form", locals: { commentable: @question }                
+    =< link_to 'Add comment', new_question_comment_path(@question), remote: true              
 hr
 .answers
   - if @question.answers.empty?
