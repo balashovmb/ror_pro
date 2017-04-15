@@ -1,9 +1,9 @@
 .question data-id="#{@question.id}"
   = render 'questions/question_show', question: @question
   = render 'votes/votes', votable: @question
-  .question_comments
+  .div id="Question-#{@question.id}-comments" class = 'question-comments'
     = render @question.comments
-  .question_new_comment
+  .question-new-comment
     = render partial: "comments/form", locals: { commentable: @question }                
 hr
 .answers

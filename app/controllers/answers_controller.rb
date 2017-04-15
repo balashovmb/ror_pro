@@ -40,6 +40,7 @@ class AnswersController < ApplicationController
   def publish_answer
     return if @answer.errors.any?
     data = {
+      type: :answer,
       answer: @answer,
       question_author_id: @question.user_id,
       rating: @answer.rating,
