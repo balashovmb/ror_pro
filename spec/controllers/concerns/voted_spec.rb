@@ -4,12 +4,10 @@ RSpec.shared_examples 'voted' do
   votable_klass = described_class.controller_name.singularize.to_sym
   let!(:votable) { create(votable_klass) }
   let(:users_votable) { create(votable_klass, user: @user) }
-
   sign_in_user
 
   describe 'POST #vote_up' do
     subject(:vote_up) { post :vote_up, params: { id: votable.id }, format: :json }
-
     sign_in_user
 
     it "assigns the answer/question to @votable" do
@@ -28,7 +26,6 @@ RSpec.shared_examples 'voted' do
 
     context "User is author of question" do
       subject(:vote_up_own_voteble) { post :vote_up, params: { id: users_votable.id }, format: :json }
-
       it "vote up don't changes rating" do
         expect { vote_up_own_voteble }.not_to change { votable.reload.rating }
       end
@@ -42,7 +39,6 @@ RSpec.shared_examples 'voted' do
     sign_in_user
 
     subject(:vote_down) { post :vote_down, params: { id: votable.id }, format: :json }
-
     context "Vote down for another user's question/answer" do
       it "assigns the answer/question to @votable" do
         vote_down
@@ -56,7 +52,6 @@ RSpec.shared_examples 'voted' do
 
     context "User is author of question" do
       subject(:vote_down_own_voteble) { post :vote_down, params: { id: users_votable.id }, format: :json }
-
       it "vote down don't changes rating" do
         expect { vote_down_own_voteble }.not_to change { votable.reload.rating }
       end
