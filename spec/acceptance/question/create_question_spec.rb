@@ -28,7 +28,7 @@ feature 'Create question', %q{
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 
-  fcontext "mulitple sessions" do
+  context "mulitple sessions" do
     scenario "question appears on another user's page", js: true do
       Capybara.using_session('user') do
         sign_in(user)

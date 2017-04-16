@@ -33,7 +33,7 @@ feature 'Create comment to answer', %q{
     end
   end
 
-  fcontext "mulitple sessions" do
+  context "mulitple sessions" do
     scenario "comment appears on another user's page", js: true do
       Capybara.using_session('user') do
         sign_in(user)

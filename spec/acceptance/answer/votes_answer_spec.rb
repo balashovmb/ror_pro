@@ -73,7 +73,7 @@ feature 'Vote for answer', %q{
     end
   end
 
-  fcontext "mulitple sessions" do
+  context "mulitple sessions" do
     before do
       Capybara.using_session('user') do
         sign_in(user)

@@ -6,8 +6,7 @@ App.cable.subscriptions.create "AnswersChannel",
   received: (data) ->
     console.log data.type
     if data.type == "answer"
-      if gon.current_user_id != data.answer.user_id
-        $('.answers').append(JST['templates/answer'](data))
+      $('.answers').append(JST['templates/answer'](data))
     if data.type == "comment"
       targetDiv = '#' + data.comment.commentable_type + '-' + data.comment.commentable_id + '-comments'
       $('form#new_comment').remove()

@@ -45,7 +45,7 @@ feature 'Best answer', %q{
     expect(page).not_to have_link 'Set best'
   end
 
-  fcontext "mulitple sessions" do
+  context "mulitple sessions" do
     before do
       Capybara.using_session('user') do
         sign_in(another_user)
