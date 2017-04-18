@@ -52,6 +52,7 @@ class CommentsController < ApplicationController
   end
 
   def publish_comment
+    return if @comment.errors.any?
     data = {
       type: :comment,
       comment: @comment
