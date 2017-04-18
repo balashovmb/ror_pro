@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
 
   after_action :publish_question, only: [:create]
 
-  respond_to :html, :js, :json
+  respond_to :js, :json
 
   def new
     respond_with(@question = Question.new)
