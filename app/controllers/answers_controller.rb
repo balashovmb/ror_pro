@@ -7,32 +7,23 @@ class AnswersController < ApplicationController
 
   after_action :publish_answer, only: [:create]
 
+  respond_to :js, :json
+
   def create
-    @answer = @question.answers.new(answer_params)
-    @answer.user = current_user
-    @answer.save
+    @answer = current_user.answers.create(answer_params.merge(question_id: @question.id))
+    respond_with(@answer)  
   end
 
   def destroy
-    if current_user.author?(@answer)
-      @answer.destroy
-      flash[:notice] = 'Your answer deleted.'
-    else
-      flash[:alert] = 'No rights to delete'
-    end
+    respond_with(@answer.destroy) if current_user.author?(@answer)
   end
 
   def update
-    if current_user.author?(@answer)
-      @answer.update(answer_params)
-      flash[:notice] = 'Your answer updated.'
-    else
-      flash[:alert] = 'No rights to edit answer.'
-    end
+    respond_with(@answer.update(answer_params)) if current_user.author?(@answer) #работает, а в касте Виталий говорит, что не должно 
   end
 
   def set_best
-    @answer.set_best if current_user.author?(@answer.question)
+    respond_with(@answer.set_best) if current_user.author?(@answer.question)
   end
 
   private
