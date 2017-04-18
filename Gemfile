@@ -43,6 +43,7 @@ gem 'cocoon'
 gem 'record_tag_helper'
 gem 'skim'
 gem 'gon'
+gem 'responders'
 
 group :test do
   gem 'shoulda-matchers'

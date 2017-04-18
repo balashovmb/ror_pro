@@ -265,6 +265,7 @@ DEPENDENCIES
   rails-controller-testing
   record_tag_helper
   remotipart
+  responders
   rspec-rails
   sass-rails (~> 5.0)
   shoulda-matchers

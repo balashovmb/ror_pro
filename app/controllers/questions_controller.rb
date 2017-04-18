@@ -3,51 +3,42 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :destroy, :update]
+  before_action :new_answer, only: :show
 
   after_action :publish_question, only: [:create]
 
+  respond_to :html, :js, :json
+
   def new
-    @question = Question.new
+    respond_with(@question = Question.new)
   end
 
   def create
-    @question = Question.create(question_params)
-    @question.user = current_user
-
-    if @question.save
-      redirect_to @question, notice: 'Your question successfully created.'
-    else
-      render :new
-    end
+    @question = current_user.questions.create(question_params)
+    respond_with(@question)
   end
 
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def destroy
-    if current_user.author?(@question)
-      @question.destroy
-      redirect_to questions_path, notice: 'Your question deleted.'
-    else
-      redirect_to @question, alert: 'No rights to delete.'
-    end
+    respond_with(@question.destroy) if current_user.author?(@question)
   end
 
-  def update
-    if current_user.author?(@question)
-      @question.update(question_params)
-      flash[:notice] = 'Your question updated.'
-    else
-      flash[:alert] = 'No rights to edit question.'
-    end
+  def update  
+    respond_with(@question.update(question_params)) if current_user.author?(@question) 
   end
 
   def show
-    @answer = @question.answers.new
+    respond_with(@question)
   end
 
   private
+
+  def new_answer
+    @answer = @question.answers.new
+  end
 
   def publish_question
     return if @question.errors.any?
