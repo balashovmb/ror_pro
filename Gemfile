@@ -44,6 +44,8 @@ gem 'record_tag_helper'
 gem 'skim'
 gem 'gon'
 gem 'responders'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :test do
   gem 'shoulda-matchers'
