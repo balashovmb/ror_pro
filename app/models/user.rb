@@ -23,8 +23,10 @@ class User < ApplicationRecord
       user.create_authorization(auth)
     else
       password = Devise.friendly_token[0, 20]
-      user = User.create!(email: email, password: password, password_confirmation: password)
-      user.create_authorization(auth)
+      user = User.new(email: email, password: password, password_confirmation: password)
+      user.skip_confirmation! if ['facebook'].freeze.include? auth.provider
+      user.save
+      user.create_authorization(auth)if user.persisted?
     end
 
     user
