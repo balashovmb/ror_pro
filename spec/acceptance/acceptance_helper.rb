@@ -1,4 +1,5 @@
- require 'rails_helper'
+require 'rails_helper'
+require 'capybara/email/rspec'
 
 Capybara.javascript_driver      = :webkit
 #Capybara.default_max_wait_time  = 5
