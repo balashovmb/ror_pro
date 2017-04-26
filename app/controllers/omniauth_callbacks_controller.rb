@@ -18,6 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     elsif @auth.provider
       session['provider'] = @auth.provider
       session['uid'] = @auth.uid
+      flash[:notice] = 'Email is required to complete sign up'
       render 'omniauth_callbacks/set_email'
     else
       redirect_to new_user_registration_path
