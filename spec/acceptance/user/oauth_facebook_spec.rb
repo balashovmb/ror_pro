@@ -16,9 +16,9 @@ feature 'Sign is with facebook', '
   scenario 'User try to sign in with invalid credentials' do
     visit new_user_session_path
     mock_auth_invalid_hash('facebook')
+    click_on 'Sign in'
     click_on 'Sign in with Facebook'
 
     expect(page).to have_content 'Could not authenticate you because invalid credentials'
   end
-
 end

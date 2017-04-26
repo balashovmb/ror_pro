@@ -4,6 +4,7 @@ RSpec.shared_examples 'voted' do
   votable_klass = described_class.controller_name.singularize.to_sym
   let!(:votable) { create(votable_klass) }
   let(:users_votable) { create(votable_klass, user: @user) }
+
   sign_in_user
 
   describe 'POST #vote_up' do

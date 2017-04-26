@@ -26,8 +26,8 @@ class QuestionsController < ApplicationController
     respond_with(@question.destroy) if current_user.author?(@question)
   end
 
-  def update  
-    respond_with(@question.update(question_params)) if current_user.author?(@question) 
+  def update
+    respond_with(@question.update(question_params)) if current_user.author?(@question)
   end
 
   def show

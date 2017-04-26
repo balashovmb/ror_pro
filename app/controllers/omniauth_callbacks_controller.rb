@@ -1,11 +1,9 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :common_auth
-  
-  def facebook
-  end
 
-  def twitter
-  end
+  def facebook; end
+
+  def twitter; end
 
   private
 

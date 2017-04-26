@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = current_user.answers.create(answer_params.merge(question_id: @question.id))
-    respond_with(@answer)  
+    respond_with(@answer)
   end
 
   def destroy
@@ -19,7 +19,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    respond_with(@answer.update(answer_params)) if current_user.author?(@answer) #работает, а в касте Виталий говорит, что не должно 
+    respond_with(@answer.update(answer_params)) if current_user.author?(@answer)
   end
 
   def set_best

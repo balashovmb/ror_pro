@@ -7,7 +7,7 @@ feature 'Sign in with twitter', '
   scenario 'User sign in with valid credentials' do
     visit new_user_session_path
     mock_auth_hash('twitter', nil)
-    click_on 'Sign in'    
+    click_on 'Sign in'
     click_on 'Sign in with Twitter'
     fill_in 'email', with: 'test@test.com'
     click_on 'Submit'

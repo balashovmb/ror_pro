@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe OmniauthCallbacksController, type: :controller do
-
   let(:user) { create(:user) }
+
   before { request.env['devise.mapping'] = Devise.mappings[:user] }
 
-   describe 'GET #facebook' do
+  describe 'GET #facebook' do
     context 'without onmiauth' do
       before do
         get :facebook
@@ -19,7 +19,7 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
     context 'new user' do
       before do
         request.env['omniauth.auth'] = OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345',
-         info: { email: 'test@mail.com' })
+          info: { email: 'test@mail.com' })
         get :facebook
       end
 
@@ -27,7 +27,7 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
         expect(assigns(:user)).to be_a(User)
       end
     end
-    
+
     context 'without onmiauth' do
       before do
         get :facebook
