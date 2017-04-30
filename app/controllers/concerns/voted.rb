@@ -4,7 +4,8 @@ module Voted
   included do
     before_action :set_votable, only: [:vote_up, :vote_down, :cancel_vote]
     before_action :check_users_vote, only: [:vote_up, :vote_down]
-    before_action :check_votable_author, only: [:vote_up, :vote_down, :cancel_vote]
+
+    authorize_resource
   end
 
   def vote_up
@@ -43,12 +44,6 @@ module Voted
   def check_users_vote
     if @votable.exist_vote?(current_user)
       render json: { data: 'You can vote only once', dom_id: dom_id }, status: :unprocessable_entity
-    end
-  end
-
-  def check_votable_author
-    if current_user.author?(@votable)
-      render json: { data: "You can't vote for your #{model_klass}", dom_id: dom_id }, status: :unprocessable_entity
     end
   end
 end

@@ -6,11 +6,8 @@ class Ability
     alias_action :vote_up, :vote_down, :cancel_vote, to: :vote
 
     @user = user
-    if @user
-      user_abilities
-    else
-      guest_abilities
-    end
+    
+    @user ? user_abilities : guest_abilities
   end
 
   private

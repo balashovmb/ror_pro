@@ -12,7 +12,7 @@ hr
   - else
     = render @question.answers
 .new_answer
-  - if user_signed_in?
+  - if can?(:create, Answer)
     = form_for [@question, @answer], remote: true do |f|
         = f.label :body, 'Answer'
         .answer-errors
