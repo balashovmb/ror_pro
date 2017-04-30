@@ -5,7 +5,7 @@ class Ability
     alias_action :vote_up, :vote_down, :cancel_vote, to: :vote
 
     @user = user
-    
+
     @user ? user_abilities : guest_abilities
   end
 
@@ -16,11 +16,11 @@ class Ability
   end
 
   def user_abilities
-    guest_abilities 
+    guest_abilities
     can :create, [Question, Answer, Comment, Attachment]
     can [:update, :destroy], [Question, Answer, Comment], user_id: @user.id
     can :destroy, Attachment, attachable: { user_id: @user.id }
-    can :set_best, Answer, question: { user_id: @user.id}
+    can :set_best, Answer, question: { user_id: @user.id }
     can :vote, [Question, Answer] { |votable| !@user.author?(votable) }
   end
 end

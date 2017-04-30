@@ -45,4 +45,4 @@ RSpec.describe Ability, type: :model do
     it { should be_able_to :set_best, create(:answer, question: question) }
     it { should_not be_able_to :set_best, create(:answer, question: question2) }
   end
-end 
+end

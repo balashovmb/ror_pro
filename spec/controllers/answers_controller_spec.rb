@@ -115,7 +115,6 @@ RSpec.describe AnswersController, type: :controller do
         patch :set_best, params: { id: answer }, format: :js
         expect(assigns(:answer).best).to eq false
       end
-
     end
   end
 end

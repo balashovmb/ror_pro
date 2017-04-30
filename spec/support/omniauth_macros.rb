@@ -3,7 +3,7 @@ module OmniauthMacros
     OmniAuth.config.mock_auth[provider.to_sym] = OmniAuth::AuthHash.new(
       provider: provider,
       uid: '12345',
-      info: { email: email}
+      info: { email: email }
     )
   end
 
