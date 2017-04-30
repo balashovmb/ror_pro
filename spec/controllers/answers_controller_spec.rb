@@ -116,10 +116,6 @@ RSpec.describe AnswersController, type: :controller do
         expect(assigns(:answer).best).to eq false
       end
 
-      it 'renders set_best template' do
-        patch :set_best, params: { id: answer }, format: :js
-        expect(response).to render_template :set_best
-      end
     end
   end
 end

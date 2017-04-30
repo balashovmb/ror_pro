@@ -7,6 +7,8 @@ class CommentsController < ApplicationController
 
   respond_to :js
 
+  authorize_resource
+
   def new
     @comment = @commentable.comments.build
     respond_with @comment
@@ -18,7 +20,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    respond_with @comment.destroy if current_user.author?(@comment)
+    respond_with @comment.destroy
   end
 
   private

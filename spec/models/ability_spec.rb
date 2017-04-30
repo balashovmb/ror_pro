@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe Ability, type: :model do
   subject(:ability) { Ability.new(user) }
 
-  context 'when user guest' do
+  context 'guest' do
     let(:user) { nil }
     it { should be_able_to :read, :all }
     it { should_not be_able_to :manage, :all }
   end
 
-  context 'when user authorized' do
+  context 'authorized user' do
     let(:user) { create :user }
     let(:another_user) { create :user }
 
@@ -42,7 +42,7 @@ RSpec.describe Ability, type: :model do
     it { should_not be_able_to :vote, create(:question, user: user) }
     it { should_not be_able_to :vote, create(:answer, user: user) }
 
-    it { should be_able_to :set_best, create(:answer, question: question, user: user) }
-    it { should_not be_able_to :set_best, another_user}
+    it { should be_able_to :set_best, create(:answer, question: question) }
+    it { should_not be_able_to :set_best, create(:answer, question: question2) }
   end
 end 

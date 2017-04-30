@@ -9,21 +9,23 @@ class AnswersController < ApplicationController
 
   respond_to :js, :json
 
+  authorize_resource
+
   def create
     @answer = current_user.answers.create(answer_params.merge(question_id: @question.id))
     respond_with(@answer)
   end
 
   def destroy
-    respond_with(@answer.destroy) if current_user.author?(@answer)
+    respond_with(@answer.destroy)
   end
 
   def update
-    respond_with(@answer.update(answer_params)) if current_user.author?(@answer)
+    respond_with(@answer.update(answer_params))
   end
 
   def set_best
-    respond_with(@answer.set_best) if current_user.author?(@answer.question)
+    respond_with(@answer.set_best)
   end
 
   private

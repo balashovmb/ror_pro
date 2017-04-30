@@ -96,9 +96,9 @@ RSpec.describe QuestionsController, type: :controller do
         expect { delete :destroy, params: { id: question } }.not_to change(Question, :count)
       end
 
-      it 'gets success response' do
+      it 'shows error alert' do
         delete :destroy, params: { id: question }
-        expect(response).to be_successful
+        expect(flash[:alert]).to be_present
       end
     end
   end
