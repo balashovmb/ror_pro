@@ -5,20 +5,20 @@ describe 'Profile API' do
     context 'unauthorized' do
       it 'returns 401 status if there is no access_token' do
         get '/api/v1/profiles/me', params: { format: :json }
-        expect(response.status).to eq 401 
+        expect(response.status).to eq 401
       end
 
       it 'returns 401 status access_token is invalid' do
          get '/api/v1/profiles/me', params: { access_token: '12345', format: :json }
-        expect(response.status).to eq 401 
+        expect(response.status).to eq 401
       end
-    end 
+    end
   end
   context 'authorized' do
     let(:me) { create(:user) }
     let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
-    before { get '/api/v1/profiles/me',params: { format: :json, access_token: access_token.token }}
+    before { get '/api/v1/profiles/me', params: { format: :json, access_token: access_token.token } }
 
     it 'returns 200 status' do
       expect(response).to be_success
@@ -38,7 +38,6 @@ describe 'Profile API' do
   end
 
   describe 'GET /list' do
-
     context 'unauthorized' do
       it 'returns 401 status if no access token' do
         get '/api/v1/profiles/list', params: { format: :json }
@@ -58,7 +57,7 @@ describe 'Profile API' do
       let!(:users) { create_list(:user, 3) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
-      before { get '/api/v1/profiles/list',params: { format: :json, access_token: access_token.token }}
+      before { get '/api/v1/profiles/list', params: { format: :json, access_token: access_token.token } }
 
       it 'returns 200 status' do
         expect(response).to be_success
@@ -87,6 +86,6 @@ describe 'Profile API' do
       it 'not includes current user' do
         expect(response.body).to_not include_json(me.to_json)
       end
-    end   
+    end
   end
 end

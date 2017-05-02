@@ -21,5 +21,4 @@ class Api::V1::ProfilesController < ApplicationController
   def current_ability
     @ability ||= Ability.new(current_resource_owner)
   end
-
 end

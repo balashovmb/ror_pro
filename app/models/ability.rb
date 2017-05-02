@@ -27,5 +27,5 @@ class Ability
 
   def api_abilities
     can [:me, :list], User
-  end  
+  end
 end
