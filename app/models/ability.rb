@@ -17,10 +17,15 @@ class Ability
 
   def user_abilities
     guest_abilities
+    api_abilities
     can :create, [Question, Answer, Comment, Attachment]
     can [:update, :destroy], [Question, Answer, Comment], user_id: @user.id
     can :destroy, Attachment, attachable: { user_id: @user.id }
     can :set_best, Answer, question: { user_id: @user.id }
     can :vote, [Question, Answer] { |votable| !@user.author?(votable) }
   end
+
+  def api_abilities
+    can [:me, :list], User
+  end  
 end
