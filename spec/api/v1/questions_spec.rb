@@ -49,4 +49,19 @@ describe 'Questions API' do
       end
     end
   end
+  describe 'GET #show' do
+    let(:question) { create :question }
+
+    context 'when user is not authenticated' do
+      it 'return status 401 if there is no access token' do
+        get "/api/v1/questions/#{question.id}", params: { format: :json}
+        expect(response.status).to eq 401
+      end
+
+      it 'return status 401 if there is invalid access token' do
+        get "/api/v1/questions/#{question.id}", params: { format: :json, access_token: '12345'}
+        expect(response.status).to eq 401
+      end
+    end
+  end  
 end
