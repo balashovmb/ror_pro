@@ -2,17 +2,10 @@ require 'rails_helper'
 
 describe 'Questions API' do
   describe 'GET /index' do
-    context 'unauthorized' do
-      it 'returns 401 status if there is no access_token' do
-        get '/api/v1/questions', params: { format: :json }
-        expect(response.status).to eq 401
-      end
-
-      it 'returns 401 status if access_token is invalid' do
-        get '/api/v1/questions', params: { format: :json, access_token: '1234' }
-        expect(response.status).to eq 401
-      end
-    end
+    let(:http_method) { :get }
+    let(:path) { '/api/v1/questions' }
+#    attributes = %w(id title body created_at updated_at)
+    it_behaves_like 'API authorizable'
 
     context 'authorized' do
       let(:access_token) { create(:access_token) }
@@ -39,18 +32,11 @@ describe 'Questions API' do
   end
   describe 'GET #show' do
     let(:question) { create :question }
+    let(:http_method) { :get }
+    let(:path) {"/api/v1/questions/#{question.id}"}
 
-    context 'unauthorized' do
-      it 'return status 401 if there is no access token' do
-        get "/api/v1/questions/#{question.id}", params: { format: :json }
-        expect(response.status).to eq 401
-      end
+    it_behaves_like 'API authorizable'
 
-      it 'return status 401 if there is invalid access token' do
-        get "/api/v1/questions/#{question.id}", params: { format: :json, access_token: '12345' }
-        expect(response.status).to eq 401
-      end
-    end
     context 'authorized' do
       let!(:access_token) { create :access_token }
       let!(:comments) { create_list(:comment, 2) }
@@ -88,17 +74,13 @@ describe 'Questions API' do
   end
 
   describe 'POST #create' do
-    context 'unauthorized' do
-      it 'return status 401 if there is no access token' do
-        post "/api/v1/questions", params: { question: attributes_for(:question), format: :json }
-        expect(response.status).to eq 401
-      end
 
-      it 'return status 401 if there is invalid access token' do
-        post "/api/v1/questions", params: { question: attributes_for(:question), format: :json, access_token: '12345' }
-        expect(response.status).to eq 401
-      end
-    end
+    let(:http_method) { :post }
+    let(:path) { "/api/v1/questions" }
+    let(:options) {{ question: attributes_for(:question) }}
+
+    it_behaves_like 'API authorizable'
+
     context 'authorized' do
       let!(:user) { create :user }
       let!(:access_token) { create :access_token, resource_owner_id: user.id }
