@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for "API authorizable" do
+shared_examples_for "API authenticable" do
   context 'unauthorized' do
     it 'returns 401 status if there is no access_token' do
       send(http_method, path, params: { format: :json }.merge(try(:options) || {} ))
@@ -12,4 +12,4 @@ shared_examples_for "API authorizable" do
       expect(response.status).to eq 401
     end
   end
-end
+end    

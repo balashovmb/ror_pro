@@ -5,7 +5,7 @@ describe 'Profile API' do
 
     let(:http_method) { :get }
     let(:path) { '/api/v1/profiles/me' }
-    it_behaves_like 'API authorizable'
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       let(:me) { create(:user) }
@@ -35,7 +35,7 @@ describe 'Profile API' do
     
     let(:http_method) { :get }
     let(:path) { '/api/v1/profiles/list' }
-    it_behaves_like 'API authorizable'
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       let(:me) { create(:user) }

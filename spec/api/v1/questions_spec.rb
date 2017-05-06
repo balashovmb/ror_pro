@@ -5,7 +5,7 @@ describe 'Questions API' do
     let(:http_method) { :get }
     let(:path) { '/api/v1/questions' }
 #    attributes = %w(id title body created_at updated_at)
-    it_behaves_like 'API authorizable'
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       let(:access_token) { create(:access_token) }
@@ -35,7 +35,7 @@ describe 'Questions API' do
     let(:http_method) { :get }
     let(:path) {"/api/v1/questions/#{question.id}"}
 
-    it_behaves_like 'API authorizable'
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       let!(:access_token) { create :access_token }
@@ -79,7 +79,7 @@ describe 'Questions API' do
     let(:path) { "/api/v1/questions" }
     let(:options) {{ question: attributes_for(:question) }}
 
-    it_behaves_like 'API authorizable'
+    it_behaves_like 'API authenticable'
 
     context 'authorized' do
       let!(:user) { create :user }
