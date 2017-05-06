@@ -25,14 +25,14 @@ describe 'Profile API' do
 
       %w(password encrypted_password).each do |attr|
         it "does not contain #{attr}" do
-          expect(response.body).to_not have_json_path(attr)
+          expect(response.body).not_to have_json_path(attr)
         end
       end
     end
-  end  
+  end
 
   describe 'GET /list' do
-    
+
     let(:http_method) { :get }
     let(:path) { '/api/v1/profiles/list' }
     it_behaves_like 'API authenticable'
@@ -69,7 +69,7 @@ describe 'Profile API' do
       end
 
       it 'not includes current user' do
-        expect(response.body).to_not include_json(me.to_json)
+        expect(response.body).not_to include_json(me.to_json)
       end
     end
   end

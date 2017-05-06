@@ -7,7 +7,6 @@ describe 'Answers API' do
 
     let(:http_method) { :get }
     let(:path) { "/api/v1/questions/#{question.id}/answers" }
-#    attributes = %w(id title body created_at updated_at)
     it_behaves_like 'API authenticable'
 
 

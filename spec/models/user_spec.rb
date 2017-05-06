@@ -74,7 +74,7 @@ RSpec.describe User do
 
         it 'creates authorization for user' do
           user = User.find_for_oauth(auth)
-          expect(user.authorizations).to_not be_empty
+          expect(user.authorizations).not_to be_empty
         end
 
         it 'creates authorization with provider and uid' do

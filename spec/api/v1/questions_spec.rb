@@ -11,7 +11,6 @@ describe 'Questions API' do
       let(:access_token) { create(:access_token) }
       let!(:questions) { create_list(:question, 2) }
       let(:question) { questions.first }
-      let!(:answer) { create(:answer, question: question) }
 
       before { get '/api/v1/questions', params: { format: :json, access_token: access_token.token } }
 
@@ -33,8 +32,7 @@ describe 'Questions API' do
   describe 'GET #show' do
     let(:question) { create :question }
     let(:http_method) { :get }
-    let(:path) {"/api/v1/questions/#{question.id}"}
-
+    let(:path) { "/api/v1/questions/#{question.id}" }
     it_behaves_like 'API authenticable'
 
     context 'authorized' do
