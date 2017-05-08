@@ -7,6 +7,10 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'shoulda/matchers'
 require 'cancan/matchers'
+require 'sidekiq/testing'
+require 'capybara/email/rspec'
+
+Sidekiq::Testing.inline!
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
