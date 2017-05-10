@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SubscriptionsController, type: :controller do
   let(:question) { create(:question) }
+  let(:another_user) { create (:user)}
   sign_in_user
 
   describe 'POST #create' do
@@ -13,7 +14,7 @@ RSpec.describe SubscriptionsController, type: :controller do
     end
   end
 
-  context 'if user already subscribed' do
+  context 'user subscribed' do
     let!(:subscription) { create(:subscription, user: @user, question: question) }
 
     it 'does not create new record in db' do
@@ -37,8 +38,8 @@ RSpec.describe SubscriptionsController, type: :controller do
       end
     end
 
-    context 'delete by someone else' do
-      let!(:subscription) { create(:subscription) }
+    context 'delete by another user' do
+      let!(:subscription) { create(:subscription, user: another_user) }
 
       it 'does not delete subscription from db' do
         expect { delete :destroy, params: { id: subscription.id }, format: :js }
