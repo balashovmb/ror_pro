@@ -4,7 +4,16 @@ class Question < ApplicationRecord
   include Commentable
 
   has_many :answers, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
   belongs_to :user
 
   validates :title, :body, length: { minimum: 10, maximum: 255 }
+
+  after_create :subscribe_author
+
+  private
+
+  def subscribe_author
+    subscriptions.create(user_id: user.id)
+  end
 end

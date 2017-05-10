@@ -32,7 +32,8 @@ Rails.application.routes.draw do
     resources :answers, concerns: [:votable], shallow: true do
       patch 'set_best', on: :member
     end
-    resources :comments, only: [:new,:create], defaults: { commentable: 'question' }    
+    resources :comments, only: [:new,:create], defaults: { commentable: 'question' } 
+    resources :subscriptions, only: [:create, :destroy], shallow: true   
   end
 
   resources :answers, only: [] do

@@ -9,4 +9,19 @@ RSpec.describe Question, type: :model do
   it { should validate_length_of(:title).is_at_least(10).is_at_most(255) }
   it { should have_many(:answers).dependent(:destroy) }
   it { should belong_to(:user) }
+  it { should have_many(:subscriptions).dependent(:destroy) }
+
+  describe '#subscribe_author' do
+    let(:user) { create :user }
+    let(:question) { build(:question, user: user) }
+
+    it 'subscribes question owner on question' do
+      expect { question.save }.to change(user.subscriptions, :count).by(1)
+    end
+
+    it 'performs after question has been created' do
+      expect(question).to receive(:subscribe_author)
+      question.save
+    end
+  end
 end

@@ -4,7 +4,10 @@
   .div id="Question-#{@question.id}-comments" class = 'question-comments'
     = render @question.comments
   .question-new-comment
-    =< link_to 'Add comment', new_question_comment_path(@question), remote: true              
+    =< link_to 'Add comment', new_question_comment_path(@question), remote: true
+  .subscription  
+    - if can?(:create, Subscription)
+      = render 'questions/subscription'                
 hr
 .answers
   - if @question.answers.empty?

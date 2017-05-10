@@ -22,15 +22,18 @@ RSpec.describe Ability, type: :model do
     it { should be_able_to :create, Answer }
     it { should be_able_to :create, Comment }
     it { should be_able_to :create, Attachment }
+    it { should be_able_to :create, Subscription }
 
     it { should be_able_to :destroy, create(:question, user: user) }
     it { should be_able_to :destroy, create(:answer, user: user) }
     it { should be_able_to :destroy, create(:attachment, attachable: question) }
     it { should be_able_to :destroy, create(:comment, user: user) }
+    it { should be_able_to :destroy, create(:subscription, user: user) }
     it { should_not be_able_to :destroy, create(:question, user: another_user) }
     it { should_not be_able_to :destroy, create(:answer, user: another_user) }
     it { should_not be_able_to :destroy, create(:attachment, attachable: question2) }
     it { should_not be_able_to :destroy, create(:comment, user: another_user) }
+    it { should_not be_able_to :destroy, create(:subscription, user: another_user) }
 
     it { should be_able_to :update, create(:question, user: user) }
     it { should be_able_to :update, create(:answer, user: user) }
