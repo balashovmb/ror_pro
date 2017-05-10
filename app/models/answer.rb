@@ -8,6 +8,8 @@ class Answer < ApplicationRecord
 
   validates :body, length: { minimum: 10 }
 
+  after_create_commit { AnswersNotificationJob.perform_later self }
+
   default_scope { order('best DESC') }
 
   def set_best
