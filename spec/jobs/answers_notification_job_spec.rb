@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe AnswersNotificationJob, type: :job do
+  include ActiveJob::TestHelper
   let(:question) { create :question }
-  let(:subscriptions) { create_list(:subscription, 10, question: question) }
+  let!(:subscriptions) { create_list(:subscription,3, question: question) }
   let(:answer) { create :answer, question: question }
 
   it 'sends emails to subscribers' do

@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :destroy, :update]
   before_action :new_answer, only: :show
+  before_action :check_subscription, only: :show
 
   after_action :publish_question, only: [:create]
 
@@ -60,4 +61,9 @@ class QuestionsController < ApplicationController
   def set_question
     @question = Question.find(params[:id])
   end
+
+  def check_subscription
+    @subscription = Subscription.find_or_initialize_by(user: current_user, question: @question) if can?(:create, Subscription)
+  end
+
 end
