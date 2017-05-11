@@ -83,7 +83,7 @@ describe 'Answers API' do
     let(:question) { create :question }
     let(:http_method) { :post }
     let(:path) { "/api/v1/questions/#{question.id}/answers" }
-    let(:options) {{ answer: attributes_for(:answer) }}
+    let(:options) { { answer: attributes_for(:answer) } }
 
     it_behaves_like 'API authenticable'
 

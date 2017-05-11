@@ -38,8 +38,8 @@ RSpec.describe Answer, type: :model do
 
     it 'should not create job after update' do
       answer.save!
-      expect(AnswersNotificationJob).to_not receive(:perform_later)
+      expect(AnswersNotificationJob).not_to receive(:perform_later)
       answer.update!(body: 'updated body')
     end
-  end 
+  end
 end

@@ -1,7 +1,7 @@
 require 'acceptance/acceptance_helper'
 
 feature 'Subscribe ', %q{
-  User can subscribe to a newsletter 
+  User can subscribe to a newsletter
   about new answers to question
 } do
   let(:user) { create :user }

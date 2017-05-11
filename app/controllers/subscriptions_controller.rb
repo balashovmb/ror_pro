@@ -25,9 +25,8 @@ class SubscriptionsController < ApplicationController
   def set_question
     @question = Question.find(params[:question_id])
   end
-  
+
   def set_question_after_destroy
     @question = @subscription.question
   end
-
 end

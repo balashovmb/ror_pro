@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SubscriptionsController, type: :controller do
   let(:question) { create(:question) }
-  let(:another_user) { create (:user)}
+  let(:another_user) { create (:user) }
   sign_in_user
 
   describe 'POST #create' do
@@ -19,7 +19,7 @@ RSpec.describe SubscriptionsController, type: :controller do
 
     it 'does not create new record in db' do
       expect { post :create, params: { question_id: question }, format: :js }
-          .to_not change(Subscription, :count)
+          .not_to change(Subscription, :count)
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe SubscriptionsController, type: :controller do
 
       it 'does not delete subscription from db' do
         expect { delete :destroy, params: { id: subscription.id }, format: :js }
-            .to_not change(Subscription, :count)
+            .not_to change(Subscription, :count)
       end
 
       it 'responds with status 403 (forbidden)' do
@@ -52,5 +52,4 @@ RSpec.describe SubscriptionsController, type: :controller do
       end
     end
   end
-end  
-
+end

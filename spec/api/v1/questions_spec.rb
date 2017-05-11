@@ -75,7 +75,7 @@ describe 'Questions API' do
 
     let(:http_method) { :post }
     let(:path) { "/api/v1/questions" }
-    let(:options) {{ question: attributes_for(:question) }}
+    let(:options) { { question: attributes_for(:question) } }
 
     it_behaves_like 'API authenticable'
 

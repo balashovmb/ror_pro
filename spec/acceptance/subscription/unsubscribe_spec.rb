@@ -1,9 +1,9 @@
 require 'acceptance/acceptance_helper'
 
 feature 'Unsubscribe', %q{
-  Subscriber can cancel the subscription 
+  Subscriber can cancel the subscription
   for answers to the question
-  to   
+  to
 } do
 
   given(:user) { create(:user) }
@@ -23,7 +23,7 @@ feature 'Unsubscribe', %q{
 
     scenario 'can unsubscribe a question', js: true do
       click_on 'Unsubscribe'
-      expect(page).to_not have_link 'Unsubscribe'
+      expect(page).not_to have_link 'Unsubscribe'
       expect(page).to have_button 'Subscribe'
     end
   end
@@ -33,7 +33,7 @@ feature 'Unsubscribe', %q{
       sign_in(user)
       visit question_path(question)
 
-      expect(page).to_not have_button 'Unsubscribe'
+      expect(page).not_to have_button 'Unsubscribe'
     end
 
     scenario 'does not get email when someone answers a question', js: true do
