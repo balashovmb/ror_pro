@@ -1,1 +1,3 @@
-$('.subscription').replaceWith('<%= link_to "Unsubscribe!", subscription_path(@subscription), method: :delete, remote: true, id: ".subscription"%>');
+
+$('.subscription').prepend('<%= link_to "Unsubscribe", subscription_path(@subscription), method: :delete, remote: true, class: "unsubscribe-link"%>');
+$(".subscribe-link").remove()
