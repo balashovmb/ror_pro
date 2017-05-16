@@ -54,6 +54,8 @@ gem 'oj'
 gem 'oj_mimic_json'
 gem 'sidekiq'
 gem 'whenever'
+gem 'mysql2'
+gem 'thinking-sphinx'
 
 
 group :test do
