@@ -6,7 +6,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   belongs_to :user
 
-  validates :body, length: { minimum: 10 }
+  validates :body, length: { minimum: 5 }
 
   after_create_commit { AnswersNotificationJob.perform_later self }
 

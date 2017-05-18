@@ -42,7 +42,9 @@ Rails.application.routes.draw do
 
   resources :comments, only: :destroy
   
-  resources :attachments, only: :destroy  
+  resources :attachments, only: :destroy
+
+  resource :search, only: :show  
 
   root 'questions#index'
 

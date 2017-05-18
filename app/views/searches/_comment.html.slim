@@ -1,0 +1,6 @@
+- if item.commentable.is_a? Question
+  = link_to "Comment for: #{item.commentable.title}", question_path(item.commentable)
+  p = item.body
+- else
+  = link_to "Comment for: #{item.commentable.question.title}", question_path(item.commentable.question)
+  p = item.body

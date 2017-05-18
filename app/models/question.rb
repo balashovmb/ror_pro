@@ -7,7 +7,7 @@ class Question < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   belongs_to :user
 
-  validates :title, :body, length: { minimum: 10, maximum: 255 }
+  validates :title, :body, length: { minimum: 5, maximum: 255 }
 
   after_create :subscribe_author
 
