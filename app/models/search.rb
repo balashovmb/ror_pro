@@ -1,4 +1,4 @@
-class Search < ActiveRecord::Base
+class Search
 
   OBJECTS = %w[All Questions Answers Comments Users].freeze
 

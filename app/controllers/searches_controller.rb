@@ -4,6 +4,6 @@ class SearchesController < ApplicationController
   def show
     @query = params[:query]
     @object = params[:object]
-    @result = Search.find(@query, @object) if @query && !@query.blank?
+    @result = Search.find(@query, @object) if @query.present?
   end
 end
