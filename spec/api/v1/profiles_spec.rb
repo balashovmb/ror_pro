@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe 'Profile API' do
   describe 'GET /me' do
-
     let(:http_method) { :get }
     let(:path) { '/api/v1/profiles/me' }
     it_behaves_like 'API authenticable'
@@ -32,7 +31,6 @@ describe 'Profile API' do
   end
 
   describe 'GET /list' do
-
     let(:http_method) { :get }
     let(:path) { '/api/v1/profiles/list' }
     it_behaves_like 'API authenticable'

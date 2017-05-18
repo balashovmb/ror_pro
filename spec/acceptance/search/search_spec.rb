@@ -4,14 +4,14 @@ feature 'Search', %q{
   To be able to find information, anyone can use search
 } do
 
-  let!(:question1) { create(:question, title: 'Founded question 1')}
-  let!(:question2) { create(:question, title: 'Founded question 2')}
-  let!(:answer) { create(:answer, body: 'Founded answer')}
-  let!(:comment1) { create(:comment, commentable: question1, body: 'Founded question comment')}
-  let!(:comment2) { create(:comment, commentable: answer, body: 'Founded answer comment')}
-  let!(:user) { create(:user, email: 'founded@test.com')}
+  let!(:question1) { create(:question, title: 'Founded question 1') }
+  let!(:question2) { create(:question, title: 'Founded question 2') }
+  let!(:answer) { create(:answer, body: 'Founded answer') }
+  let!(:comment1) { create(:comment, commentable: question1, body: 'Founded question comment') }
+  let!(:comment2) { create(:comment, commentable: answer, body: 'Founded answer comment') }
+  let!(:user) { create(:user, email: 'founded@test.com') }
 
-  let!(:not_findable) { create(:question, title: 'not_findable')}
+  let!(:not_findable) { create(:question, title: 'not_findable') }
 
   before do
     index
@@ -22,7 +22,6 @@ feature 'Search', %q{
     click_button 'Find'
 
     expect(page).to have_content('No results')
-
   end
 
   scenario 'Search all contexts', js: true do

@@ -72,7 +72,6 @@ describe 'Questions API' do
   end
 
   describe 'POST #create' do
-
     let(:http_method) { :post }
     let(:path) { "/api/v1/questions" }
     let(:options) { { question: attributes_for(:question) } }

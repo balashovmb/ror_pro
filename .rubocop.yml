@@ -10,7 +10,8 @@ AllCops:
     - 'spec/spec_helper.rb'
     - 'spec/acceptance/acceptance_helper.rb'
     - 'tmp/**/*'
-    - 'public/**/*'        
+    - 'public/**/*'
+    - 'app/indices/*'        
   DisplayCopNames: true
 
 Rails:
