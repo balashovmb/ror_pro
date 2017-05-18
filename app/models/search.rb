@@ -1,6 +1,6 @@
 class Search < ActiveRecord::Base
 
-  OBJECTS = %w[Questions Answers Comments Users All].freeze
+  OBJECTS = %w[All Questions Answers Comments Users].freeze
 
   def self.find(query, object)
     return nil if query.try(:blank?) || !OBJECTS.include?(object)
