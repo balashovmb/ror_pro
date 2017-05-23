@@ -22,6 +22,8 @@ append :linked_files, "config/database.yml",  ".env"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle", "public/uploads" 
+set :passenger_restart_with_touch, true
+
 
 namespace :deploy do
 
