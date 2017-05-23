@@ -18,6 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+env :PATH, ENV['PATH']
 
 every 1.day, at: '6am' do
   runner 'DailyDigestJob.perform_now'
