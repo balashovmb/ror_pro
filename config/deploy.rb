@@ -11,12 +11,14 @@ set :deploy_to, "/home/deployer/ror_pro"
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
+#set :default_env, { rvm_bin_path: '~/.rvm/bin' }
+
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml", ".env"
+append :linked_files, "config/database.yml",  ".env"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle"  
