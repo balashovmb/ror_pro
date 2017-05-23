@@ -85,10 +85,10 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: '51.15.67.2' }
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address: '127.0.0.1',
-  #   port: 25,
-  #   domain: 'ror-pro.localdomain'
-  # }  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: '127.0.0.1',
+    port: 25,
+    domain: 'ror-pro.localdomain'
+  }  
 end
