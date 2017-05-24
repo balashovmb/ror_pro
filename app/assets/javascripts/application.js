@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.remotipart
-//= require turbolinks
 //= require action_cable
 //= require_tree .
 //= require cocoon
