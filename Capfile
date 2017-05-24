@@ -10,7 +10,6 @@ require 'capistrano/sidekiq'
 require 'whenever/capistrano'
 require 'capistrano-passenger'
 require 'thinking_sphinx/capistrano'
-require 'capistrano-seed'
 
 # Load the SCM plugin appropriate to your project:
 #
