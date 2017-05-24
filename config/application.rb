@@ -19,6 +19,7 @@ module RorPro
     # -- all .rb files in that directory are automatically loaded.
     
     config.action_cable.disable_request_forgery_protection = false
+    config.action_cable.allowed_request_origins = ['http://51.15.67.2', 'http://localhost:3000']    
 
     config.generators do |g|
       g.test_framework :rspec,
