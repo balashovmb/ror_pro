@@ -58,6 +58,7 @@ gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
+gem 'unicorn'
 
 group :test do
   gem 'shoulda-matchers'
@@ -91,6 +92,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
