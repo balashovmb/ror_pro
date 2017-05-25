@@ -4,7 +4,7 @@ working_directory "#{app_path}/current"
 pid               "#{app_path}/current/tmp/pids/unicorn.pid"
 
 # listen
-listen "/home/deployer/ror_pro/shared/tmp/sockets/unicorn.ror_pro.sock", backlog: 64
+listen "/home/deployer/ror_pro/shared/tmp/sockets/unicorn.ror_pro1.sock", backlog: 64
 
 # logging
 stderr_path "log/unicorn.stderr.log"
