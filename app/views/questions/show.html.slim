@@ -1,31 +1,33 @@
-.question data-id="#{@question.id}"
-  = render 'questions/question_show', question: @question
-  = render 'votes/votes', votable: @question
-  .div id="Question-#{@question.id}-comments" class = 'question-comments'
-    = render @question.comments
-  .question-new-comment
-    =< link_to 'Add comment', new_question_comment_path(@question), remote: true
-  .subscription  
-    - if can?(:create, Subscription)
-      = render 'questions/subscription'                
-hr
-.answers
-  - if @question.answers.empty?
-    b No answers
-  - else
-    = render @question.answers
-.new_answer
-  - if can?(:create, Answer)
-    = form_for [@question, @answer], remote: true do |f|
-        = f.label :body, 'Answer'
-        .answer-errors
-        = f.text_area :body, id: 'new-answer-body'
-        p
-          = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
-        p= f.submit 'Create answer'
-  - else
-    i You must sign in first for create answer
-    br
+-cache [can?(:vote, @question), user_signed_in?, can?(:destroy, @question),
+ can?(:edit, @question), can?(:create, Subscription) && can?(:destroy, Subscription), @question]
+  .question data-id="#{@question.id}"
+    = render 'questions/question_show', question: @question
+    = render 'votes/votes', votable: @question
+    .div id="Question-#{@question.id}-comments" class = 'question-comments'
+      = render @question.comments
+    .question-new-comment
+      =< link_to 'Add comment', new_question_comment_path(@question), remote: true
+    .subscription  
+      - if can?(:create, Subscription)
+        = render 'questions/subscription'                
+  hr
+  .answers
+    - if @question.answers.empty?
+      b No answers
+    - else
+      = render @question.answers
+  .new_answer
+    - if can?(:create, Answer)
+      = form_for [@question, @answer], remote: true do |f|
+          = f.label :body, 'Answer'
+          .answer-errors
+          = f.text_area :body, id: 'new-answer-body'
+          p
+            = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
+          p= f.submit 'Create answer'
+    - else
+      i You must sign in first for create answer
+      br
 
-= link_to 'All questions', questions_path
+  = link_to 'All questions', questions_path
 

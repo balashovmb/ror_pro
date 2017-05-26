@@ -59,6 +59,7 @@ gem 'thinking-sphinx'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'unicorn'
+gem 'redis-rails'
 
 group :test do
   gem 'shoulda-matchers'
