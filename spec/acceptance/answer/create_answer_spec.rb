@@ -7,6 +7,7 @@ feature 'Create answer', %q{
 } do
   given(:user) { create(:user) }
   given(:question) { create(:question) }
+  given!(:answer) {create(:answer, question: question)}
 
   scenario 'Authenticated user creates answer', js: true do
     sign_in(user)
@@ -14,6 +15,8 @@ feature 'Create answer', %q{
     visit question_path(question)
     fill_in 'new-answer-body', with: 'text text12'
     click_on 'Create answer'
+    wait_for_ajax
+    save_and_open_page
     within '.answers' do
       expect(page).to have_content 'text text12'
     end

@@ -1,11 +1,9 @@
 App.answers_channel = App.cable.subscriptions.create "AnswersChannel",
   connected: ->
-  connected: ->
-    setTimeout =>
-      @followCurrenQuestion()
-      @installPageCallback()
-      console.log 'Connected AnswersChannel'
-    , 1000
+    @followCurrenQuestion()
+    @installPageCallback()
+    console.log 'Connected AnswersChannel'
+
   received: (data) ->
     console.log data.type
     if data.type == "answer"
