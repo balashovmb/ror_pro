@@ -1,8 +1,11 @@
-App.cable.subscriptions.create "AnswersChannel",
+App.answers_channel = App.cable.subscriptions.create "AnswersChannel",
   connected: ->
-    @followCurrenQuestion()
-    console.log 'Connected AnswersChannel'
-  ,
+  connected: ->
+    setTimeout =>
+      @followCurrenQuestion()
+      @installPageCallback()
+      console.log 'Connected AnswersChannel'
+    , 1000
   received: (data) ->
     console.log data.type
     if data.type == "answer"
@@ -21,3 +24,7 @@ App.cable.subscriptions.create "AnswersChannel",
       @perform 'subscribe_question_stream', id: questionId
     else
       @perform 'unsubscribe_question_stream'
+  installPageCallback: ->
+    unless @installedPageCallback
+      @installedPageCallback = true
+      $(document).on( 'turbolinks:load', -> App.answers_channel.followCurrenQuestion())
