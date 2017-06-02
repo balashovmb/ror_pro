@@ -1,5 +1,5 @@
 -cache [can?(:vote, @question), user_signed_in?, can?(:destroy, @question),
-  can?(:edit, @question), can?(:create, Subscription) && can?(:destroy, Subscription), @question] do
+  can?(:edit, @question), can?(:create, Subscription) && can?(:destroy, Subscription), @question, @subscription] do
   .question data-id="#{@question.id}"
     = render 'questions/question_show', question: @question
     = render 'votes/votes', votable: @question
