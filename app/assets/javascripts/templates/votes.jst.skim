@@ -5,9 +5,11 @@ p.votings
     span id="errors_#{@votable_klass}_#{@votable.id}"  
     -if gon.current_user_id && (@votable.user_id != gon.current_user_id)
       p
-        a.voting href="/answers/#{@votable.id}/vote_up" data-remote="true" data-method="post" data-type="json" Vote UP
+        a.voting href="/answers/#{@votable.id}/vote_up" data-remote="true" data-method="post" data-type="json" id="vote_up"
+          img src="/pics/vote_up.png"
       p
-        a.voting href="/answers/#{@votable.id}/cancel_vote" data-remote="true" data-method="delete" data-type="json" Cancel  
+        a.voting href="/answers/#{@votable.id}/cancel_vote" data-remote="true" data-method="delete" data-type="json" id="cancel_vote"
+          img src="/pics/dot.png"
       p
-        a.voting href="/answers/#{@votable.id}/vote_down" data-remote="true" data-method="post" data-type="json" Vote DOWN
-
+        a.voting href="/answers/#{@votable.id}/vote_down" data-remote="true" data-method="post" data-type="json" id="vote_down"
+          img src="/pics/vote_down.png"

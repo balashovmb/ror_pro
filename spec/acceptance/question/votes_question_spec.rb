@@ -18,16 +18,16 @@ feature 'Vote for question', %q{
 
     scenario "authenticated user can vote ", js: true do
       within ".question" do
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         expect(page).to have_content 'Rating: 1'
       end
     end
 
     scenario "authenticated user can't vote twice", js: true do
       within ".question" do
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         wait_for_ajax
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         expect(page).to have_content 'Rating: 1'
         expect(page).to have_content "You can vote only once"
       end
@@ -39,16 +39,16 @@ feature 'Vote for question', %q{
 
     scenario "authenticated user can vote down", js: true do
       within ".question" do
-        click_link 'Vote DOWN'
+        find("[id='vote_down']").click
         expect(page).to have_content 'Rating: -1'
       end
     end
 
     scenario "authenticated user can't vote twice", js: true do
       within ".question" do
-        click_link 'Vote DOWN'
+        find("[id='vote_down']").click
         wait_for_ajax
-        click_link 'Vote DOWN'
+        find("[id='vote_down']").click
         expect(page).to have_content 'Rating: -1'
         expect(page).to have_content "You can vote only once"
       end
@@ -60,9 +60,9 @@ feature 'Vote for question', %q{
       login_and_open_question
 
       within ".question" do
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         wait_for_ajax
-        click_link 'Cancel'
+        find("[id='cancel_vote']").click
         wait_for_ajax
         expect(page).to have_content 'Rating: 0'
       end
@@ -74,9 +74,9 @@ feature 'Vote for question', %q{
     visit question_path(users_question)
 
     within ".question" do
-      expect(page).not_to have_content 'Vote UP'
-      expect(page).not_to have_content 'Vote DOWN'
-      expect(page).not_to have_content 'Cancel'
+      expect(page).not_to have_selector('#vote_up')
+      expect(page).not_to have_selector('#vote_down')
+      expect(page).not_to have_selector('#cancel_vote')
     end
   end
 end

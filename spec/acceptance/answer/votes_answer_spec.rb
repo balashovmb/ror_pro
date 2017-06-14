@@ -18,16 +18,16 @@ feature 'Vote for answer', %q{
   context 'Vote up' do
     scenario "authenticated user can vote ", js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         expect(page).to have_content 'Rating: 1'
       end
     end
 
     scenario "authenticated user can't vote twice", js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         wait_for_ajax
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         expect(page).to have_content 'Rating: 1'
         expect(page).to have_content "You can vote only once"
       end
@@ -37,16 +37,16 @@ feature 'Vote for answer', %q{
   context 'Vote down' do
     scenario "authenticated user can vote down", js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Vote DOWN'
+        find("[id='vote_down']").click
         expect(page).to have_content 'Rating: -1'
       end
     end
 
     scenario "authenticated user can't vote twice", js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Vote DOWN'
+        find("[id='vote_down']").click
         wait_for_ajax
-        click_link 'Vote DOWN'
+        find("[id='vote_down']").click
         expect(page).to have_content 'Rating: -1'
         expect(page).to have_content "You can vote only once"
       end
@@ -56,9 +56,9 @@ feature 'Vote for answer', %q{
   context 'Cancel vote' do
     scenario "user can cancel his vote", js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Vote UP'
+        find("[id='vote_up']").click
         wait_for_ajax
-        click_link 'Cancel'
+        find("[id='cancel_vote']").click
         wait_for_ajax
         expect(page).to have_content 'Rating: 0'
       end
@@ -97,7 +97,7 @@ feature 'Vote for answer', %q{
     scenario "answer Vote UP link works in another users session", js: true do
       Capybara.using_session('user2') do
         within '#answer-3' do
-          click_link 'Vote UP'
+          find("[id='vote_up']").click
           expect(page).to have_content 'Rating: 1'
         end
       end
@@ -106,7 +106,7 @@ feature 'Vote for answer', %q{
     scenario "answer Vote DOWN link works in another users session", js: true do
       Capybara.using_session('user2') do
         within '#answer-3' do
-          click_link 'Vote DOWN'
+          find("[id='vote_down']").click
           expect(page).to have_content 'Rating: -1'
         end
       end
@@ -115,9 +115,9 @@ feature 'Vote for answer', %q{
     scenario "answer Cancel vote link works in another users session", js: true do
       Capybara.using_session('user2') do
         within '#answer-3' do
-          click_link 'Vote DOWN'
+          find("[id='vote_down']").click
           wait_for_ajax
-          click_link 'Cancel'
+          find("[id='cancel_vote']").click
           expect(page).to have_content 'Rating: 0'
         end
       end

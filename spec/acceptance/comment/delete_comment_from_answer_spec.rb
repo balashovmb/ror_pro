@@ -12,7 +12,7 @@ feature 'Delete comment from answer', %q{
   scenario "authenticated user removes his comment from answer", js: true do
     sign_in(user)
     visit question_path(answer.question)
-    click_link 'Delete comment'
+    click_button 'Delete comment'
     wait_for_ajax
     expect(page).not_to have_content comment.body
   end
