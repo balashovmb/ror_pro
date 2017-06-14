@@ -33,7 +33,7 @@ feature 'Delete files from questions', %q{
   scenario 'Another user dont see Delete file link', js: true do
     sign_in(another_user)
     visit question_path(question)
-
+    save_and_open_page
     expect(page).not_to have_content 'Delete file'
   end
 end

@@ -12,7 +12,7 @@ feature 'Question editing', %{
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(question)
 
-    expect(page).not_to have_link 'Edit'
+    expect(page).not_to have_button 'Edit'
   end
 
   describe 'Authenticated user' do
@@ -21,8 +21,8 @@ feature 'Question editing', %{
       visit question_path(question)
     end
 
-    scenario 'author sees link to edit' do
-      expect(page).to have_link 'Edit question'
+    scenario 'author sees button to edit' do
+      expect(page).to have_button 'Edit question'
     end
 
     scenario 'author try to edit his question', js: true do
@@ -42,10 +42,10 @@ feature 'Question editing', %{
     end
   end
 
-  scenario "can't see Edit question link on another user's question" do
+  scenario "can't see Edit question button on another user's question" do
     sign_in(user)
     visit question_path(question)
 
-    expect(page).not_to have_link 'Edit question'
+    expect(page).not_to have_button 'Edit question'
   end
 end

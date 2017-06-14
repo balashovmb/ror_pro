@@ -1,25 +1,22 @@
-  .question_title  
-    b= @question.title
-  br
-  .question_body
-    = @question.body
-  p Attachments:
-  ul
-    -@question.attachments.each do |a|
-      .attachment id = "attachment-#{a.id}"  
-        li= link_to a.file.identifier, a.file.url
-        - if can?(:destroy, a)
-          = link_to 'Delete file', a , method: :delete, remote: true, data: { confirm: 'Are you shure?' }      
-
-  - if can?(:edit, @question)
-    p= link_to 'Delete question', @question, method: :delete, data: { confirm: 'Are you shure?' }
-    p= link_to 'Edit question', '#', class: 'edit-question-link', data: { question_id: @question.id} 
-    p 
+.question_title  
+  b= @question.title
+br
+.question_body
+  p= @question.body
+p Attachments:
+ul
+  = render 'attachments/attachments', attachable: @question
+- if can?(:edit, @question)
+  p= button_to 'Delete question', @question, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you shure?' }
+  p= button_to 'Edit question', '#', class: 'edit-question-link btn btn-warning', data: { question_id: @question.id} 
+  p
+  .row 
     = form_for @question, remote: true do |f|  
-      = f.label :title
-      .edit-question-errors    
-      = f.text_field :title
-      = f.label :body
-      = f.text_area :body
-      = f.submit 'Save'
-     
+      .col-lg-10 
+        = f.label :title
+        .edit-question-errors   
+        p= f.text_field :title, class:"form-control" 
+        p= f.label :body
+        p= f.text_area :body, class:"form-control"
+        = f.submit 'Save', class: "btn btn-primary"
+   
