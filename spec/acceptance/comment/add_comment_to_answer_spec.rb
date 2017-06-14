@@ -16,7 +16,7 @@ feature 'Create comment to answer', %q{
 
     scenario 'User adds comment to the answer', js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Add comment'
+        click_button 'Add comment'
         fill_in 'comment-body', with: 'new comment'
         click_on 'Create comment'
         expect(page).to have_content 'new comment'
@@ -24,7 +24,7 @@ feature 'Create comment to answer', %q{
     end
     scenario 'User tries to create too short comment', js: true do
       within "#answer-#{answer.id}" do
-        click_link 'Add comment'
+        click_button 'Add comment'
         fill_in 'comment-body', with: 'lol'
         click_on 'Create comment'
         expect(page).not_to have_content 'lol'
@@ -46,7 +46,7 @@ feature 'Create comment to answer', %q{
 
       Capybara.using_session('user') do
         within "#answer-#{answer.id}" do
-          click_link 'Add comment'
+          click_button 'Add comment'
           fill_in 'comment-body', with: 'new comment'
           click_on 'Create comment'
           expect(page).to have_content 'new comment'

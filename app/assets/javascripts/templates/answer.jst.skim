@@ -1,17 +1,20 @@
-.answer id="answer-#{@answer.id}"
-  p.answer-body =@answer.body
-  - for a in @attachments
-    li
-      a href=a.with_meta.url =a.with_meta.filename
-
-  - if @answer.best 
-    p
-      b BEST ANSWER!
-  - else
-    - if gon.current_user_id && (gon.current_user_id == @question_author_id)
-      a href="/answers/#{@answer.id}/set_best"  data-remote="true" data-method="patch" Set best
-  - if gon.current_user_id && (gon.current_user_id == @answer.user_id)
-    p
-      a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" Delete answer    
-  ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')
-  br        
+.row
+  .answer id="answer-#{@answer.id}"
+    .col-lg-1
+      - if @answer.best 
+        p
+          b BEST ANSWER!
+      - else
+        - if gon.current_user_id && (gon.current_user_id == @question_author_id)
+          p
+            a href="/answers/#{@answer.id}/set_best" data-remote="true" data-method="patch" class="btn btn-success" Set best
+    .col-lg-6              
+      p.answer-body =@answer.body
+      - for a in @attachments
+        li
+          a href=a.with_meta.url =a.with_meta.filename
+      - if gon.current_user_id && (gon.current_user_id == @answer.user_id)
+        p
+          a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger" Delete answer    
+      ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')
+br 
