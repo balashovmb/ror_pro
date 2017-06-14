@@ -12,7 +12,7 @@ feature 'Answer editing', %{
   scenario 'Unauthenticated user try to edit answer' do
     visit question_path(answer.question)
 
-    expect(page).not_to have_link 'Edit'
+    expect(page).not_to have_button 'Edit'
   end
 
   describe 'Authenticated user' do
@@ -21,9 +21,9 @@ feature 'Answer editing', %{
       visit question_path(answer.question)
     end
 
-    scenario 'author sees link to edit' do
+    scenario 'author sees button to edit' do
       within '.answers' do
-        expect(page).to have_link 'Edit'
+        expect(page).to have_button 'Edit'
       end
     end
 
@@ -44,6 +44,6 @@ feature 'Answer editing', %{
     sign_in(user)
     visit question_path(answer.question)
 
-    expect(page).not_to have_link 'Edit'
+    expect(page).not_to have_button 'Edit'
   end
 end

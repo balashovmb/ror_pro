@@ -1,39 +1,33 @@
--cache [answer, can?(:set_best, answer), can?(:edit, answer), can?(:delete, answer), user_signed_in?] do
-  - if answer.persisted?
+-cache [answer, can?(:set_best, answer), can?(:edit, answer), can?(:delete, answer), user_signed_in?, answer.best] do
+  .row
     .answer id = "answer-#{answer.id}"
-      p id="edited-answer-#{answer.id}"
-        = answer.body
-    
-        -answer.attachments.each do |a|
-          .attachment id = "attachment-#{a.id}"           
-            li= link_to a.file.identifier, a.file.url
-            - if can?(:destroy, a)
-              = link_to 'Delete file', a , method: :delete, remote: true, data: { confirm: 'Are you shure?' } 
-              p
-
-        - if answer.best
-          p
-            b BEST ANSWER!
-        - else
-          - if can?(:set_best, answer)
-            p= link_to 'Set best', set_best_answer_path(answer), method: :patch, remote: true         
-        - if can?(:edit, answer)
-          p= link_to 'Delete answer', answer, method: :delete, remote: true, data: { answer_id: answer.id, confirm: 'Are you shure?' }
-          p = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id} 
-          p 
-          = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
-            = f.label :body, 'Answer'
-            .answer-errors
-            = f.text_area :body
-            p
-            .add-file
-              = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
-            = f.submit 'Save'
-        = render 'votes/votes', votable: answer
-      div id="Answer-#{answer.id}-comments" class="answer-comments"
-        =render answer.comments
-      .answer-new-comment  
-        - if can?(:create, Comment)  
-          =< link_to 'Add comment', new_answer_comment_path(answer), remote: true    
-    br                 
-              
+      .col-lg-1
+        - if answer.persisted?
+          = render 'answers/best', answer: answer
+          = render 'votes/votes', votable: answer
+      .col-lg-6
+        - if answer.persisted?
+          p id="edited-answer-#{answer.id}"
+            = answer.body        
+            = render 'attachments/attachments', attachable: answer 
+                  p         
+            - if can?(:edit, answer)
+              p= button_to 'Delete answer', answer, method: :delete, remote: true, class: 'btn btn-danger', data: { answer_id: answer.id, confirm: 'Are you shure?' }
+              p = button_to 'Edit', '#', class: 'edit-answer-link btn btn-warning', data: { answer_id: answer.id} 
+              p 
+              = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
+                .row
+                  .col-lg-8
+                    = f.label :body, 'Answer'
+                    .answer-errors
+                    = f.text_area :body, class:"form-control" 
+                    p
+                    .add-file
+                      = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
+                    = f.submit 'Save', class: "btn btn-info" 
+            div id="Answer-#{answer.id}-comments" class="answer-comments"
+              =render answer.comments
+            .answer-new-comment  
+              - if can?(:create, Comment)  
+                = button_to 'Add comment', new_answer_comment_path(answer), remote: true, method: :get, class:"btn btn-info"  
+    br 
