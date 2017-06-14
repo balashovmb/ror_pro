@@ -18,6 +18,7 @@
 
 config/database.yml
 public/uploads/*
+public/pics/*
 dump.rdb
 config/*.sphinx.conf
 db/sphinx
