@@ -1,22 +1,43 @@
-html
+html lang="en"
   head
-    title
-      = 'RorPro'
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title= content_for?(:title) ? yield(:title) : "RorPro"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
-    = Gon::Base.render_data    
+    = Gon::Base.render_data  
+    = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
+    = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
+    = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
+    = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
   body
-    -if user_signed_in?
-      = current_user.email 
-      p= link_to 'Sign out', destroy_user_session_path, method: :delete
-    - else 
-      = link_to 'Sign in', new_user_session_path
-
-    =render 'common/search_form'   
-    
-    p#alert = alert
-    p#notice = notice
-  hr
-    = yield
+    .navbar.navbar-default.navbar-static-top
+      .container
+        button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand href="#"RorPro
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          ul.nav.navbar-nav
+            .row        
+              - if user_signed_in?
+                .col-lg-offset-10
+                  li=current_user.email
+                  p= link_to 'Sign out', destroy_user_session_path, method: :delete
+              - else
+                li= link_to 'Sign in', new_user_session_path
+              .col-lg-offset-6
+                = render 'common/search_form'     
+    .container
+      .row
+        .col-lg-12
+          = bootstrap_flash
+          = yield
+      footer
+        br
+        p &copy; Mikhail Balashov 2017
