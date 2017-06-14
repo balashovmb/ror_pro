@@ -1,2 +1,2 @@
-$('.subscription').prepend('<%= button_to "Unsubscribe", subscription_path(@subscription), method: :delete, remote: true, class: "unsubscribe-link"%>');
-$(".subscribe-link").remove()
+$('.subscribe-link').remove()
+$('.subscription').prepend('<%= button_to "Unsubscribe", subscription_path(@subscription), method: :delete, remote: true, class: "subscribe-link btn btn-danger"%>');

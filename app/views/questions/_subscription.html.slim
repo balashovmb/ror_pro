@@ -1,4 +1,4 @@
 - if @subscription.persisted?
-    = button_to 'Unsubscribe', subscription_path(@subscription), remote: true, method: :delete,  class: 'unsubscribe-link'
+    = button_to 'Unsubscribe', subscription_path(@subscription), remote: true, method: :delete,  class: 'subscribe-link btn btn-danger'
 - else
-    = button_to 'Subscribe', question_subscriptions_path(@question), remote: true, method: :post,  class: 'subscribe-link'
+    = button_to 'Subscribe', question_subscriptions_path(@question), remote: true, method: :post,  class: 'subscribe-link btn btn-success'
