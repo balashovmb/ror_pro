@@ -1,8 +1,10 @@
 -cache [comment, can?(:destroy, comment)]  do
   .comment
     .div id="comment_#{comment.id}"
-      small 
-        p
-          i= comment.body  
-        - if can?(:destroy, comment)  
-          p= link_to 'Delete comment', comment, method: :delete, remote: true, data: { confirm: 'Are you shure?'} 
+      .raw
+        .col-md-offset-1
+          small 
+            p
+              i= comment.body  
+            - if can?(:destroy, comment)  
+              p= button_to 'Delete comment', comment, method: :delete, remote: true, class: 'btn btn-danger btn-xs', data: { confirm: 'Are you shure?'} 

@@ -2,7 +2,8 @@
   div id="comment_#{@comment.id}"
     small
       p
-        i=@comment.body
-        p   
-          - if gon.current_user_id == @comment.user_id
-            a href="/comments/#{@comment.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" Delete comment      
+        .col-md-offset-1
+          i=@comment.body
+          p   
+            - if gon.current_user_id == @comment.user_id
+              a href="/comments/#{@comment.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger btn-xs" Delete comment 
