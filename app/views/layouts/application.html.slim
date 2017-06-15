@@ -29,13 +29,15 @@ html lang="en"
                 .col-lg-offset-10
                   li=current_user.email
                   p= link_to 'Sign out', destroy_user_session_path, method: :delete
+                  p= link_to 'My account', edit_user_registration_path 
               - else
-                li= link_to 'Sign in', new_user_session_path
+                .col-lg-offset-10
+                  li= link_to 'Sign in', new_user_session_path
               .col-lg-offset-6
                 = render 'common/search_form'     
     .container
       .row
-        .col-lg-12
+        .col-lg-10
           = bootstrap_flash
           = yield
       footer
