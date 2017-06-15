@@ -28,7 +28,7 @@ describe 'Answers API' do
 
       %w(id body question_id created_at updated_at).each do |attr|
         it "returns #{attr} for each answer" do
-          answer = answers.last
+          answer = answers.first
           expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path("answers/0/#{attr}")
         end
       end

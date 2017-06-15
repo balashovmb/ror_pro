@@ -10,7 +10,7 @@ class Answer < ApplicationRecord
 
   after_create_commit { AnswersNotificationJob.perform_later self }
 
-  default_scope { order('best DESC') }
+  default_scope { order('best DESC, created_at ASC') }
 
   def set_best
     transaction do

@@ -16,7 +16,6 @@ feature 'Create answer', %q{
     fill_in 'new-answer-body', with: 'text text12'
     click_on 'Create answer'
     wait_for_ajax
-    save_and_open_page
     within '.answers' do
       expect(page).to have_content 'text text12'
     end
