@@ -19,25 +19,26 @@ html lang="en"
       .container
         button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
           span.icon-bar
-          span.icon-bar
+          span.icon-bar 
           span.icon-bar
         a.navbar-brand href="#"RorPro
-        .navbar-collapse.collapse.navbar-responsive-collapse
-          ul.nav.navbar-nav
-            .row        
-              - if user_signed_in?
-                .col-lg-offset-10
-                  li=current_user.email
-                  p= link_to 'Sign out', destroy_user_session_path, method: :delete
-                  p= link_to 'My account', edit_user_registration_path 
-              - else
-                .col-lg-offset-10
-                  li= link_to 'Sign in', new_user_session_path
-              .col-lg-offset-6
-                = render 'common/search_form'     
+        .row      
+          - if user_signed_in?
+            .col-lg-offset-11 
+              =current_user.email
+              p= link_to 'Sign out', destroy_user_session_path, method: :delete
+              p= link_to 'My account', edit_user_registration_path 
+          - else
+            .col-lg-offset-11
+              = link_to 'Sign in', new_user_session_path
+        .row
+          .col-lg-2 
+            h4= link_to 'All questions', questions_path          
+          .div class= "col-lg-offset-8 col-md-offset-5 col-sm-offset-4 col-xs-offset-3"
+            = render 'common/search_form'     
     .container
       .row
-        .col-lg-10
+        .col-lg-12
           = bootstrap_flash
           = yield
       footer

@@ -17,4 +17,5 @@
       - if gon.current_user_id && (gon.current_user_id == @answer.user_id)
         p
           a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger" Delete answer    
-br 
+  br
+  hr 
