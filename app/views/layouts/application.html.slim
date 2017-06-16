@@ -22,20 +22,22 @@ html lang="en"
           span.icon-bar 
           span.icon-bar
         a.navbar-brand href="#"RorPro
-        .row      
-          - if user_signed_in?
-            .col-lg-offset-11 
-              =current_user.email
-              p= link_to 'Sign out', destroy_user_session_path, method: :delete
-              p= link_to 'My account', edit_user_registration_path 
-          - else
-            .col-lg-offset-11
-              = link_to 'Sign in', new_user_session_path
-        .row
-          .col-lg-2 
-            h4= link_to 'All questions', questions_path          
-          .div class= "col-lg-offset-8 col-md-offset-5 col-sm-offset-4 col-xs-offset-3"
-            = render 'common/search_form'     
+        .navbar-collapse.collapse.navbar-responsive-collapse
+          ul.nav.navbar-nav
+            .row      
+              - if user_signed_in?
+                .col-lg-offset-11 
+                  =current_user.email
+                  p= link_to 'Sign out', destroy_user_session_path, method: :delete
+                  p= link_to 'My account', edit_user_registration_path 
+              - else
+                .col-lg-offset-11
+                  li= link_to 'Sign in', new_user_session_path
+            .row       
+              .div class= "col-lg-offset-8"
+                = render 'common/search_form'
+        .col-lg-2 
+          h4= link_to 'All questions', questions_path                
     .container
       .row
         .col-lg-12
