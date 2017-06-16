@@ -3,7 +3,7 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title= content_for?(:title) ? yield(:title) : "RorPro"
+    title= content_for?(:title) ? yield(:title) : "Q&A time"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -17,26 +17,27 @@ html lang="en"
   body
     .navbar.navbar-default.navbar-static-top
       .container
+        a.navbar-brand href="#"Q&A time 
         button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
           span.icon-bar
           span.icon-bar 
           span.icon-bar
-        a.navbar-brand href="#"Q&A time
+        .col-lg-2
+          .navbar-text
+            strong= link_to 'All questions', questions_path           
         .navbar-collapse.collapse.navbar-responsive-collapse
-          ul.nav.navbar-nav
-            - if user_signed_in?
-              .div class= "col-lg-offset-11 col-xs-offset-11 col-sm-offset-11 col-md-offset-11"
+          - if user_signed_in?
+            .row
+              .div class= "col-lg-offset-11 col-xs-offset-4 col-sm-offset-5 col-md-offset-5"
                 =current_user.email
                 p= link_to 'Sign out', destroy_user_session_path, method: :delete
                 p= link_to 'My account', edit_user_registration_path 
-            - else
-              .div class= "col-lg-offset-11 col-xs-offset-5 col-sm-offset-5 col-md-offset-5"
-                p= link_to 'Sign in', new_user_session_path
-            .row       
-              .div class= "col-lg-offset-8 col-xs-offset-6 col-sm-offset-6 col-md-offset-6"
-                = render 'common/search_form'
-        .col-lg-2 
-          h4= link_to 'All questions', questions_path                
+          - else
+            .div class= "col-lg-offset-11 col-xs-offset-5 col-sm-offset-5 col-md-offset-5"
+              p= link_to 'Sign in', new_user_session_path
+        .row
+          .div class= "col-lg-offset-8 col-xs-offset-0 col-sm-offset-5 col-md-offset-5"
+            = render 'common/search_form'                 
     .container
       .row
         .col-lg-12

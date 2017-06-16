@@ -7,7 +7,7 @@
       - else
         - if gon.current_user_id && (gon.current_user_id == @question_author_id)
           p
-            a href="/answers/#{@answer.id}/set_best" data-remote="true" data-method="patch" class="btn btn-success" Set best
+            a href="/answers/#{@answer.id}/set_best" data-remote="true" data-method="patch" class="btn btn-success btn-sm" Set best
       ==JST["templates/votes"](votable: @answer, rating: @rating, votable_klass: 'answer')
     .col-lg-6              
       p.answer-body =@answer.body
@@ -16,6 +16,6 @@
           a href=a.with_meta.url =a.with_meta.filename
       - if gon.current_user_id && (gon.current_user_id == @answer.user_id)
         p
-          a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger" Delete answer    
+          a href="/answers/#{@answer.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger btn-sm" Delete answer    
   br
   hr 

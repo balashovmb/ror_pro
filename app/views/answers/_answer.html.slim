@@ -11,8 +11,8 @@
               = render 'attachments/attachments', attachable: answer 
                     p         
               - if can?(:edit, answer)
-                p= button_to 'Delete answer', answer, method: :delete, remote: true, class: 'btn btn-danger', data: { answer_id: answer.id, confirm: 'Are you shure?' }
-                p = button_to 'Edit', '#', class: 'edit-answer-link btn btn-warning', data: { answer_id: answer.id} 
+                p= button_to 'Delete answer', answer, method: :delete, remote: true, class: 'btn btn-danger btn-sm', data: { answer_id: answer.id, confirm: 'Are you shure?' }
+                p = button_to 'Edit', '#', class: 'edit-answer-link btn btn-warning btn-sm', data: { answer_id: answer.id} 
                 p 
                 = form_for answer, remote: true, html: { id: "edit-answer-#{answer.id}"} do |f|
                   .row
@@ -28,6 +28,6 @@
                 =render answer.comments
               .answer-new-comment  
                 - if can?(:create, Comment)  
-                  = button_to 'Add comment', new_answer_comment_path(answer), remote: true, method: :get, class:"btn btn-info"  
+                  = button_to 'Add comment', new_answer_comment_path(answer), remote: true, method: :get, class:"btn btn-info btn-sm"  
         br
         hr     
