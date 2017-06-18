@@ -1,5 +1,11 @@
 <h2>Log in</h2>
 
+<strong> Log in only if you agree with the </strong>
+  <%= link_to 'Privacy Policy', policy_path %>
+  <strong>and</strong>
+  <%= link_to 'Terms Of Service', terms_path %>
+<br>
+<br>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
