@@ -61,6 +61,7 @@ gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'unicorn'
 gem 'redis-rails'
 gem 'twitter-bootstrap-rails'
+gem 'mailgun-ruby'
 
 group :test do
   gem 'shoulda-matchers'

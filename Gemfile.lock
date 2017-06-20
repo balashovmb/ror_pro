@@ -113,6 +113,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
     doorkeeper (4.2.5)
       railties (>= 4.2)
     dotenv (1.0.2)
@@ -136,6 +138,8 @@ GEM
       multi_json
       request_store (>= 1.0)
     hashie (3.5.5)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     i18n (0.8.1)
     innertube (1.1.0)
     jbuilder (2.6.3)
@@ -175,6 +179,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    mailgun-ruby (1.1.6)
+      rest-client (~> 2.0)
     method_source (0.8.2)
     middleware (0.1.0)
     mime-types (3.1)
@@ -189,6 +195,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
+    netrc (0.11.0)
     nio4r (2.0.0)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
@@ -279,6 +286,10 @@ GEM
     request_store (1.3.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     riddle (2.1.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
@@ -365,6 +376,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.1.4)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.4)
     unicorn (5.3.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -417,6 +431,7 @@ DEPENDENCIES
   launchy
   letter_opener
   listen (~> 3.0.5)
+  mailgun-ruby
   mysql2
   oj
   oj_mimic_json
