@@ -1,5 +1,4 @@
 class Search
-
   OBJECTS = %w[All Questions Answers Comments Users].freeze
 
   def self.find(query, object)

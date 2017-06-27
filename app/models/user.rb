@@ -25,17 +25,21 @@ class User < ApplicationRecord
     if user
       user.create_authorization(auth)
     else
-      password = Devise.friendly_token[0, 20]
-      user = User.new(email: email, password: password, password_confirmation: password)
-      user.skip_confirmation! if auth.provider == 'facebook'
-      user.save
+      user = create_user(email, auth)
       user.create_authorization(auth) if user.persisted?
     end
     user
   end
 
-  def create_authorization(auth)
-    self.authorizations.create(provider: auth.provider, uid: auth.uid)
+  def self.create_user(email, auth)
+    password = Devise.friendly_token[0, 20]
+    user = User.new(email: email, password: password, password_confirmation: password)
+    user.skip_confirmation! if auth.provider == 'facebook'
+    user.save
+    user
   end
 
+  def create_authorization(auth)
+    authorizations.create(provider: auth.provider, uid: auth.uid)
+  end
 end

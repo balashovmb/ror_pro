@@ -42,8 +42,7 @@ module Voted
   end
 
   def check_users_vote
-    if @votable.exist_vote?(current_user)
-      render json: { data: 'You can vote only once', dom_id: dom_id }, status: :unprocessable_entity
-    end
+    render json: { data: 'You can vote only once', dom_id: dom_id }, status: :unprocessable_entity if
+      @votable.exist_vote?(current_user)
   end
 end

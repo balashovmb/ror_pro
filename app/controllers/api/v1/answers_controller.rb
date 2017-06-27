@@ -3,7 +3,6 @@ class Api::V1::AnswersController < Api::V1::BaseController
   before_action :set_question, except: :show
 
   def index
-
     respond_with @answers = @question.answers
   end
 

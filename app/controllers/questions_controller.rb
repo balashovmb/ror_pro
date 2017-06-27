@@ -63,6 +63,7 @@ class QuestionsController < ApplicationController
   end
 
   def check_subscription
-    @subscription = Subscription.find_or_initialize_by(user: current_user, question: @question) if can?(:create, Subscription)
+    @subscription = Subscription.find_or_initialize_by(user: current_user, question: @question) if
+      can?(:create, Subscription)
   end
 end
