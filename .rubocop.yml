@@ -39,4 +39,16 @@ Style/PercentLiteralDelimiters:
   Enabled: false  
 
 Style/UnneededPercentQ:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false  
+
+RSpec/ExampleLength:
+  Enabled: false
+  
+RSpec/NestedGroups:
+  Enabled: false

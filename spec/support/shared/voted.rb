@@ -9,7 +9,6 @@ RSpec.shared_examples 'voted' do
 
   describe 'POST #vote_up' do
     subject(:vote_up) { post :vote_up, params: { id: votable.id }, format: :json }
-    sign_in_user
 
     it "assigns the answer/question to @votable" do
       vote_up
@@ -37,8 +36,6 @@ RSpec.shared_examples 'voted' do
     end
   end
   describe 'POST #vote_down' do
-    sign_in_user
-
     subject(:vote_down) { post :vote_down, params: { id: votable.id }, format: :json }
     context "Vote down for another user's question/answer" do
       it "assigns the answer/question to @votable" do
@@ -64,8 +61,6 @@ RSpec.shared_examples 'voted' do
       post :vote_up, params: { id: votable.id }, format: :json
       delete :cancel_vote, params: { id: votable.id }, format: :json
     end
-
-    sign_in_user
 
     it "deletes vote" do
       vote_and_cancel

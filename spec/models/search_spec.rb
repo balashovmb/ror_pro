@@ -5,7 +5,7 @@ RSpec.describe Search, type: :model do
     %w(Questions Answers Comments Users).each do |obj|
       it "Array of #{obj}" do
         expect(ThinkingSphinx).to receive(:search).with('Request', classes: [obj.singularize.classify.constantize])
-        Search.find('Request', "#{obj}")
+        Search.find('Request', obj.to_s)
       end
     end
 

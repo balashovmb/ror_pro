@@ -11,7 +11,7 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
         get :facebook
       end
 
-      it 'should redirect_to new user registration' do
+      it 'redirect_to new user registration' do
         expect(response).to redirect_to new_user_registration_path
       end
     end
@@ -19,7 +19,7 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
     context 'new user' do
       before do
         request.env['omniauth.auth'] = OmniAuth::AuthHash.new(provider: 'facebook', uid: '12345',
-          info: { email: 'test@mail.com' })
+                                                              info: { email: 'test@mail.com' })
         get :facebook
       end
 
@@ -33,7 +33,7 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
         get :facebook
       end
 
-      it 'should redirect_to new user registration' do
+      it 'redirect_to new user registration' do
         expect(response).to redirect_to new_user_registration_path
       end
     end
@@ -57,7 +57,8 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
 
     context 'new user' do
       before do
-        request.env['omniauth.auth'] = OmniAuth::AuthHash.new(provider: 'twitter', uid: '12345', info: { email: 'twitter@mail.com' })
+        request.env['omniauth.auth'] = OmniAuth::AuthHash.new(provider: 'twitter', uid: '12345',
+                                                              info: { email: 'twitter@mail.com' })
         get :twitter
       end
 

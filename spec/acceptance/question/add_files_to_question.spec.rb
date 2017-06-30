@@ -17,7 +17,7 @@ feature 'Add files to question', %q{
 
   scenario 'User adds file when asks question', js: true do
     click_on 'Add file'
-    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+    attach_file 'File', Rails.root.join('spec', 'spec_helper.rb')
 
     click_on 'Create'
 
@@ -27,11 +27,11 @@ feature 'Add files to question', %q{
   scenario 'User adds several files when asks question', js: true do
     click_on 'Add file'
 
-    attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+    attach_file 'File', Rails.root.join('spec', 'spec_helper.rb')
 
     click_on 'Add file'
     within all('.nested-fields').last do
-      attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
+      attach_file 'File', Rails.root.join('spec', 'rails_helper.rb')
     end
 
     click_on 'Create'

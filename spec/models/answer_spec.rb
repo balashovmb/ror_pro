@@ -31,12 +31,12 @@ RSpec.describe Answer, type: :model do
     let(:question) { create(:question, user: user) }
     let(:answer) { build :answer, question: question }
 
-    it 'should push notification job to queue after answer create' do
+    it 'push notification job to queue after answer create' do
       expect(AnswersNotificationJob).to receive(:perform_later)
       answer.save!
     end
 
-    it 'should not create job after update' do
+    it 'not create job after update' do
       answer.save!
       expect(AnswersNotificationJob).not_to receive(:perform_later)
       answer.update!(body: 'updated body')

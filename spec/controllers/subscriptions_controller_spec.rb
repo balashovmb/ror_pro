@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe SubscriptionsController, type: :controller do
   let(:question) { create(:question) }
-  let(:another_user) { create (:user) }
+  let(:another_user) { create(:user) }
   sign_in_user
 
   describe 'POST #create' do
     context 'if user was not subscribed before' do
       it 'creates new subscription in db' do
         expect { post :create, params: { question_id: question }, format: :js }
-            .to change(@user.subscriptions.where(question: question), :count).by(1)
+          .to change(@user.subscriptions.where(question: question), :count).by(1)
       end
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe SubscriptionsController, type: :controller do
 
     it 'does not create new record in db' do
       expect { post :create, params: { question_id: question }, format: :js }
-          .not_to change(Subscription, :count)
+        .not_to change(Subscription, :count)
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe SubscriptionsController, type: :controller do
 
       it 'deletes subscription from db' do
         expect { delete :destroy, params: { id: subscription.id }, format: :js }
-            .to change(Subscription, :count).by(-1)
+          .to change(Subscription, :count).by(-1)
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe SubscriptionsController, type: :controller do
 
       it 'does not delete subscription from db' do
         expect { delete :destroy, params: { id: subscription.id }, format: :js }
-            .not_to change(Subscription, :count)
+          .not_to change(Subscription, :count)
       end
 
       it 'responds with status 403 (forbidden)' do

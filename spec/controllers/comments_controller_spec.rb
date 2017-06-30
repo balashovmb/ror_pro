@@ -7,8 +7,10 @@ RSpec.describe CommentsController, type: :controller do
     let!(:answer) { create(:answer) }
 
     context 'with valid attributes' do
-      let(:questions_comment) { post :create, params: { commentable: 'question', question_id: question.id, comment: { body: "comment" } }, format: :js }
-      let(:answers_comment) { post :create, params: { commentable: 'answer', answer_id: answer.id, comment: { body: "comment" } }, format: :js }
+      let(:questions_comment) { post :create, params: questions_comment_param, format: :js }
+      let(:answers_comment) { post :create, params: answers_comment_param, format: :js }
+      let(:questions_comment_param) { { commentable: 'question', question_id: question.id, comment: { body: "comment" } } }
+      let(:answers_comment_param) { { commentable: 'answer', answer_id: answer.id, comment: { body: "comment" } } }
 
       it "saves question's comment to database" do
         expect { questions_comment }.to change(question.comments.where(user: @user), :count).by(1)
@@ -18,8 +20,10 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
     context 'with invalid attributes' do
-      let(:questions_invalid_comment) { post :create, params: { commentable: 'question', question_id: question.id, comment: { body: "" } }, format: :js }
-      let(:answers_invalid_comment) { post :create, params: { commentable: 'answer', answer_id: answer.id, comment: { body: "" } }, format: :js }
+      let(:questions_invalid_comment) { post :create, params: answers_invalid_comment_param, format: :js }
+      let(:answers_invalid_comment) { post :create, params: questions_invalid_comment_param, format: :js }
+      let(:answers_invalid_comment_param) { { commentable: 'question', question_id: question.id, comment: { body: "" } } }
+      let(:questions_invalid_comment_param) { { commentable: 'answer', answer_id: answer.id, comment: { body: "" } } }
 
       it "don't saves question's comment to database" do
         expect { questions_invalid_comment }.not_to change(question.comments.where(user: @user), :count)

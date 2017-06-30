@@ -17,7 +17,8 @@ describe 'Answers API' do
         question.answers << answers
         get "/api/v1/questions/#{question.id}/answers", params: { access_token: access_token.token, format: :json }
       end
-          it 'responds with status 200' do
+
+      it 'responds with status 200' do
         expect(response.status).to eq 200
       end
 
