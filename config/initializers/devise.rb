@@ -12,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'ror_pro_notify@balashov.pw'
+  config.mailer_sender = 'qa_time_notify@balashov.pw'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

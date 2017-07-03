@@ -9,7 +9,7 @@ p.votings
           img src="/pics/vote_up.png"
       p
         a.voting href="/answers/#{@votable.id}/cancel_vote" data-remote="true" data-method="delete" data-type="json" id="cancel_vote"
-          img src="/pics/dot.png"
+          img src="/pics/cancel_vote.png"
       p
         a.voting href="/answers/#{@votable.id}/vote_down" data-remote="true" data-method="post" data-type="json" id="vote_down"
           img src="/pics/vote_down.png"

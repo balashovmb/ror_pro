@@ -1,15 +1,20 @@
+-content_for :title 
+  =@question.title
 -cache [can?(:vote, @question), user_signed_in?, can?(:destroy, @question),
   can?(:edit, @question), can?(:create, Subscription) && can?(:destroy, Subscription), @question, @subscription] do
   .question data-id="#{@question.id}"
-    = render 'questions/question_show', question: @question
-    = render 'votes/votes', votable: @question
-    .div id="Question-#{@question.id}-comments" class = 'question-comments'
-      = render @question.comments
-    .question-new-comment
-      p= button_to 'Add comment', new_question_comment_path(@question), remote: true, method: :get, class:"btn btn-info"
-    .subscription  
-      - if can?(:create, Subscription)
-        p= render 'questions/subscription'                
+    .row
+      .col-lg-1
+        = render 'votes/votes', votable: @question
+      .col-lg-6
+        = render 'questions/question_show', question: @question
+        .div id="Question-#{@question.id}-comments" class = 'question-comments'
+          = render @question.comments
+        .question-new-comment
+          p= button_to 'Add comment', new_question_comment_path(@question), remote: true, method: :get, class:"btn btn-info"
+        .subscription  
+          - if can?(:create, Subscription)
+            p= render 'questions/subscription'                
   hr
   .answers
     - if @question.answers.empty?

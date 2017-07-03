@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'qa_time_notify@balashov.pw'
   layout 'mailer'
 end
