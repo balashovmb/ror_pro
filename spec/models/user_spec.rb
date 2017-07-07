@@ -87,4 +87,20 @@ RSpec.describe User do
       end
     end
   end
+
+  describe '#subscribe_digest' do
+    let(:user) { create(:user, digest_subscription: false) }
+    it 'subscribes unsubscribed user' do
+      user.subscribe_digest
+      expect(user.digest_subscription).to eq true
+    end
+  end
+
+  describe '#unsubscribe_digest' do
+    let(:user) { create(:user) }
+    it 'unsubscribes subscribed user' do
+      user.unsubscribe_digest
+      expect(user.digest_subscription).to eq false
+    end
+  end
 end

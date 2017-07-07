@@ -42,4 +42,12 @@ class User < ApplicationRecord
   def create_authorization(auth)
     authorizations.create(provider: auth.provider, uid: auth.uid)
   end
+
+  def subscribe_digest
+    update(digest_subscription: true)
+  end
+
+  def unsubscribe_digest
+    update(digest_subscription: false)
+  end
 end

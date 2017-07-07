@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post 'set_email', to: 'omniauth_callbacks#set_email'
+    post 'subscribe_digest', to: 'users#subscribe_digest'
+    delete 'unsubscribe_digest', to: 'users#unsubscribe_digest'
   end
 
   resources :questions, concerns: [:votable] do

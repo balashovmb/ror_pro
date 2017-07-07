@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     alias_action :vote_up, :vote_down, :cancel_vote, to: :vote
+    alias_action :subscribe_digest, :unsubscribe_digest, to: :digest_subscription
 
     @user = user
 
@@ -23,6 +24,7 @@ class Ability
     can :destroy, Attachment, attachable: { user_id: @user.id }
     can :set_best, Answer, question: { user_id: @user.id }
     can :vote, [Question, Answer] { |votable| !@user.author?(votable) }
+    can :digest_subscription, User, id: @user.id  
   end
 
   def api_abilities

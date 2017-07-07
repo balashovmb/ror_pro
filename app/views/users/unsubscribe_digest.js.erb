@@ -1,0 +1,3 @@
+$('.subscribtion-digest-status').html('Unsubscribed')
+$('.subscribtion-digest-button').remove()
+$('.subscribtion-digest-status').append('<p><%= button_to "Subscribe", subscribe_digest_path, method: :post, remote: true, class: "subscribtion-digest-button"%></p>');
