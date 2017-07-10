@@ -6,6 +6,6 @@
   $('.edit-answer-errors').html('')
   $('form#edit-answer-<%= @answer.id %>').hide();
   $('#edited-answer-<%= @answer.id %>').show();
+  $('#answer-<%= @answer.id %>').html('<%= j render 'answers/answer', answer: @answer  %> '); 
   $('.edit-answer-link').show();
-  $('#edited-answer-<%= @answer.id %>').html('<%= j @answer.body %>'); 
 <% end %>

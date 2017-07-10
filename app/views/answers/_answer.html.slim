@@ -1,11 +1,11 @@
 -cache [answer, can?(:set_best, answer), can?(:edit, answer), can?(:delete, answer), user_signed_in?, answer.best] do
   - if answer.persisted?
-    .row
-      .answer id = "answer-#{answer.id}"
+    .answer id = "answer-#{answer.id}"
+      .row
         .col-lg-1
             = render 'answers/best', answer: answer
             = render 'votes/votes', votable: answer
-        .col-lg-6
+        .col-lg-8
             p id="edited-answer-#{answer.id}"
               = answer.body        
               = render 'attachments/attachments', attachable: answer 
@@ -24,10 +24,13 @@
                       .add-file
                         = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
                       = f.submit 'Save', class: "btn btn-info" 
-              div id="Answer-#{answer.id}-comments" class="answer-comments"
-                =render answer.comments
-              .answer-new-comment  
-                - if can?(:create, Comment)  
-                  = button_to 'Add comment', new_answer_comment_path(answer), remote: true, method: :get, class:"btn btn-info btn-sm"  
+      .row
+        .col-lg-1
+        .col-lg-8
+          div id="Answer-#{answer.id}-comments" class="answer-comments"
+            =render answer.comments
+          .answer-new-comment  
+            - if can?(:create, Comment)  
+              = button_to 'Add comment', new_answer_comment_path(answer), remote: true, method: :get, class:"btn btn-info btn-sm"  
         br
         hr     

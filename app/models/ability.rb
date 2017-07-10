@@ -24,7 +24,7 @@ class Ability
     can :destroy, Attachment, attachable: { user_id: @user.id }
     can :set_best, Answer, question: { user_id: @user.id }
     can :vote, [Question, Answer] { |votable| !@user.author?(votable) }
-    can :digest_subscription, User, id: @user.id  
+    can :digest_subscription, User, id: @user.id
   end
 
   def api_abilities
