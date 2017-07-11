@@ -4,6 +4,6 @@
       p
         .col-md-offset-1
           i=@comment.body
-          p   
-            - if gon.current_user_id == @comment.user_id
+          - if gon.current_user_id == @comment.user_id
+            p
               a href="/comments/#{@comment.id}" data-remote="true" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger btn-xs" Delete comment 
