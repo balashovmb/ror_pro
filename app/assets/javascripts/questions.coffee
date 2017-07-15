@@ -20,5 +20,11 @@ $ ->
     ,
 
     received: (data) ->
-      questionsList.append data
+      console.log data.question_id
+      if data.type == "delete_question"
+        targetDiv = $('#question_' + data.question_id)
+        console.log targetDiv
+        targetDiv.remove();
+      else
+        questionsList.append data
   })

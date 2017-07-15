@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
   before_action :check_subscription, only: :show
 
   after_action :publish_question, only: [:create]
+  after_action :delete_question_broadcast, only: [:destroy]
 
   respond_to :js, :json
 
@@ -52,6 +53,14 @@ class QuestionsController < ApplicationController
         locals: { question: @question }
       )
     )
+  end
+
+  def delete_question_broadcast
+    data = {
+      type: :delete_question,
+      question_id: @question.id      
+    }
+    ActionCable.server.broadcast('questions', data)
   end
 
   def question_params
