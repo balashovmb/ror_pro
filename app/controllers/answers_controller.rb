@@ -6,6 +6,7 @@ class AnswersController < ApplicationController
   before_action :set_answer,         only: [:destroy, :update, :set_best]
 
   after_action :publish_answer, only: [:create]
+  after_action :delete_answer_broadcast, only: [:destroy]
 
   respond_to :js, :json
 
@@ -38,6 +39,16 @@ class AnswersController < ApplicationController
       question_author_id: @question.user_id,
       rating: @answer.rating,
       attachments: @answer.attachments.as_json(methods: :with_meta)
+    }
+    ActionCable.server.broadcast("question_answers_#{@question.id}", data)
+  end
+
+  def delete_answer_broadcast
+    @question = @answer.question
+    data = {
+      action: :delete,
+      type: :answer,
+      answer_id: @answer.id      
     }
     ActionCable.server.broadcast("question_answers_#{@question.id}", data)
   end

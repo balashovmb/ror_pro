@@ -57,7 +57,7 @@ class QuestionsController < ApplicationController
 
   def delete_question_broadcast
     data = {
-      type: :delete_question,
+      action: :delete,
       question_id: @question.id      
     }
     ActionCable.server.broadcast('questions', data)

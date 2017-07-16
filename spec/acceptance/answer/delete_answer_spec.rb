@@ -34,4 +34,22 @@ feature 'Delete answer', %q{
       expect(page).not_to have_content('Delete answer')
     end
   end
+  context "mulitple sessions" do
+    scenario "answer disappears on another user's page", js: true do
+      Capybara.using_session('guest') do
+        visit question_path(answer.question)
+        expect(page).to have_content(answer.body)
+      end
+
+      Capybara.using_session('user') do
+        sign_in(answer.user)
+        visit question_path(answer.question)
+        click_on 'Delete answer'
+      end
+
+      Capybara.using_session('guest') do
+        expect(page).not_to have_content(answer.body)
+      end
+    end
+  end
 end
