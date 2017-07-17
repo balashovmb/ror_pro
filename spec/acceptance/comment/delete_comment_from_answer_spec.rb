@@ -22,4 +22,22 @@ feature 'Delete comment from answer', %q{
     visit question_path(answer.question)
     expect(page).not_to have_link 'Delete comment'
   end
+  context "mulitple sessions" do
+    scenario "comment disappears on another user's page", js: true do
+      Capybara.using_session('guest') do
+        visit question_path(answer.question)
+        expect(page).to have_content(comment.body)
+      end
+
+      Capybara.using_session('user') do
+        sign_in(answer.user)
+        visit question_path(comment.commentable.question)
+        click_on 'Delete comment'
+      end
+
+      Capybara.using_session('guest') do
+        expect(page).not_to have_content(comment.body)
+      end
+    end
+  end
 end

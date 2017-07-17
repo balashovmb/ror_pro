@@ -13,10 +13,14 @@ App.answers_channel = App.cable.subscriptions.create "AnswersChannel",
       else
         $('.answers').append(JST['templates/answer'](data))
     if data.type == "comment"
-      targetDiv = '#' + data.comment.commentable_type + '-' + data.comment.commentable_id + '-comments'
-      $('form#new_comment').remove()
-      $('#errors-field').html('')
-      $(targetDiv).append(JST["templates/comment"]({comment: data.comment}))
+      if data.action == "delete"
+        targetDiv = $('#comment_' + data.comment_id)
+        targetDiv.remove();        
+      else
+        targetDiv = '#' + data.comment.commentable_type + '-' + data.comment.commentable_id + '-comments'
+        $('form#new_comment').remove()
+        $('#errors-field').html('')
+        $(targetDiv).append(JST["templates/comment"]({comment: data.comment}))
     return
 
   followCurrenQuestion: ->

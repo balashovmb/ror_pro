@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: :destroy
 
   after_action :publish_comment, only: :create
+  after_action :delete_comment_broadcast, only: :destroy
 
   respond_to :js
 
@@ -25,11 +26,11 @@ class CommentsController < ApplicationController
 
   private
 
-  def question_id
+  def question_id(commentable = @commentable)
     if @comment.commentable_type == 'Question'
-      @commentable.id
+      commentable.id
     elsif @comment.commentable_type == 'Answer'
-      @commentable.question.id
+      commentable.question.id
     end
   end
 
@@ -59,6 +60,19 @@ class CommentsController < ApplicationController
       type: :comment,
       comment: @comment
     }
-    ActionCable.server.broadcast("question_comments_#{question_id}", data)
+    broadcast_data(data)
+  end
+
+  def delete_comment_broadcast
+    data = {
+      action: :delete,
+      type: :comment,
+      comment_id: @comment.id      
+    }
+    broadcast_data(data)
+  end
+
+  def broadcast_data(data)
+    ActionCable.server.broadcast("question_comments_#{question_id(@comment.commentable)}", data) 
   end
 end
