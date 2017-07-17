@@ -40,7 +40,7 @@ class AnswersController < ApplicationController
       rating: @answer.rating,
       attachments: @answer.attachments.as_json(methods: :with_meta)
     }
-    ActionCable.server.broadcast("question_answers_#{@question.id}", data)
+    broadcast_data(data)
   end
 
   def delete_answer_broadcast
@@ -50,7 +50,11 @@ class AnswersController < ApplicationController
       type: :answer,
       answer_id: @answer.id      
     }
-    ActionCable.server.broadcast("question_answers_#{@question.id}", data)
+    broadcast_data(data)
+  end
+
+  def broadcast_data(data)
+    ActionCable.server.broadcast("question_answers_#{@question.id}", data)  
   end
 
   def set_question

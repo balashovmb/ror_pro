@@ -46,13 +46,11 @@ class QuestionsController < ApplicationController
 
   def publish_question
     return if @question.errors.any?
-    ActionCable.server.broadcast(
-      'questions',
-      ApplicationController.render(
+    data = ApplicationController.render(
         partial: 'questions/question',
         locals: { question: @question }
       )
-    )
+    broadcast_data(data)
   end
 
   def delete_question_broadcast
@@ -60,7 +58,11 @@ class QuestionsController < ApplicationController
       action: :delete,
       question_id: @question.id      
     }
-    ActionCable.server.broadcast('questions', data)
+    broadcast_data(data)
+  end
+
+  def broadcast_data(data)
+    ActionCable.server.broadcast('questions', data)    
   end
 
   def question_params
