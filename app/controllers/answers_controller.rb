@@ -48,13 +48,13 @@ class AnswersController < ApplicationController
     data = {
       action: :delete,
       type: :answer,
-      answer_id: @answer.id      
+      answer_id: @answer.id
     }
     broadcast_data(data)
   end
 
   def broadcast_data(data)
-    ActionCable.server.broadcast("question_answers_#{@question.id}", data)  
+    ActionCable.server.broadcast("question_answers_#{@question.id}", data)
   end
 
   def set_question

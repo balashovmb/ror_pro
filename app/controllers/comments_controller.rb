@@ -67,12 +67,12 @@ class CommentsController < ApplicationController
     data = {
       action: :delete,
       type: :comment,
-      comment_id: @comment.id      
+      comment_id: @comment.id
     }
     broadcast_data(data)
   end
 
   def broadcast_data(data)
-    ActionCable.server.broadcast("question_comments_#{question_id(@comment.commentable)}", data) 
+    ActionCable.server.broadcast("question_comments_#{question_id(@comment.commentable)}", data)
   end
 end

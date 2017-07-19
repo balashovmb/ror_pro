@@ -113,7 +113,7 @@ describe 'Questions API' do
       context 'invalid params' do
         it 'returns status 422' do
           post "/api/v1/questions", params: { question: { body: '1234512345', title: '' }, format: :json,
-                                             access_token: access_token.token }
+                                              access_token: access_token.token }
           expect(response.status).to eq 422
         end
       end
