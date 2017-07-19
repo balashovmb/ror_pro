@@ -6,17 +6,7 @@ feature 'Sign in with twitter', '
 ' do
   scenario 'User sign in with valid credentials' do
     visit new_user_session_path
-    mock_auth_hash('twitter', nil)
-    click_on 'Sign in'
-    click_on 'Sign in with Twitter'
-    fill_in 'email', with: 'test@test.com'
-    click_on 'Submit'
-
-    open_email 'test@test.com'
-    current_email.click_link 'Confirm my account'
-    expect(page).to have_content 'Your email address has been successfully confirmed'
-
-    visit new_user_session_path
+    mock_auth_hash('twitter', 'test@test.com')
     click_on 'Sign in'
     click_on 'Sign in with Twitter'
 

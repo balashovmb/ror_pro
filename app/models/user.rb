@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :twitter]
+         :omniauthable, omniauth_providers: [:facebook, :twitter, :vkontakte]
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
   has_many :votes, dependent: :destroy
@@ -34,7 +34,7 @@ class User < ApplicationRecord
   def self.create_user(email, auth)
     password = Devise.friendly_token[0, 20]
     user = User.new(email: email, password: password, password_confirmation: password)
-    user.skip_confirmation! if auth.provider == 'facebook'
+    user.skip_confirmation! if auth.provider
     user.save
     user
   end

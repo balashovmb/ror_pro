@@ -5,6 +5,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def twitter; end
 
+  def vkontakte; end
+
   private
 
   def common_auth
