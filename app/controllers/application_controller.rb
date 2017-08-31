@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :gon_user, unless: :devise_controller?
+  
+  before_action :it_mobile?, unless: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -23,4 +25,9 @@ class ApplicationController < ActionController::Base
   def gon_user
     gon.current_user_id = current_user.id if current_user
   end
+
+  def it_mobile?
+    @mobile = Mobile::Check.call(request.user_agent)
+  end
+
 end
