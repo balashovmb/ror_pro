@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def it_mobile?
-    @mobile = Mobile::Check.call(request.user_agent)
+    @mobile = Mobile::Detect.call(request.user_agent)
   end
 
 end
