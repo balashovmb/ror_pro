@@ -62,6 +62,7 @@ gem 'unicorn'
 gem 'redis-rails'
 gem 'twitter-bootstrap-rails'
 gem 'mailgun-ruby'
+gem 'ahoy_matey'
 
 group :test do
   gem 'shoulda-matchers'
