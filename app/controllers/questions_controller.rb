@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
 
   def new
     respond_with(@question = Question.new)
+    ahoy.track "Attemt to create question"
   end
 
   def create
