@@ -1,0 +1,34 @@
+language: ruby
+rvm:
+  - 2.3.3
+
+notifications:
+  email: false
+
+sudo: required
+dist: trusty
+addons:
+  postgresql: "9.5"
+  apt:
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - libqt5webkit5-dev
+      - qtdeclarative5-dev  
+
+bundler_args: --without development --deployment --jobs=3 --retry=3
+
+cache: bundler
+
+before_script:
+  - sudo service postgresql stop
+  - sudo service postgresql start
+  - sudo apt-get install sphinxsearch
+  - psql -c 'create database ror_pro_test;' -U postgres
+  - cp config/database.travis.yml config/database.yml
+  - cp config/secrets.travis.yml config/secrets.yml
+  - bundle exec rake db:setup
+
+gemfile:
+- Gemfile
+script: xvfb-run bundle exec rake
