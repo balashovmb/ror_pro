@@ -1,24 +1,7 @@
-# README
+Q&A Time
+========
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Thinknetica сode school training project
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[![Build Status](https://travis-ci.org/balashovmb/ror_pro.svg?branch=guard-travis-17-12-17)](https://travis-ci.org/balashovmb/ror_pro)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ecdf57e22b73a9631870/maintainability)](https://codeclimate.com/github/balashovmb/ror_pro/maintainability)

@@ -3,7 +3,6 @@ require 'capybara/email/rspec'
 
 OmniAuth.config.test_mode = true
 
-Capybara.javascript_driver      = :webkit
 #Capybara.default_max_wait_time  = 5
 Capybara.ignore_hidden_elements = true
 

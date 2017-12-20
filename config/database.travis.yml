@@ -1,0 +1,3 @@
+test:
+  adapter: postgresql
+  database: ror_pro_test

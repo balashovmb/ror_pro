@@ -96,6 +96,11 @@ group :development do
   gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'capistrano3-unicorn', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-rails', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-spring', require: false
+  gem 'guard-livereload', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
