@@ -6,34 +6,33 @@ html lang="en"
     title= content_for?(:title) ? yield(:title) : "Q&A time"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
-    = Gon::Base.render_data  
+    = Gon::Base.render_data
     = favicon_link_tag '/pics/favicon.ico', :rel => 'shortcut icon'
   body
     .navbar.navbar-default.navbar-static-top
       .container
-        a.navbar-brand href="#"Q&A time 
+        a.navbar-brand href="#"Q&A time
         button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
           span.icon-bar
-          span.icon-bar 
+          span.icon-bar
           span.icon-bar
         .col-lg-2
           .navbar-text
-            strong= link_to 'All questions', questions_path           
+            strong= link_to 'All questions', questions_path
         .navbar-collapse.collapse.navbar-responsive-collapse
           - if user_signed_in?
             .row
               .div class= "col-lg-offset-11 col-xs-offset-4 col-sm-offset-5 col-md-offset-5"
                 =current_user.email
                 p= link_to 'Sign out', destroy_user_session_path, method: :delete
-                p= link_to 'My account', edit_user_registration_path 
+                p= link_to 'My account', edit_user_registration_path
           - else
             .div class= "col-lg-offset-11 col-xs-offset-5 col-sm-offset-5 col-md-offset-5"
               p= link_to 'Sign in', new_user_session_path
         .row
           .div class= "col-lg-offset-8 col-xs-offset-0 col-sm-offset-5 col-md-offset-5"
-            = render 'common/search_form'                 
+            = render 'common/search_form'
     .container
       .row
         .col-lg-12
@@ -42,3 +41,4 @@ html lang="en"
       footer
         br
         p &copy; Mikhail Balashov 2017
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
