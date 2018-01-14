@@ -36,4 +36,19 @@ namespace :deploy do
   end
 
   after :publishing, :restart
+  after 'deploy:assets:precompile', 'css:recompile'
+end
+
+namespace :css do
+  desc 'recompile critical css'
+  task :recompile do
+    on roles(:app) do
+      within current_path do
+        with rails_env: fetch(:rails_env) do
+          execute :bundle, "exec rake critical_path_css:clear_all"
+          execute :bundle, "exec rake critical_path_css:generate"
+        end
+      end
+    end
+  end
 end

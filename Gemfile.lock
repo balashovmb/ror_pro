@@ -117,6 +117,7 @@ GEM
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crass (1.0.3)
+    critical-path-css-rails (2.3.0)
     database_cleaner (1.6.1)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -475,6 +476,7 @@ DEPENDENCIES
   carrierwave
   cocoon
   coffee-rails (~> 4.2)
+  critical-path-css-rails (~> 2.3.0)
   database_cleaner
   devise
   doorkeeper

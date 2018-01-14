@@ -62,6 +62,7 @@ gem 'unicorn'
 gem 'redis-rails'
 gem 'twitter-bootstrap-rails'
 gem 'mailgun-ruby'
+gem 'critical-path-css-rails', '~> 2.3.0'
 
 group :test do
   gem 'shoulda-matchers'
@@ -70,7 +71,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara-webkit'
   gem 'capybara-email'
-  gem 'json_spec'    
+  gem 'json_spec'
 end
 
 group :development, :test do
@@ -78,7 +79,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'rails-controller-testing'  
+  gem 'rails-controller-testing'
   gem 'letter_opener'
 end
 

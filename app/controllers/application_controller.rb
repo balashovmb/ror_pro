@@ -7,8 +7,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :gon_user, unless: :devise_controller?
-  
+
   before_action :it_mobile?, unless: :devise_controller?
+
+  before_action :fetch_critical_css, only: [:show, :index]
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -19,6 +21,12 @@ class ApplicationController < ActionController::Base
   end
 
   check_authorization unless: :devise_controller?
+
+  def fetch_critical_css
+    @critical_css = (request.get?) ? CriticalPathCss.fetch(request.path) : ''
+    GenerateCriticalCssJob.perform_later(request.path) if @critical_css.empty?
+    return @critical_css
+  end
 
   private
 

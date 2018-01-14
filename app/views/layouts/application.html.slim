@@ -5,7 +5,14 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     title= content_for?(:title) ? yield(:title) : "Q&A time"
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    - if critical_css.present?
+      css:
+        #{critical_css}
+      = tag :link, as: 'style', href: stylesheet_path('application'), onload: raw("this.rel='stylesheet'"), rel: 'preload'
+      noscript
+        = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    - else
+      = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = action_cable_meta_tag
     = Gon::Base.render_data
     = favicon_link_tag '/pics/favicon.ico', :rel => 'shortcut icon'
