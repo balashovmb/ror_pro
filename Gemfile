@@ -60,7 +60,6 @@ gem 'thinking-sphinx'
 gem 'dotenv-rails'
 gem 'unicorn'
 gem 'redis-rails'
-gem 'twitter-bootstrap-rails'
 gem 'mailgun-ruby'
 
 group :test do
@@ -70,7 +69,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara-webkit'
   gem 'capybara-email'
-  gem 'json_spec'    
+  gem 'json_spec'
 end
 
 group :development, :test do
@@ -78,7 +77,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'rails-controller-testing'  
+  gem 'rails-controller-testing'
   gem 'letter_opener'
 end
 

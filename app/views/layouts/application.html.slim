@@ -35,8 +35,13 @@ html lang="en"
             = render 'common/search_form'
     .container
       .row
-        .col-lg-12
-          = bootstrap_flash
+        .col-12
+          - if notice
+            .alert.alert-success.mt-4
+              = notice
+          - if alert
+            .alert.alert-danger.mt-4
+              = alert
           = yield
       footer
         br

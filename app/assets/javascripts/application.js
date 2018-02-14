@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap/dist/js/bootstrap
 //= require jquery.remotipart
 //= require turbolinks
 //= require action_cable
