@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.8.2"
+lock "3.10.1"
 
 set :application, "ror_pro"
 set :repo_url, "git@github.com:balashovmb/ror_pro.git"
