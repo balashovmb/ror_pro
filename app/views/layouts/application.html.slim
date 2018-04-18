@@ -12,7 +12,7 @@ html lang="en"
   body
     .navbar.navbar-default.navbar-static-top
       .container
-        a.navbar-brand href="#"Q&A time
+        a.navbar-brand href="#{root_url}"Q&A time
         button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse"
           span.icon-bar
           span.icon-bar
@@ -21,17 +21,16 @@ html lang="en"
           .navbar-text
             strong= link_to 'All questions', questions_path
         .navbar-collapse.collapse.navbar-responsive-collapse
-          - if user_signed_in?
-            .row
-              .div class= "col-lg-offset-11 col-xs-offset-4 col-sm-offset-5 col-md-offset-5"
+          .row
+            .col-md-offset-11.col-sm-offset-10
+              - if user_signed_in?
                 =current_user.email
                 p= link_to 'Sign out', destroy_user_session_path, method: :delete
                 p= link_to 'My account', edit_user_registration_path
-          - else
-            .div class= "col-lg-offset-11 col-xs-offset-5 col-sm-offset-5 col-md-offset-5"
-              p= link_to 'Sign in', new_user_session_path
+              - else
+                p= link_to 'Sign in', new_user_session_path
         .row
-          .div class= "col-lg-offset-8 col-xs-offset-0 col-sm-offset-5 col-md-offset-5"
+          .col-md-offset-7.col-sm-offset-6
             = render 'common/search_form'
     .container
       .row
