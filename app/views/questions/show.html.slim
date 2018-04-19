@@ -4,9 +4,9 @@
   can?(:create, Subscription) && can?(:destroy, Subscription), @question, @subscription] do
   .question data-id="#{@question.id}"
     .row
-      .col-lg-1
+      .col-md-1.col-sm-2.col-xs-3
         = render 'votes/votes', votable: @question
-      .col-lg-6
+      .col-sm-6
         = render 'questions/question_show', question: @question
         .div id="Question-#{@question.id}-comments" class = 'question-comments'
           = render @question.comments
@@ -22,7 +22,7 @@
       b No answers
     - else
       = render @question.answers
-  .new_answer
+  .new_answer.container
     - if can?(:create, Answer)
         .row
           .col-lg-6
@@ -34,8 +34,3 @@
               p= f.submit 'Create answer', class: "btn btn-primary"
     - else
       i You must sign in first for create answer
-br
-- if @mobile
-  |Просмотр с мобильного 
-
-= link_to 'All questions', questions_path
