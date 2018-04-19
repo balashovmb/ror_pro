@@ -23,19 +23,19 @@ feature 'Best answer', %q{
 
     scenario 'marks answer as best', js: true do
       within "#answer-#{answer3.id}" do
-        expect(page).to have_content 'BEST ANSWER!'
+        expect(page).to have_content 'BEST'
       end
     end
 
     scenario 'mark on previous best answer disappears', js: true do
       within "#answer-#{answer2.id}" do
-        expect(page).not_to have_content 'BEST ANSWER!'
+        expect(page).not_to have_content 'BEST'
       end
     end
 
     scenario 'best answer shows first in answer list', js: true do
       wait_for_ajax
-      expect(first('.answer')).to have_content 'BEST ANSWER!'
+      expect(first('.answer')).to have_content 'BEST'
     end
   end
 
@@ -71,7 +71,7 @@ feature 'Best answer', %q{
       Capybara.using_session('user2') do
         within '#answer-4' do
           click_link 'Set best'
-          expect(page).to have_content 'BEST ANSWER!'
+          expect(page).to have_content 'BEST'
         end
       end
     end
