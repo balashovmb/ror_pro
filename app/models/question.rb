@@ -11,6 +11,8 @@ class Question < ApplicationRecord
 
   after_create :subscribe_author
 
+  scope :ordered_by_time, -> { order(created_at: :desc) }
+
   private
 
   def subscribe_author

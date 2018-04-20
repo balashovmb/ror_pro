@@ -7,4 +7,4 @@ br
   - if @questions.empty?
     b Questions list is empty
   - else
-    =render @questions
+    =render @questions.ordered_by_time
