@@ -1,22 +1,22 @@
 .question_title  
-  b= @question.title
+  b = @question.title
 br
 .question_body
-  p= @question.body
+  p = @question.body
 p Attachments:
 ul
   = render 'attachments/attachments', attachable: @question
 - if can?(:edit, @question)
-  p= button_to 'Delete question', @question, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you shure?' }
-  p= button_to 'Edit question', '#', class: 'edit-question-link btn btn-warning', data: { question_id: @question.id} 
+  p = button_to 'Delete question', @question, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you shure?' }
+  p = button_to 'Edit question', '#', class: 'edit-question-link btn btn-warning', data: { question_id: @question.id}
   p
   .row 
     = form_for @question, remote: true do |f|  
       .col-lg-10 
         = f.label :title
         .edit-question-errors   
-        p= f.text_field :title, class:"form-control" 
-        p= f.label :body
-        p= f.text_area :body, class:"form-control"
+        p = f.text_field :title, class:"form-control"
+        p = f.label :body
+        p = f.text_area :body, class:"form-control"
         = f.submit 'Save', class: "btn btn-primary"
    

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'acceptance/acceptance_helper'
 
 feature 'Questions list', %q{
   User can view list of questions
@@ -11,21 +11,15 @@ feature 'Questions list', %q{
     sign_in(user)
 
     question_list
-
     visit questions_path
-    expect(page).to have_content 'Question title1'
-    expect(page).to have_content 'Question body1'
-    expect(page).to have_content 'Question title2'
-    expect(page).to have_content 'Question body2'
+    expect(page).to have_content question_list.first.title
+    expect(page).to have_content question_list.last.title
   end
 
   scenario 'Non-authenticated user can view list of questions' do
     question_list
-
     visit questions_path
-    expect(page).to have_content 'Question title3'
-    expect(page).to have_content 'Question body3'
-    expect(page).to have_content 'Question title4'
-    expect(page).to have_content 'Question body4'
+    expect(page).to have_content question_list.first.title
+    expect(page).to have_content question_list.last.title
   end
 end

@@ -1,4 +1,4 @@
--cache [answer, can?(:set_best, answer), can?(:edit, answer), can?(:delete, answer), user_signed_in?, answer.best] do
+- cache [answer, can?(:set_best, answer), can?(:edit, answer), can?(:delete, answer), user_signed_in?, answer.best] do
   - if answer.persisted?
     .answer.container id = "answer-#{answer.id}"
       .row
@@ -17,7 +17,7 @@
                 .row
                   .col-lg-8
                     = f.label :body, 'Answer'
-                    .answer-errors
+                    .edit-answer-errors
                     = f.text_area :body, class:"form-control"
                     p.add-file
                       = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'

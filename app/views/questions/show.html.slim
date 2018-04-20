@@ -1,6 +1,6 @@
 -content_for :title
-  =@question.title
--cache [can?(:vote, @question), user_signed_in?, can?(:destroy, @question), can?(:edit, @question),
+  = @question.title
+- cache [can?(:vote, @question), user_signed_in?, can?(:destroy, @question), can?(:edit, @question),
   can?(:create, Subscription) && can?(:destroy, Subscription), @question, @subscription] do
   .question data-id="#{@question.id}"
     .row
@@ -11,11 +11,11 @@
         .div id="Question-#{@question.id}-comments" class = 'question-comments'
           = render @question.comments
         .question-new-comment
-          p= button_to 'Add comment', new_question_comment_path(@question), remote: true,
+          p = button_to 'Add comment', new_question_comment_path(@question), remote: true,
            method: :get, class:"btn btn-info"
         .subscription
           - if can?(:create, Subscription)
-            p= render 'questions/subscription'
+            p = render 'questions/subscription'
   hr
   .answers
     - if @question.answers.empty?

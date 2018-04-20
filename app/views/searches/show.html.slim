@@ -1,10 +1,9 @@
 h1 Search results
-
 .search_results
-  -if @result
+  - if @result
     ul
-      -@result.each do |item|
+      - @result.each do |item|
         li
-          =render "#{item.class.name.downcase}", item: item
-  -else
+          = render "#{item.class.name.downcase}", item: item
+  - else
     |No results

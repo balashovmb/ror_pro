@@ -6,6 +6,7 @@ html lang="en"
     title= content_for?(:title) ? yield(:title) : "Q&A time"
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
     = Gon::Base.render_data
     = favicon_link_tag '/pics/favicon.ico', :rel => 'shortcut icon'
@@ -40,4 +41,3 @@ html lang="en"
       footer
         br
         p &copy; Mikhail Balashov 2017
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

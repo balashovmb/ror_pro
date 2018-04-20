@@ -8,6 +8,6 @@
     =< content_tag_for :span, votable, :rating
       = votable.rating   
   - if can?(:vote, votable)
-    p= link_to image_tag("/pics/vote_up.png"), polymorphic_path([:vote_up, votable]), method: :post, remote: true, data: { type: :json }, id: "vote_up"
-    p= link_to image_tag("/pics/cancel_vote.png"), polymorphic_path([:cancel_vote, votable]), method: :delete, remote: true, data: { type: :json }, id: "cancel_vote"   
-    p= link_to image_tag("/pics/vote_down.png"), polymorphic_path([:vote_down, votable]), method: :post, remote: true,  data: { type: :json }, id: "vote_down"
+    p = link_to image_tag("/pics/vote_up.png"), polymorphic_path([:vote_up, votable]), method: :post, remote: true, data: { type: :json }, id: "vote_up"
+    p = link_to image_tag("/pics/cancel_vote.png"), polymorphic_path([:cancel_vote, votable]), method: :delete, remote: true, data: { type: :json }, id: "cancel_vote"
+    p = link_to image_tag("/pics/vote_down.png"), polymorphic_path([:vote_down, votable]), method: :post, remote: true,  data: { type: :json }, id: "vote_down"
