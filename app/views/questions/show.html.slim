@@ -11,7 +11,8 @@
         .div id="Question-#{@question.id}-comments" class = 'question-comments'
           = render @question.comments
         .question-new-comment
-          p = button_to 'Add comment', new_question_comment_path(@question), remote: true,
+          - if can?(:create, Comment)
+            p = button_to 'Add comment', new_question_comment_path(@question), remote: true,
            method: :get, class:"btn btn-info"
         .subscription
           - if can?(:create, Subscription)

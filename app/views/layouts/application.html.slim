@@ -23,7 +23,7 @@ html lang="en"
             strong = link_to 'All questions', questions_path
         .navbar-collapse.collapse.navbar-responsive-collapse
           .row
-            .col-md-offset-11.col-sm-offset-9
+            .col-md-offset-10.col-sm-offset-9
               - if user_signed_in?
                 = current_user.email
                 p = link_to 'Sign out', destroy_user_session_path, method: :delete

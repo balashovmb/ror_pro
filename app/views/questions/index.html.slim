@@ -1,7 +1,10 @@
-- content_for :title 
+- content_for :title
   'Q&A time - All questions
-
-p = link_to 'Ask question', new_question_path, class: "btn btn-primary"
+- if can?(:create, Question)
+  p = link_to 'Ask question', new_question_path, class: "btn btn-primary"
+- else
+  p
+    i You must sign in first for create questions
 br
 .questions-list.collection
   - if @questions.empty?

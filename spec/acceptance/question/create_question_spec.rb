@@ -21,11 +21,10 @@ feature 'Create question', %q{
     expect(page).to have_content 'text text text'
   end
 
-  scenario 'Non-authenticated user tries to create question' do
+  scenario "Non-authenticated user don't see create question button" do
     visit questions_path
-    click_on 'Ask question'
 
-    expect(page).to have_content 'You are not authorized to access this page'
+    expect(page).not_to have_button 'Ask question'
   end
 
   context "mulitple sessions" do
