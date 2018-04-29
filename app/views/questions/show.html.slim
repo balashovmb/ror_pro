@@ -31,7 +31,7 @@
               = f.label :body, 'Answer'
               .answer-errors
               = f.text_area :body, id: "new-answer-body", class: "form-control"
-              p= link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
-              p= f.submit 'Create answer', class: "btn btn-primary"
+              p = link_to_add_association 'Add file', f, :attachments, partial: 'attachments/attachment_fields'
+              p = f.submit 'Create answer', class: "btn btn-primary"
     - else
       i You must sign in first for create answer
