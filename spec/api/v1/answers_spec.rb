@@ -99,7 +99,7 @@ describe 'Answers API' do
 
         it 'return success' do
           post "/api/v1/questions/#{question.id}/answers", params: { answer: attributes_for(:answer), format: :json, access_token: access_token.token }
-          expect(response).to be_success
+          expect(response).to be_successful
         end
 
         it 'returns attributes of created answer' do
