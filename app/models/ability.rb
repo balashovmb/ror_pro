@@ -23,7 +23,9 @@ class Ability
     can [:update, :destroy], [Question, Answer, Comment, Subscription], user_id: @user.id
     can :destroy, Attachment, attachable: { user_id: @user.id }
     can :set_best, Answer, question: { user_id: @user.id }
-    can :vote, [Question, Answer] { |votable| !@user.author?(votable) }
+    can :vote, [Question, Answer] do |votable| 
+      !@user.author?(votable) 
+    end
     can :digest_subscription, User, id: @user.id
   end
 

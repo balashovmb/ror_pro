@@ -1,26 +1,26 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :answer_body do |n|
     "Answer body#{n}"
   end
 
   factory :answer do
-    body "MyText12345"
+    body { "MyText12345" }
     user
     question
-    best false
+    best { false }
   end
 
   factory :invalid_answer, class: "Answer" do
-    body nil
+    body { nil }
     user
     question
-    best false
+    best { false }
   end
 
   factory :answer_list, class: "Answer" do
-    body :answer_body
+    body { :answer_body }
     user
     question
-    best false
+    best { false }
   end
 end

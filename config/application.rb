@@ -29,7 +29,7 @@ module RorPro
                        routing_specs: false,
                        request_specs: false,
                        controller_spec: true
-      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes}  
   end  

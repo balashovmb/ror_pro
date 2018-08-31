@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :body do |n|
     "Question body#{n}"
   end
@@ -14,14 +14,14 @@ FactoryGirl.define do
   end
 
   factory :question do
-    title "Question title"
-    body "Question body"
+    title { "Question title" }
+    body { "Question body" }
     user
   end
 
   factory :invalid_question, class: "Question" do
-    title nil
-    body nil
+    title { nil }
+    body { nil }
     user
   end
 end
