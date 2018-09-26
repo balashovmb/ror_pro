@@ -61,7 +61,6 @@ gem 'thinking-sphinx'
 gem 'dotenv-rails'
 gem 'unicorn'
 gem 'redis-rails'
-gem 'twitter-bootstrap-rails'
 gem 'mailgun-ruby'
 
 group :test do
