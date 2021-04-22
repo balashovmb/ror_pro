@@ -4,6 +4,7 @@ describe 'Questions API' do
   describe 'GET /index' do
     let(:http_method) { :get }
     let(:path) { '/api/v1/questions' }
+    let(:options) { {} }
     # attributes = %w(id title body created_at updated_at)
     it_behaves_like 'API authenticable'
 
@@ -30,6 +31,7 @@ describe 'Questions API' do
     end
   end
   describe 'GET #show' do
+    let(:options) { {} }
     let(:question) { create :question }
     let(:http_method) { :get }
     let(:path) { "/api/v1/questions/#{question.id}" }

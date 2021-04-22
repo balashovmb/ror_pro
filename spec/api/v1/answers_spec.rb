@@ -7,6 +7,8 @@ describe 'Answers API' do
 
     let(:http_method) { :get }
     let(:path) { "/api/v1/questions/#{question.id}/answers" }
+
+    let(:options) { {} }
     it_behaves_like 'API authenticable'
 
 
@@ -39,7 +41,7 @@ describe 'Answers API' do
     let(:answer) { create(:answer, question: question) }
     let(:http_method) { :get }
     let(:path) { "/api/v1/answers/#{answer.id}" }
-
+    let(:options) { {} }
     it_behaves_like 'API authenticable'
 
     context 'authorized' do
