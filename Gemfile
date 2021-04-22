@@ -7,10 +7,10 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 6.0'
 # Use postgresql as the database for Active Record
 gem "bootsnap", ">= 1.1.0", require: false
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -45,7 +45,7 @@ gem 'record_tag_helper'
 gem 'skim', github: "balashovmb/skim"
 gem 'gon'
 gem 'responders'
-gem 'omniauth'
+gem 'omniauth', '~> 1.0'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
