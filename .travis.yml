@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.5.1
+  - 2.7.3
 
 notifications:
   email: false
@@ -8,7 +8,7 @@ notifications:
 sudo: required
 dist: trusty
 addons:
-  postgresql: "9.5"
+  postgresql: "10.15"
   apt:
     sources:
       - ubuntu-sdk-team
