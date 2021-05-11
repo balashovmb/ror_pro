@@ -18,4 +18,4 @@ Q&A Time
 * Background jobs (Using ActiveJob)
 * Full text search (Using Thinking sphinx gem)
 
-#### App is deployed [here](http://www.balashov.pw)
+#### App is deployed [here](http://51.15.67.2/)
