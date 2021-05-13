@@ -9,7 +9,7 @@ feature 'Sign in with twitter', '
     mock_auth_hash('twitter', 'test@test.com')
     click_on 'Sign in'
     click_on 'Sign in with Twitter'
-
+  
     expect(page).to have_content 'Successfully authenticated from Twitter account.'
   end
 

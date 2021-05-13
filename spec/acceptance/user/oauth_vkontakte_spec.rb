@@ -9,7 +9,6 @@ feature 'Sign is with vk', '
     mock_auth_hash('vkontakte', 'test@test.com')
     click_on 'Sign in'
     click_on 'Sign in with Vkontakte'
-
     expect(page).to have_content 'Successfully authenticated from Vkontakte account.'
   end
 
